@@ -46,11 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Edit.cs">
+    <Compile Include="BaseEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Edit.Designer.cs">
-      <DependentUpon>Edit.cs</DependentUpon>
+    <Compile Include="BaseEdit.Designer.cs">
+      <DependentUpon>BaseEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MemberEditForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberEditForm2.Designer.cs">
+      <DependentUpon>MemberEditForm2.cs</DependentUpon>
     </Compile>
     <Compile Include="MemberModulForm4.cs">
       <SubType>Form</SubType>
@@ -98,8 +104,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Edit.resx">
-      <DependentUpon>Edit.cs</DependentUpon>
+    <EmbeddedResource Include="BaseEdit.resx">
+      <DependentUpon>BaseEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Hauptseite.resx">
       <DependentUpon>Hauptseite.cs</DependentUpon>

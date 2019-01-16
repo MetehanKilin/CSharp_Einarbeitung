@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication5
 {
-    partial class Edit
+    partial class BaseEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -91,7 +91,7 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "neuer Wert";
             // 
-            // Edit
+            // BaseEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -102,7 +102,7 @@
             this.Controls.Add(this.abbrechenButton);
             this.Controls.Add(this.verwerfenButton);
             this.Controls.Add(this.speichernButton);
-            this.Name = "Edit";
+            this.Name = "BaseEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit";
             this.ResumeLayout(false);
@@ -116,7 +116,7 @@
         private System.Windows.Forms.Button verwerfenButton;
         private System.Windows.Forms.Button abbrechenButton;
         private System.Windows.Forms.Label editLabel;
-        private System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
     }
 }

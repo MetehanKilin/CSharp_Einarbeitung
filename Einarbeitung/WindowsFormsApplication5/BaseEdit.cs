@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication5
 {
-    public partial class Edit : Form
+    public partial class BaseEdit : Form
     {
         Patient patient;
         Form form;
 
-        public Edit()
+        public BaseEdit()
         {
             InitializeComponent();
         }
@@ -105,17 +105,14 @@ namespace WindowsFormsApplication5
         {
 
             //Hauptseite.createPatients();
-            //Console.WriteLine(patient.id);
+            //Console.WriteLine(patient.id;)
 
             //Hauptseite.zurücksetzen(patient);
-
-
-
 
             //this.Close();
             //this.Dispose();
         }
 
-       
+      
     }
 } 

@@ -24,7 +24,7 @@ namespace WindowsFormsApplication5
 
         public override void edit()
         {
-            Edit edit = new Edit();
+            MemberEditForm2 edit = new MemberEditForm2();
             edit.Patient = Patient;
             edit.Form = this;
             edit.load();
