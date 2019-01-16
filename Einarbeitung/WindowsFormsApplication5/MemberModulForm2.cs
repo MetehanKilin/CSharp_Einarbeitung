@@ -19,12 +19,12 @@ namespace WindowsFormsApplication5
 
         public override void load()
         {
-            label1.Text="Geschlecht: " + Patient.geschlecht;
+            label1.Text="Geschlecht: " + Patient.Geschlecht;
         }
 
         public void ModulFormLoad(object sender, EventArgs e)
         {
-            label1.Text = "Geschlecht: " + Patient.geschlecht;
+            label1.Text = "Geschlecht: " + Patient.Geschlecht;
         }
 
         public override void edit()

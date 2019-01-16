@@ -49,11 +49,11 @@ namespace WindowsFormsApplication5
             createPatients();
             loadPatients();
  
-            comboBox1.Items.Add(p1.vorName);
-            comboBox1.Items.Add(p2.vorName);
-            comboBox1.Items.Add(p3.vorName);
-            comboBox1.Items.Add(p4.vorName);
-            comboBox1.Items.Add(p5.vorName);
+            comboBox1.Items.Add(p1.VorName);
+            comboBox1.Items.Add(p2.VorName);
+            comboBox1.Items.Add(p3.VorName);
+            comboBox1.Items.Add(p4.VorName);
+            comboBox1.Items.Add(p5.VorName);
 
 
         }
@@ -83,7 +83,7 @@ namespace WindowsFormsApplication5
         {
             for (int i = 0; i < patienten.Count; i++)
             {
-                if (patienten[i].vorName==p.vorName)
+                if (patienten[i].VorName==p.VorName)
                 {
                     patienten[i] = p;
                     patient = p;
@@ -104,7 +104,7 @@ namespace WindowsFormsApplication5
         {
             for (int i = 0; i < patienten.Count; i++)
             {
-                if (patienten[i].vorName == p.vorName)
+                if (patienten[i].VorName == p.VorName)
                 {
                     //patienten[i] = p;
                     //patient = p;
@@ -428,9 +428,9 @@ namespace WindowsFormsApplication5
             for (int i = 0; i < patienten.Count; i++)
             {
                 //Console.WriteLine(patienten[i].vorName);
-                if (patienten[i].vorName == this.comboBox1.SelectedItem.ToString())
+                if (patienten[i].VorName == this.comboBox1.SelectedItem.ToString())
                 {
-                    patient = new Patient(patienten[i].id, patienten[i].geschlecht, patienten[i].vorName, patienten[i].nachName, patienten[i].geburtstag);
+                    patient = new Patient(patienten[i].Id, patienten[i].Geschlecht, patienten[i].VorName, patienten[i].NachName, patienten[i].Geburtstag);
                     break; 
                 }
             }

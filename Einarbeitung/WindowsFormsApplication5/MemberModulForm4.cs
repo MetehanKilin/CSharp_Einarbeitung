@@ -19,12 +19,12 @@ namespace WindowsFormsApplication5
 
         public override void load()
         {
-            label1.Text = "Geburtstag: " + Patient.geburtstag.ToString("MM/dd/yyyy");
+            label1.Text = "Geburtstag: " + Patient.Geburtstag.ToString("MM/dd/yyyy");
         }
 
         public void ModulFormLoad(object sender, EventArgs e)
         {
-            label1.Text = "Geburtstag: " + Patient.geburtstag.ToString("MM/dd/yyyy");
+            label1.Text = "Geburtstag: " + Patient.Geburtstag.ToString("MM/dd/yyyy");
 
             //print(text);
 

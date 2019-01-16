@@ -50,7 +50,7 @@ namespace WindowsFormsApplication5
 
         public void load()
         {
-            editLabel.Text = "ID: "+patient.id ;
+            //editLabel.Text = "ID: "+patient.id ;
         }
 
 
@@ -63,61 +63,57 @@ namespace WindowsFormsApplication5
 
         private void speichernButton_Click(object sender, EventArgs e)
         {
-            bool b=true;
-            int a;
+            //bool b=true;
+            //int a;
 
 
-            if (b)
-            {
-                if (int.TryParse(textBox1.Text, out a))
-                {
+            //if (b)
+            //{
+            //    if (int.TryParse(textBox1.Text, out a))
+            //    {
 
-                    //Hauptseite.
+            //        //Hauptseite.
 
-                    BasisModulForm ab = (BasisModulForm)form;
+            //        BasisModulForm ab = (BasisModulForm)form;
 
-                    //hier die veränderung herausnehmen
-                    //abspeichern in der Verwaltung
-                    //MemberModulForm patient updaten
-                    //laden Methode aufrufen
+            //        //hier die veränderung herausnehmen
+            //        //abspeichern in der Verwaltung
+            //        //MemberModulForm patient updaten
+            //        //laden Methode aufrufen
 
-                    patient.id = a;
+            //        patient.id = a;
 
-                    Hauptseite.manipulationPatient(patient);
+            //        Hauptseite.manipulationPatient(patient);
                     
-                    //ab.label1.Text = a.ToString();
+            //        //ab.label1.Text = a.ToString();
 
 
 
-                    this.Close();
-                    this.Dispose();
-                    b = false;
-                }
-                else
-                {
-                    MessageBox.Show("Bitte geben Sie ein Int ein");
-                }
-            }
-
-
-
-
+            //        this.Close();
+            //        this.Dispose();
+            //        b = false;
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Bitte geben Sie ein Int ein");
+            //    }
+            //}
 
         }
 
         private void verwerfenButton_Click(object sender, EventArgs e)
         {
 
-            Hauptseite.createPatients();
-            Console.WriteLine(patient.id);
+            //Hauptseite.createPatients();
+            //Console.WriteLine(patient.id);
 
-            Hauptseite.zurücksetzen(patient);
-
-
+            //Hauptseite.zurücksetzen(patient);
 
 
-            this.Close();
-            this.Dispose();
+
+
+            //this.Close();
+            //this.Dispose();
         }
 
        

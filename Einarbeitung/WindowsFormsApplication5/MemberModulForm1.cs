@@ -19,7 +19,7 @@ namespace WindowsFormsApplication5
 
         public override void load()
         {
-            label1.Text = "Die ID lautet: " + Patient.id;
+            label1.Text = "Die ID lautet: " + Patient.Id;
         }
 
         public override void edit()
@@ -60,7 +60,7 @@ namespace WindowsFormsApplication5
 
         private void ModulFormLoad(object sender, EventArgs e)
         {
-            label1.Text = "Die ID lautet: " + Patient.id;
+            label1.Text = "Die ID lautet: " + Patient.Id;
            
         }
        

@@ -19,20 +19,20 @@ namespace WindowsFormsApplication5
 
         public override void load()
         {
-            label1.Text = " ID: " + Patient.id + "\n "
-                            + "Geschlecht: " + Patient.geschlecht + "\n "
-                            + "Vorname: " + Patient.vorName + "\n "
-                            + "Nachname: " + Patient.nachName + "\n "
-                            + "Geburtstag: " + Patient.geburtstag.ToString("MM/dd/yyyy");
+            label1.Text = " ID: " + Patient.Id + "\n "
+                            + "Geschlecht: " + Patient.Geschlecht + "\n "
+                            + "Vorname: " + Patient.VorName + "\n "
+                            + "Nachname: " + Patient.NachName + "\n "
+                            + "Geburtstag: " + Patient.Geburtstag.ToString("MM/dd/yyyy");
         }
 
         public void ModulFormLoad(object sender, EventArgs e)
         {
-            label1.Text=" ID: " + Patient.id + "\n "
-                            + "Geschlecht: " + Patient.geschlecht + "\n "
-                            + "Vorname: " + Patient.vorName + "\n "
-                            + "Nachname: " + Patient.nachName + "\n "
-                            + "Geburtstag: " + Patient.geburtstag.ToString("MM/dd/yyyy")
+            label1.Text=" ID: " + Patient.Id + "\n "
+                            + "Geschlecht: " + Patient.Geschlecht + "\n "
+                            + "Vorname: " + Patient.VorName + "\n "
+                            + "Nachname: " + Patient.NachName + "\n "
+                            + "Geburtstag: " + Patient.Geburtstag.ToString("MM/dd/yyyy")
                             ;
             //print(text);
 

@@ -20,12 +20,12 @@ namespace WindowsFormsApplication5
 
         public override void load()
         {
-            label1.Text = "Vor- und Nachname: " + Patient.vorName + " " + Patient.nachName;
+            label1.Text = "Vor- und Nachname: " + Patient.VorName + " " + Patient.NachName;
         }
 
         public void ModulFormLoad(object sender, EventArgs e)
         {
-            label1.Text = "Vor- und Nachname: " + Patient.vorName+" "+ Patient.nachName;
+            label1.Text = "Vor- und Nachname: " + Patient.VorName+" "+ Patient.NachName;
             //print(text);
 
 
