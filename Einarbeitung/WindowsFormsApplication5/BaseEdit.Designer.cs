@@ -115,8 +115,8 @@
         private System.Windows.Forms.Button speichernButton;
         private System.Windows.Forms.Button verwerfenButton;
         private System.Windows.Forms.Button abbrechenButton;
-        private System.Windows.Forms.Label editLabel;
+        public System.Windows.Forms.Label editLabel;
         public System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Label label1;
     }
 }

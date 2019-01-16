@@ -12,8 +12,8 @@ namespace WindowsFormsApplication5
 {
     public partial class BaseEdit : Form
     {
-        Patient patient;
-        Form form;
+        static Patient patient;
+        static Form form;
 
         public BaseEdit()
         {
@@ -48,7 +48,7 @@ namespace WindowsFormsApplication5
             }
         }
 
-        public void load()
+        public virtual void load()
         {
             //editLabel.Text = "ID: "+patient.id ;
         }
@@ -61,7 +61,7 @@ namespace WindowsFormsApplication5
             this.Dispose();
         }
 
-        private void speichernButton_Click(object sender, EventArgs e)
+        public virtual void speichernButton_Click(object sender, EventArgs e)
         {
             //bool b=true;
             //int a;

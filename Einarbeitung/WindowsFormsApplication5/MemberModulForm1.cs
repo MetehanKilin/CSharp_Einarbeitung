@@ -15,6 +15,7 @@ namespace WindowsFormsApplication5
         public MemberModulForm1()
         {
             InitializeComponent();
+            button1.Visible = false;
         }
 
         public override void load()

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            comboBox1 = new System.Windows.Forms.ComboBox();
             this.Delete = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -42,7 +42,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(comboBox1);
             this.panel1.Controls.Add(this.Delete);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
@@ -58,14 +58,14 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(0, 503);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(126, 21);
-            this.comboBox1.TabIndex = 6;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            comboBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new System.Drawing.Point(0, 503);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new System.Drawing.Size(126, 21);
+            comboBox1.TabIndex = 6;
+            comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // Delete
             // 
@@ -171,7 +171,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button Delete;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        public static System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

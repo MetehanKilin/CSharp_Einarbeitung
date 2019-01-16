@@ -48,13 +48,12 @@ namespace WindowsFormsApplication5
 
             createPatients();
             loadPatients();
- 
+
             comboBox1.Items.Add(p1.VorName);
             comboBox1.Items.Add(p2.VorName);
             comboBox1.Items.Add(p3.VorName);
             comboBox1.Items.Add(p4.VorName);
             comboBox1.Items.Add(p5.VorName);
-
 
         }
 
@@ -79,11 +78,13 @@ namespace WindowsFormsApplication5
             patienten.Add(p5);
         }
 
+       
+
         public static void manipulationPatient(Patient p)
         {
             for (int i = 0; i < patienten.Count; i++)
             {
-                if (patienten[i].VorName==p.VorName)
+                if (patienten[i].Id==p.Id)
                 {
                     patienten[i] = p;
                     patient = p;
@@ -92,11 +93,23 @@ namespace WindowsFormsApplication5
                         BasisModulForm f1 = (BasisModulForm)verwaltung[j].form;
                         f1.Patient = patient;
                         f1.load();
+                        comboBox1.Items.Clear();
+                        comboBox1.Items.Add(p1.VorName);
+                        comboBox1.Items.Add(p2.VorName);
+                        comboBox1.Items.Add(p3.VorName);
+                        comboBox1.Items.Add(p4.VorName);
+                        comboBox1.Items.Add(p5.VorName);
+
+                        //comboBox1.SelectedItem = comboBox1.FindString(patient.VorName);
+                        comboBox1.SelectedIndex = comboBox1.FindStringExact(patient.VorName);
                         break;
                     }
                     break;
                 }
             }
+
+
+            
         }
 
 
@@ -428,9 +441,10 @@ namespace WindowsFormsApplication5
             for (int i = 0; i < patienten.Count; i++)
             {
                 //Console.WriteLine(patienten[i].vorName);
-                if (patienten[i].VorName == this.comboBox1.SelectedItem.ToString())
+                if (patienten[i].VorName == comboBox1.SelectedItem.ToString())
                 {
-                    patient = new Patient(patienten[i].Id, patienten[i].Geschlecht, patienten[i].VorName, patienten[i].NachName, patienten[i].Geburtstag);
+                    patient = patienten[i];
+                    //patient = new Patient(patienten[i].Id, patienten[i].Geschlecht, patienten[i].VorName, patienten[i].NachName, patienten[i].Geburtstag);
                     break; 
                 }
             }

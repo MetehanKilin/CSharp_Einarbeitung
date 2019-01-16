@@ -36,5 +36,32 @@ namespace WindowsFormsApplication5
             //                + "Geburtstag: " + patient.geburtstag.ToString("MM/dd/yyyy");
 
         }
+
+
+
+
+
+
+        public override void edit()
+        {
+            MemberEditForm3 edit = new MemberEditForm3();
+            edit.Patient = Patient;
+            edit.Form = this;
+            edit.load();
+            edit.Show();
+
+
+
+
+
+        }
+
+
+        public override void editPatient(string s)
+        {
+            label1.Text = "Vorname und Nachname: " + s;
+        }
+
+
     }
 }

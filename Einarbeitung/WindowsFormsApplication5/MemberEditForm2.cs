@@ -31,12 +31,55 @@ namespace WindowsFormsApplication5
             rW.Text = "W";
             rW.Location = new System.Drawing.Point((textBox1.Location.X), (textBox1.Location.Y+20));
 
-
             Controls.Add(rM);
             Controls.Add(rW);
 
 
 
         }
+
+
+
+        public override void speichernButton_Click(object sender, EventArgs e)
+        {
+            bool b = true;
+            int a;
+
+
+            if (b)
+            {
+                if (int.TryParse(textBox1.Text, out a))
+                {
+
+                    //Hauptseite.
+
+                    BasisModulForm ab = (BasisModulForm)Form;
+
+                    //hier die veränderung herausnehmen
+                    //abspeichern in der Verwaltung
+                    //MemberModulForm patient updaten
+                    //laden Methode aufrufen
+
+                    Patient.Geschlecht = 'a';
+
+                    Hauptseite.manipulationPatient(Patient);
+
+                    //ab.label1.Text = a.ToString();
+
+
+
+                    this.Close();
+                    this.Dispose();
+                    b = false;
+                }
+                else
+                {
+                    MessageBox.Show("Bitte geben Sie ein Int ein");
+                }
+            }
+
+        }
+
+
     }
 }
