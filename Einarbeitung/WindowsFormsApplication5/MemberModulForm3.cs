@@ -20,6 +20,7 @@ namespace WindowsFormsApplication5
 
         public override void load()
         {
+            Console.WriteLine("Vor - und Nachname: " + Patient.VorName + " " + Patient.NachName);
             label1.Text = "Vor- und Nachname: " + Patient.VorName + " " + Patient.NachName;
         }
 

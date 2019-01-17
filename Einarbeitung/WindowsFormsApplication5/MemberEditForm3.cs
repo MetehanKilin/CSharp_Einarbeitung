@@ -20,10 +20,6 @@ namespace WindowsFormsApplication5
 
         public override void speichernButton_Click(object sender, EventArgs e)
         {
-           
-
-                    //Hauptseite.
-
                     BasisModulForm ab = (BasisModulForm) Form;
 
                     //hier die veränderung herausnehmen
@@ -37,8 +33,6 @@ namespace WindowsFormsApplication5
                     Hauptseite.manipulationPatient(Patient);
 
                     //ab.label1.Text = a.ToString();
-
-
 
                     this.Close();
                     this.Dispose();

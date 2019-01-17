@@ -69,7 +69,7 @@ namespace WindowsFormsApplication5
         
 
 
-        public void loadPatients()
+        public static void loadPatients()
         {
             patienten.Add(p1);
             patienten.Add(p2);
@@ -115,25 +115,41 @@ namespace WindowsFormsApplication5
 
         public static void zurücksetzen(Patient p)
         {
+            patienten.Clear();
+            loadPatients();
+
+
             for (int i = 0; i < patienten.Count; i++)
             {
-                if (patienten[i].VorName == p.VorName)
+                if (patienten[i].Id == p.Id)
                 {
                     //patienten[i] = p;
-                    //patient = p;
-
-
+                    patient = patienten[i];
                     for (int j = 0; j < verwaltung.Count; j++)
                     {
                         BasisModulForm f1 = (BasisModulForm)verwaltung[j].form;
                         f1.Patient = patient;
 
                         f1.load();
+
+
+                        comboBox1.Items.Clear();
+
+                        comboBox1.Items.Add(p1.VorName);
+                        comboBox1.Items.Add(p2.VorName);
+                        comboBox1.Items.Add(p3.VorName);
+                        comboBox1.Items.Add(p4.VorName);
+                        comboBox1.Items.Add(p5.VorName);
+
+                        comboBox1.SelectedIndex = comboBox1.FindStringExact(patient.VorName);
+
                         break;
                     }
                     break;
                 }
             }
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)

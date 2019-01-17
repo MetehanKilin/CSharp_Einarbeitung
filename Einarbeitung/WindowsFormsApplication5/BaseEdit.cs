@@ -104,13 +104,12 @@ namespace WindowsFormsApplication5
         private void verwerfenButton_Click(object sender, EventArgs e)
         {
 
-            //Hauptseite.createPatients();
-            //Console.WriteLine(patient.id;)
+            Hauptseite.createPatients();
 
-            //Hauptseite.zurücksetzen(patient);
+            Hauptseite.zurücksetzen(patient);
 
-            //this.Close();
-            //this.Dispose();
+            this.Close();
+            this.Dispose();
         }
 
       

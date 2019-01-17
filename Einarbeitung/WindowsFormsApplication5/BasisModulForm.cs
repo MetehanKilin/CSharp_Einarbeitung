@@ -34,7 +34,7 @@ namespace WindowsFormsApplication5
 
         public virtual void load()
         {
-            Console.WriteLine("hallo");
+           
         }
 
         private void BasisModulForm_FormClosing(object sender, FormClosingEventArgs e)
