@@ -51,10 +51,6 @@ namespace WindowsFormsApplication5
             edit.load();
             edit.Show();
 
-
-
-
-
         }
 
 

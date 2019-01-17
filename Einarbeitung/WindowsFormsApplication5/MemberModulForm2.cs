@@ -34,6 +34,7 @@ namespace WindowsFormsApplication5
             edit.Form = this;
             edit.load();
             edit.Show();
+
         }
         public override void editPatient(string s)
         {
