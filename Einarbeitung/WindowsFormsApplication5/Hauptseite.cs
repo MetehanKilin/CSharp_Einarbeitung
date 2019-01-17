@@ -60,11 +60,11 @@ namespace WindowsFormsApplication5
 
         public static void createPatients()
         {
-            p1 = new Patient(1, 'm', "AAA", "BBB", new DateTime(1990, 01, 01));
-            p2 = new Patient(2, 'w', "CCC", "DDD", new DateTime(1991, 02, 02));
-            p3 = new Patient(3, 'm', "EEE", "FFF", new DateTime(1992, 03, 03));
-            p4 = new Patient(4, 'w', "GGG", "HHH", new DateTime(1993, 04, 04));
-            p5 = new Patient(5, 'm', "III", "JJJ", new DateTime(1994, 05, 05));
+            p1 = new Patient(1, 'M', "AAA", "BBB", new DateTime(1990, 01, 01));
+            p2 = new Patient(2, 'W', "CCC", "DDD", new DateTime(1991, 02, 02));
+            p3 = new Patient(3, 'M', "EEE", "FFF", new DateTime(1992, 03, 03));
+            p4 = new Patient(4, 'W', "GGG", "HHH", new DateTime(1993, 04, 04));
+            p5 = new Patient(5, 'M', "III", "JJJ", new DateTime(1994, 05, 05));
         }
         
 

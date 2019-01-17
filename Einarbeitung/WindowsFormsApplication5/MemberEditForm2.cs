@@ -17,6 +17,7 @@ namespace WindowsFormsApplication5
             InitializeComponent();
         }
 
+        char geschlecht;
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -30,6 +31,7 @@ namespace WindowsFormsApplication5
                 rW.Text = "W";
                 rW.Location = new System.Drawing.Point((textBox1.Location.X), (textBox1.Location.Y));
                 Controls.Add(rW);
+                geschlecht = 'W';
                
             }
             else if (Patient.Geschlecht=='W' || Patient.Geschlecht=='w')
@@ -38,6 +40,7 @@ namespace WindowsFormsApplication5
                 rM.Text = "M";
                 rM.Location = new System.Drawing.Point(textBox1.Location.X, textBox1.Location.Y);
                 Controls.Add(rM);
+                geschlecht = 'M';
             }
             else
             {
@@ -52,11 +55,6 @@ namespace WindowsFormsApplication5
 
         public override void speichernButton_Click(object sender, EventArgs e)
         {
-
-          
-                    
-            //Hauptseite.
-
             BasisModulForm ab = (BasisModulForm)Form;
 
             //hier die veränderung herausnehmen
@@ -64,11 +62,8 @@ namespace WindowsFormsApplication5
             //MemberModulForm patient updaten
             //laden Methode aufrufen
 
-            Patient.Geschlecht = 'a';
-
+            Patient.Geschlecht = geschlecht;
             Hauptseite.manipulationPatient(Patient);
-
-            //ab.label1.Text = a.ToString();
 
 
             this.Close();
