@@ -123,6 +123,8 @@ namespace WindowsFormsApplication5
             {
                 if (patienten[i].Id == p.Id)
                 {
+
+                    //HIER SCHAUEN DASS NUR EIN WERT VERWORFEN WIRD
                     //patienten[i] = p;
                     patient = patienten[i];
                     for (int j = 0; j < verwaltung.Count; j++)

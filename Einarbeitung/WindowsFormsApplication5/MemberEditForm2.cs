@@ -47,8 +47,6 @@ namespace WindowsFormsApplication5
                 MessageBox.Show("Kein Geschlecht zugeordnet");
                 
             }
-
-
         }
 
 

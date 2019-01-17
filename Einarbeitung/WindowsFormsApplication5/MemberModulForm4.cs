@@ -25,16 +25,17 @@ namespace WindowsFormsApplication5
         public void ModulFormLoad(object sender, EventArgs e)
         {
             label1.Text = "Geburtstag: " + Patient.Geburtstag.ToString("MM/dd/yyyy");
+        }
 
-            //print(text);
-
-
-            //label1.Text = " ID: " + patient.id + "\n "
-            //                + "Geschlecht: " + patient.geschlecht + "\n "
-            //                + "Vorname: " + patient.vorName + "\n "
-            //                + "Nachname: " + patient.nachName + "\n "
-            //                + "Geburtstag: " + patient.geburtstag.ToString("MM/dd/yyyy");
+        public override void edit()
+        {
+            MemberEditForm4 edit = new MemberEditForm4();
+            edit.Patient = Patient;
+            edit.Form = this;
+            edit.load();
+            edit.Show();
 
         }
+
     }
 }
