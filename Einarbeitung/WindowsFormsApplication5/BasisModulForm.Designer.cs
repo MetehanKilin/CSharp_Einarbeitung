@@ -52,7 +52,6 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "edit";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // BasisModulForm
             // 
@@ -63,7 +62,6 @@
             this.Controls.Add(this.label1);
             this.Name = "BasisModulForm";
             this.Text = "ModulForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BasisModulForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

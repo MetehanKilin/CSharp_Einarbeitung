@@ -21,7 +21,6 @@ namespace WindowsFormsApplication5
                 return id;
             }
 
-           
         }
 
         public char Geschlecht

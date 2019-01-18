@@ -46,30 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BaseEdit.Designer.cs">
-      <DependentUpon>BaseEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MemberEditForm2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberEditForm2.Designer.cs">
-      <DependentUpon>MemberEditForm2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MemberEditForm3.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberEditForm3.Designer.cs">
-      <DependentUpon>MemberEditForm3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MemberEditForm4.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberEditForm4.Designer.cs">
-      <DependentUpon>MemberEditForm4.cs</DependentUpon>
-    </Compile>
     <Compile Include="MemberModulForm4.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,25 +84,19 @@
     </Compile>
     <Compile Include="Patient.cs" />
     <Compile Include="VerwaltungForms.cs" />
-    <Compile Include="Hauptseite.cs">
+    <Compile Include="Hauptfenster.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Hauptseite.Designer.cs">
-      <DependentUpon>Hauptseite.cs</DependentUpon>
+    <Compile Include="Hauptfenster.Designer.cs">
+      <DependentUpon>Hauptfenster.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BaseEdit.resx">
-      <DependentUpon>BaseEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Hauptseite.resx">
-      <DependentUpon>Hauptseite.cs</DependentUpon>
+    <EmbeddedResource Include="Hauptfenster.resx">
+      <DependentUpon>Hauptfenster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BasisModulForm.resx">
       <DependentUpon>BasisModulForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MemberEditForm3.resx">
-      <DependentUpon>MemberEditForm3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberModulForm1.resx">
       <DependentUpon>MemberModulForm1.cs</DependentUpon>

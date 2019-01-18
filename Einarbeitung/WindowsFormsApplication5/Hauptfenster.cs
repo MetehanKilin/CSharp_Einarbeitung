@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication5
 {
-    public partial class Hauptseite : Form
+    public partial class Hauptfenster : Form
     {
         static List<VerwaltungForms> verwaltung = new List<VerwaltungForms>();
         public static List<Patient> patienten = createPatients();
@@ -42,7 +42,7 @@ namespace WindowsFormsApplication5
 
 
 
-        public Hauptseite()
+        public Hauptfenster()
         {
             InitializeComponent();
 
@@ -122,7 +122,6 @@ namespace WindowsFormsApplication5
                         comboBox1.Items.Add(p4.VorName);
                         comboBox1.Items.Add(p5.VorName);
 
-                        //comboBox1.SelectedItem = comboBox1.FindString(patient.VorName);
                         comboBox1.SelectedIndex = comboBox1.FindStringExact(patient.VorName);
                         break;
                     }

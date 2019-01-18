@@ -18,7 +18,7 @@ namespace WindowsFormsApplication5
         }
 
 
-        public override void load()
+        protected override void load()
         {
             Console.WriteLine("Vor - und Nachname: " + Patient.VorName + " " + Patient.NachName);
             label1.Text = "Vor- und Nachname: " + Patient.VorName + " " + Patient.NachName;
@@ -27,14 +27,7 @@ namespace WindowsFormsApplication5
         public void ModulFormLoad(object sender, EventArgs e)
         {
             label1.Text = "Vor- und Nachname: " + Patient.VorName+" "+ Patient.NachName;
-            //print(text);
-
-
-            //label1.Text = " ID: " + patient.id + "\n "
-            //                + "Geschlecht: " + patient.geschlecht + "\n "
-            //                + "Vorname: " + patient.vorName + "\n "
-            //                + "Nachname: " + patient.nachName + "\n "
-            //                + "Geburtstag: " + patient.geburtstag.ToString("MM/dd/yyyy");
+          
 
         }
 

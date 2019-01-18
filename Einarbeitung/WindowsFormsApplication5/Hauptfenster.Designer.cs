@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApplication5
 {
-    partial class Hauptseite
+    partial class Hauptfenster
     {
         /// <summary>
         /// Erforderliche Designervariable.

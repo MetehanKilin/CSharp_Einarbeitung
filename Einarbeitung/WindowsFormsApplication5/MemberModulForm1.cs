@@ -18,43 +18,13 @@ namespace WindowsFormsApplication5
             button1.Visible = false;
         }
 
-        public override void load()
+        protected override void load()
         {
             label1.Text = "Die ID lautet: " + Patient.Id;
         }
 
-        public override void edit()
-        {
-            MemberEditForm2 edit = new MemberEditForm2();
-            edit.Patient = Patient;
-            edit.Form = this;
-            edit.load();
-            edit.Show();   
-            
-
-
-
-
-            //DialogResult dialogResult = MessageBox.Show("editieren", "Editieren", MessageBoxButtons.YesNoCancel);
-            //if (dialogResult == DialogResult.Yes)
-            //{
-            //    Console.WriteLine("yes");
-            //}
-            //else if (dialogResult == DialogResult.No)
-            //{
-
-            //    Console.WriteLine("no");
-            //}
-            //else if (dialogResult== DialogResult.Cancel)
-            //{
-            //    Console.WriteLine("abbrechen");
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Da ist was schief gelaufen");
-            //}
-        }
-        public override void editPatient(string s)
+     
+        protected override void editPatient(string s)
         {
             label1.Text = "Die ID lautet: " + s;
         }

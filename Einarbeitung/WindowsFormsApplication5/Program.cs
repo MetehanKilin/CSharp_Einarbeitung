@@ -16,7 +16,7 @@ namespace WindowsFormsApplication5
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Hauptseite());
+            Application.Run(new Hauptfenster());
         }
     }
 }

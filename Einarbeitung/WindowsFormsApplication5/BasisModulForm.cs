@@ -31,36 +31,15 @@ namespace WindowsFormsApplication5
                 patient = value;
             }
         }
-
-        public virtual void load()
+        protected virtual void load()
         {
-           
-        }
-
-        private void BasisModulForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //löscht leider nicht die verwaltung in der Hauptseite
-
-            //((TabControl)((TabPage)this.Parent).Parent).TabPages.Remove((TabPage)this.Parent);
-
-          
-        }
-
-        public virtual void edit()
-        {
-            
-
 
         }
 
 
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            edit();
-        }
 
-        public virtual void editPatient(string s)
+        protected virtual void editPatient()
         {
 
         }

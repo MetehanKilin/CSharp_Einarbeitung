@@ -9,8 +9,8 @@ namespace WindowsFormsApplication5
 {
     class VerwaltungForms
     {
-        public Form form;
-        public TabPage tabpage;
+        private Form form;
+        private TabPage tabpage;
         //public Patient patient;
 
         

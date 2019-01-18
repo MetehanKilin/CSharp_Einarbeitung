@@ -17,7 +17,7 @@ namespace WindowsFormsApplication5
             InitializeComponent();
         }
 
-        public override void load()
+        protected override void load()
         {
             label1.Text="Geschlecht: " + Patient.Geschlecht;
         }
@@ -27,18 +27,12 @@ namespace WindowsFormsApplication5
             label1.Text = "Geschlecht: " + Patient.Geschlecht;
         }
 
-        public override void edit()
+        protected override void editPatient()
         {
-            MemberEditForm2 edit = new MemberEditForm2();
-            edit.Patient = Patient;
-            edit.Form = this;
-            edit.load();
-            edit.Show();
+           
+         
 
         }
-        //public override void editPatient(string s)
-        //{
-        //    label1.Text = "Die ID lautet: " + s;
-        //}
+      
     }
 }

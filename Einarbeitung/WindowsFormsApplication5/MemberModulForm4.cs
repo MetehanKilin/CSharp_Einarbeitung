@@ -17,7 +17,7 @@ namespace WindowsFormsApplication5
             InitializeComponent();
         }
 
-        public override void load()
+        protected override void load()
         {
             label1.Text = "Geburtstag: " + Patient.Geburtstag.ToString("MM/dd/yyyy");
         }
@@ -27,13 +27,9 @@ namespace WindowsFormsApplication5
             label1.Text = "Geburtstag: " + Patient.Geburtstag.ToString("MM/dd/yyyy");
         }
 
-        public override void edit()
+        protected override void editPatient()
         {
-            MemberEditForm4 edit = new MemberEditForm4();
-            edit.Patient = Patient;
-            edit.Form = this;
-            edit.load();
-            edit.Show();
+           
 
         }
 

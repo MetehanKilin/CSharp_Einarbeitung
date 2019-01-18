@@ -18,7 +18,7 @@ namespace WindowsFormsApplication5
             button1.Visible = false;
         }
 
-        public override void load()
+        protected override void load()
         {
             label1.Text = " ID: " + Patient.Id + "\n "
                             + "Geschlecht: " + Patient.Geschlecht + "\n "
@@ -35,14 +35,7 @@ namespace WindowsFormsApplication5
                             + "Nachname: " + Patient.NachName + "\n "
                             + "Geburtstag: " + Patient.Geburtstag.ToString("MM/dd/yyyy")
                             ;
-            //print(text);
-
-
-            //label1.Text = " ID: " + patient.id + "\n "
-            //                + "Geschlecht: " + patient.geschlecht + "\n "
-            //                + "Vorname: " + patient.vorName + "\n "
-            //                + "Nachname: " + patient.nachName + "\n "
-            //                + "Geburtstag: " + patient.geburtstag.ToString("MM/dd/yyyy");
+          
 
         }
     }
