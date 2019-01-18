@@ -13,7 +13,7 @@ namespace WindowsFormsApplication5
     public partial class Hauptseite : Form
     {
         static List<VerwaltungForms> verwaltung = new List<VerwaltungForms>();
-        static List<Patient> patienten = new List<Patient>();
+        public static List<Patient> patienten = createPatients();
 
         static Patient p1;
         static Patient p2;
@@ -23,7 +23,7 @@ namespace WindowsFormsApplication5
 
 
 
-        static Patient patient;
+        public static Patient patient;
         BasisModulForm form;
         TabPage tabpage1;
 
@@ -58,15 +58,37 @@ namespace WindowsFormsApplication5
         }
 
 
-        public static void createPatients()
+        //public static void createPatients()
+        //{
+        //    p1 = new Patient(1, 'M', "AAA", "BBB", new DateTime(1990, 01, 01));
+        //    p2 = new Patient(2, 'W', "CCC", "DDD", new DateTime(1991, 02, 02));
+        //    p3 = new Patient(3, 'M', "EEE", "FFF", new DateTime(1992, 03, 03));
+        //    p4 = new Patient(4, 'W', "GGG", "HHH", new DateTime(1993, 04, 04));
+        //    p5 = new Patient(5, 'M', "III", "JJJ", new DateTime(1994, 05, 05));
+        //}
+
+        public static List<Patient> createPatients()
         {
             p1 = new Patient(1, 'M', "AAA", "BBB", new DateTime(1990, 01, 01));
             p2 = new Patient(2, 'W', "CCC", "DDD", new DateTime(1991, 02, 02));
             p3 = new Patient(3, 'M', "EEE", "FFF", new DateTime(1992, 03, 03));
             p4 = new Patient(4, 'W', "GGG", "HHH", new DateTime(1993, 04, 04));
             p5 = new Patient(5, 'M', "III", "JJJ", new DateTime(1994, 05, 05));
+
+            List<Patient> patienten = new List<Patient>();
+            patienten.Add(p1);
+            patienten.Add(p2);
+            patienten.Add(p3);
+            patienten.Add(p4);
+            patienten.Add(p5);
+
+
+
+            return patienten;
+
+
         }
-        
+
 
 
         public static void loadPatients()
@@ -110,13 +132,20 @@ namespace WindowsFormsApplication5
 
 
             
+
+
+
         }
 
 
-        public static void zurücksetzen(Patient p)
+        public static void zurücksetzen(Patient p, String arg)
         {
-            patienten.Clear();
-            loadPatients();
+            List < Patient > temp= createPatients();
+
+
+
+            //patienten.Clear();
+            //loadPatients();
 
 
             for (int i = 0; i < patienten.Count; i++)
@@ -124,35 +153,137 @@ namespace WindowsFormsApplication5
                 if (patienten[i].Id == p.Id)
                 {
 
-                    //HIER SCHAUEN DASS NUR EIN WERT VERWORFEN WIRD
-                    //patienten[i] = p;
-                    patient = patienten[i];
-                    for (int j = 0; j < verwaltung.Count; j++)
+
+
+                    switch (arg)
                     {
-                        BasisModulForm f1 = (BasisModulForm)verwaltung[j].form;
-                        f1.Patient = patient;
+                        case "2":
+                            patienten[i].Geschlecht = temp[i].Geschlecht;
+                            patient = patienten[i];
+                            for (int j = 0; j < verwaltung.Count; j++)
+                            {
+                                BasisModulForm f1 = (BasisModulForm)verwaltung[j].form;
+                                f1.Patient = patient;
 
-                        f1.load();
+                                f1.load();
 
 
-                        comboBox1.Items.Clear();
+                                comboBox1.Items.Clear();
 
-                        comboBox1.Items.Add(p1.VorName);
-                        comboBox1.Items.Add(p2.VorName);
-                        comboBox1.Items.Add(p3.VorName);
-                        comboBox1.Items.Add(p4.VorName);
-                        comboBox1.Items.Add(p5.VorName);
+                                comboBox1.Items.Add(p1.VorName);
+                                comboBox1.Items.Add(p2.VorName);
+                                comboBox1.Items.Add(p3.VorName);
+                                comboBox1.Items.Add(p4.VorName);
+                                comboBox1.Items.Add(p5.VorName);
 
-                        comboBox1.SelectedIndex = comboBox1.FindStringExact(patient.VorName);
+                                comboBox1.SelectedIndex = comboBox1.FindStringExact(patient.VorName);
+                            }
+                            break;
+                        case "3":
+                            patienten[i].VorName = temp[i].VorName; 
+                            patienten[i].NachName = temp[i].NachName;
+                            patient = patienten[i];
+                            for (int j = 0; j < verwaltung.Count; j++)
+                            {
+                                BasisModulForm f1 = (BasisModulForm)verwaltung[j].form;
+                                f1.Patient = patient;
 
-                        break;
+                                f1.load();
+
+
+                                comboBox1.Items.Clear();
+
+                                comboBox1.Items.Add(p1.VorName);
+                                comboBox1.Items.Add(p2.VorName);
+                                comboBox1.Items.Add(p3.VorName);
+                                comboBox1.Items.Add(p4.VorName);
+                                comboBox1.Items.Add(p5.VorName);
+
+                                comboBox1.SelectedIndex = comboBox1.FindStringExact(patient.VorName);
+                            }
+                            break;
+                        case "4":
+                            patienten[i].Geburtstag = temp[i].Geburtstag;
+                            patient = patienten[i];
+                            for (int j = 0; j < verwaltung.Count; j++)
+                            {
+                                BasisModulForm f1 = (BasisModulForm)verwaltung[j].form;
+                                f1.Patient = patient;
+
+                                f1.load();
+
+
+                                comboBox1.Items.Clear();
+
+                                comboBox1.Items.Add(p1.VorName);
+                                comboBox1.Items.Add(p2.VorName);
+                                comboBox1.Items.Add(p3.VorName);
+                                comboBox1.Items.Add(p4.VorName);
+                                comboBox1.Items.Add(p5.VorName);
+
+                                comboBox1.SelectedIndex = comboBox1.FindStringExact(patient.VorName);
+                            }
+                            break;
+
+
+                        default:
+                            MessageBox.Show("SwitchCase Default");
+                            break;
                     }
+
+
+
+
                     break;
                 }
             }
-
-
         }
+
+
+
+
+        //public static void zurücksetzen(Patient p)
+        //{
+
+
+        //    patienten.Clear();
+        //    loadPatients();
+
+
+        //    for (int i = 0; i < patienten.Count; i++)
+        //    {
+        //        if (patienten[i].Id == p.Id)
+        //        {
+
+        //            //HIER SCHAUEN DASS NUR EIN WERT VERT
+        //            //patienten[i] = p;
+        //            patient = patienten[i];
+        //            for (int j = 0; j < verwaltung.Count; j++)
+        //            {
+        //                BasisModulForm f1 = (BasisModulForm)verwaltung[j].form;
+        //                f1.Patient = patient;
+
+        //                f1.load();
+
+
+        //                comboBox1.Items.Clear();
+
+        //                comboBox1.Items.Add(p1.VorName);
+        //                comboBox1.Items.Add(p2.VorName);
+        //                comboBox1.Items.Add(p3.VorName);
+        //                comboBox1.Items.Add(p4.VorName);
+        //                comboBox1.Items.Add(p5.VorName);
+
+        //                comboBox1.SelectedIndex = comboBox1.FindStringExact(patient.VorName);
+
+        //                break;
+        //            }
+        //            break;
+        //        }
+        //    }
+
+
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {

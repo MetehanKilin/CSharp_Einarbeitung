@@ -36,9 +36,9 @@ namespace WindowsFormsApplication5
             edit.Show();
 
         }
-        public override void editPatient(string s)
-        {
-            label1.Text = "Die ID lautet: " + s;
-        }
+        //public override void editPatient(string s)
+        //{
+        //    label1.Text = "Die ID lautet: " + s;
+        //}
     }
 }

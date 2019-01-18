@@ -34,7 +34,16 @@ namespace WindowsFormsApplication5
 
 
 
+        public override void verwerfenButton_Click(object sender, EventArgs e)
+        {
+            //Hauptseite.createPatients();
 
+            Hauptseite.zurücksetzen(Patient, "4");
+
+            this.Close();
+            this.Dispose();
+
+        }
 
 
 

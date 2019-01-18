@@ -101,17 +101,25 @@ namespace WindowsFormsApplication5
 
         }
 
-        private void verwerfenButton_Click(object sender, EventArgs e)
+        //private void verwerfenButton_Click(object sender, EventArgs e)
+        //{
+
+        //    Hauptseite.createPatients();
+
+        //    Hauptseite.zurücksetzen(patient);
+
+        //    this.Close();
+        //    this.Dispose();
+        //}
+
+
+        public virtual void verwerfenButton_Click(object sender, EventArgs e)
         {
 
-            Hauptseite.createPatients();
-
-            Hauptseite.zurücksetzen(patient);
-
-            this.Close();
-            this.Dispose();
+           
         }
 
-      
+       
+
     }
 } 

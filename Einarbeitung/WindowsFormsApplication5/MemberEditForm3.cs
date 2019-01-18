@@ -32,6 +32,7 @@ namespace WindowsFormsApplication5
                     
                     Hauptseite.manipulationPatient(Patient);
 
+                
                     //ab.label1.Text = a.ToString();
 
                     this.Close();
@@ -41,19 +42,23 @@ namespace WindowsFormsApplication5
 
         }
 
-        public override void load()
-        {
-            
-            //editLabel.Text = "Vor- und Nachname: " + Patient.VorName + " " + Patient.NachName;
-        }
-
-
-        //public override void edit()
+        //public override void load()
         //{
 
-
+        //    editLabel.Text = "Vor- und Nachname: " + Patient.VorName + " " + Patient.NachName;
         //}
 
+
+        public override void verwerfenButton_Click(object sender, EventArgs e)
+        {
+            //Hauptseite.createPatients();
+
+            Hauptseite.zurücksetzen(Patient, "3");
+
+            this.Close();
+            this.Dispose();
+
+        }
 
 
 

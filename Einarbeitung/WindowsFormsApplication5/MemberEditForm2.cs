@@ -68,50 +68,66 @@ namespace WindowsFormsApplication5
             this.Dispose();
                    
             }
+
+        public override void verwerfenButton_Click(object sender, EventArgs e)
+        {
+            //Hauptseite.createPatients();
+
+            Hauptseite.zurücksetzen(Patient, "2");
+
+            this.Close();
+            this.Dispose();
+
         }
 
 
 
-        //public override void speichernButton_Click(object sender, EventArgs e)
-        //{
-        //    bool b = true;
-        //    int a;
 
-
-        //    if (b)
-        //    {
-        //        if (int.TryParse(textBox1.Text, out a))
-        //        {
-
-        //            //Hauptseite.
-
-        //            BasisModulForm ab = (BasisModulForm)Form;
-
-        //            //hier die veränderung herausnehmen
-        //            //abspeichern in der Verwaltung
-        //            //MemberModulForm patient updaten
-        //            //laden Methode aufrufen
-
-        //            Patient.Geschlecht = 'a';
-
-        //            Hauptseite.manipulationPatient(Patient);
-
-        //            //ab.label1.Text = a.ToString();
+    }
 
 
 
-        //            this.Close();
-        //            this.Dispose();
-        //            b = false;
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Bitte geben Sie ein Int ein");
-        //        }
-        //    }
 
-        //}
+    //public override void speichernButton_Click(object sender, EventArgs e)
+    //{
+    //    bool b = true;
+    //    int a;
 
 
-    
+    //    if (b)
+    //    {
+    //        if (int.TryParse(textBox1.Text, out a))
+    //        {
+
+    //            //Hauptseite.
+
+    //            BasisModulForm ab = (BasisModulForm)Form;
+
+    //            //hier die veränderung herausnehmen
+    //            //abspeichern in der Verwaltung
+    //            //MemberModulForm patient updaten
+    //            //laden Methode aufrufen
+
+    //            Patient.Geschlecht = 'a';
+
+    //            Hauptseite.manipulationPatient(Patient);
+
+    //            //ab.label1.Text = a.ToString();
+
+
+
+    //            this.Close();
+    //            this.Dispose();
+    //            b = false;
+    //        }
+    //        else
+    //        {
+    //            MessageBox.Show("Bitte geben Sie ein Int ein");
+    //        }
+    //    }
+
+    //}
+
+
+
 }
