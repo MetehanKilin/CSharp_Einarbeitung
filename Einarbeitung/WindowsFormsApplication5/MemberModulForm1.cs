@@ -15,24 +15,22 @@ namespace WindowsFormsApplication5
         public MemberModulForm1()
         {
             InitializeComponent();
-            button1.Visible = false;
+            speichern.Visible = false;
+            verwerfen.Visible=false;
+            textBox1.Visible = false;
         }
 
-        protected override void load()
+        public override void load()
         {
             label1.Text = "Die ID lautet: " + Patient.Id;
+            //textBox1.Text = Patient.Id.ToString();
         }
 
-     
-        protected override void editPatient(string s)
-        {
-            label1.Text = "Die ID lautet: " + s;
-        }
+  
 
         private void ModulFormLoad(object sender, EventArgs e)
         {
-            label1.Text = "Die ID lautet: " + Patient.Id;
-           
+            load();          
         }
        
     }

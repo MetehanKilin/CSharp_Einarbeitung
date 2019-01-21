@@ -51,7 +51,7 @@
             this.Name = "MemberModulForm5";
             this.Text = "MemberModulForm5";
             this.Load += new System.EventHandler(this.ModulFormLoad);
-            this.Controls.SetChildIndex(this.button1, 0);
+            this.Controls.SetChildIndex(this.speichern, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
             this.ResumeLayout(false);

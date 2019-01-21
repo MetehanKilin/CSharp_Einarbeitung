@@ -12,287 +12,48 @@ namespace WindowsFormsApplication5
 {
     public partial class Hauptfenster : Form
     {
-        static List<VerwaltungForms> verwaltung = new List<VerwaltungForms>();
-        public static List<Patient> patienten = createPatients();
-
-        static Patient p1;
-        static Patient p2;
-        static Patient p3;
-        static Patient p4;
-        static Patient p5;
+        private List<VerwaltungForms> Verwaltung = new List<VerwaltungForms>();
+        private List<Patient> Patienten = new List<Patient>();
+        private Patient Currentpatient;
 
 
-
-        public static Patient patient;
-        BasisModulForm form;
-        TabPage tabpage1;
-
-        //MemberModulForm1 form1;
-        //MemberModulForm2 form2;
-        //MemberModulForm3 form3;
-        //MemberModulForm4 form4;
-        //MemberModulForm5 form5;
-
-
-
-        //comboBox1.Items[1] = p2.vorName;
-        //comboBox1.Items[2] = p3.vorName;
-        //comboBox1.Items[3] = p4.vorName;
-        //comboBox1.Items[4] = p5.vorName;
 
 
 
         public Hauptfenster()
         {
             InitializeComponent();
-
-            createPatients();
             loadPatients();
 
-            comboBox1.Items.Add(p1.VorName);
-            comboBox1.Items.Add(p2.VorName);
-            comboBox1.Items.Add(p3.VorName);
-            comboBox1.Items.Add(p4.VorName);
-            comboBox1.Items.Add(p5.VorName);
-
-        }
-
-
-        //public static void createPatients()
-        //{
-        //    p1 = new Patient(1, 'M', "AAA", "BBB", new DateTime(1990, 01, 01));
-        //    p2 = new Patient(2, 'W', "CCC", "DDD", new DateTime(1991, 02, 02));
-        //    p3 = new Patient(3, 'M', "EEE", "FFF", new DateTime(1992, 03, 03));
-        //    p4 = new Patient(4, 'W', "GGG", "HHH", new DateTime(1993, 04, 04));
-        //    p5 = new Patient(5, 'M', "III", "JJJ", new DateTime(1994, 05, 05));
-        //}
-
-        public static List<Patient> createPatients()
-        {
-            p1 = new Patient(1, 'M', "AAA", "BBB", new DateTime(1990, 01, 01));
-            p2 = new Patient(2, 'W', "CCC", "DDD", new DateTime(1991, 02, 02));
-            p3 = new Patient(3, 'M', "EEE", "FFF", new DateTime(1992, 03, 03));
-            p4 = new Patient(4, 'W', "GGG", "HHH", new DateTime(1993, 04, 04));
-            p5 = new Patient(5, 'M', "III", "JJJ", new DateTime(1994, 05, 05));
-
-            List<Patient> patienten = new List<Patient>();
-            patienten.Add(p1);
-            patienten.Add(p2);
-            patienten.Add(p3);
-            patienten.Add(p4);
-            patienten.Add(p5);
-
-
-
-            return patienten;
-
-
-        }
-
-
-
-        public static void loadPatients()
-        {
-            patienten.Add(p1);
-            patienten.Add(p2);
-            patienten.Add(p3);
-            patienten.Add(p4);
-            patienten.Add(p5);
-        }
-
-       
-
-        public static void manipulationPatient(Patient p)
-        {
-            for (int i = 0; i < patienten.Count; i++)
+            foreach (var item in Patienten)
             {
-                if (patienten[i].Id==p.Id)
-                {
-                    patienten[i] = p;
-                    patient = p;
-                    for (int j = 0; j < verwaltung.Count; j++)
-                    {
-                        BasisModulForm f1 = (BasisModulForm)verwaltung[j].form;
-                        f1.Patient = patient;
-                        f1.load();
-                        comboBox1.Items.Clear();
-                        comboBox1.Items.Add(p1.VorName);
-                        comboBox1.Items.Add(p2.VorName);
-                        comboBox1.Items.Add(p3.VorName);
-                        comboBox1.Items.Add(p4.VorName);
-                        comboBox1.Items.Add(p5.VorName);
-
-                        comboBox1.SelectedIndex = comboBox1.FindStringExact(patient.VorName);
-                        break;
-                    }
-                    break;
-                }
+                comboBox1.Items.Add(item);
             }
 
-
-            
-
-
-
         }
 
 
-        public static void zurücksetzen(Patient p, String arg)
+        private void loadPatients()
         {
-            List < Patient > temp= createPatients();
-
-
-
-            //patienten.Clear();
-            //loadPatients();
-
-
-            for (int i = 0; i < patienten.Count; i++)
-            {
-                if (patienten[i].Id == p.Id)
-                {
-
-
-
-                    switch (arg)
-                    {
-                        case "2":
-                            patienten[i].Geschlecht = temp[i].Geschlecht;
-                            patient = patienten[i];
-                            for (int j = 0; j < verwaltung.Count; j++)
-                            {
-                                BasisModulForm f1 = (BasisModulForm)verwaltung[j].form;
-                                f1.Patient = patient;
-
-                                f1.load();
-
-
-                                comboBox1.Items.Clear();
-
-                                comboBox1.Items.Add(p1.VorName);
-                                comboBox1.Items.Add(p2.VorName);
-                                comboBox1.Items.Add(p3.VorName);
-                                comboBox1.Items.Add(p4.VorName);
-                                comboBox1.Items.Add(p5.VorName);
-
-                                comboBox1.SelectedIndex = comboBox1.FindStringExact(patient.VorName);
-                            }
-                            break;
-                        case "3":
-                            patienten[i].VorName = temp[i].VorName; 
-                            patienten[i].NachName = temp[i].NachName;
-                            patient = patienten[i];
-                            for (int j = 0; j < verwaltung.Count; j++)
-                            {
-                                BasisModulForm f1 = (BasisModulForm)verwaltung[j].form;
-                                f1.Patient = patient;
-
-                                f1.load();
-
-
-                                comboBox1.Items.Clear();
-
-                                comboBox1.Items.Add(p1.VorName);
-                                comboBox1.Items.Add(p2.VorName);
-                                comboBox1.Items.Add(p3.VorName);
-                                comboBox1.Items.Add(p4.VorName);
-                                comboBox1.Items.Add(p5.VorName);
-
-                                comboBox1.SelectedIndex = comboBox1.FindStringExact(patient.VorName);
-                            }
-                            break;
-                        case "4":
-                            patienten[i].Geburtstag = temp[i].Geburtstag;
-                            patient = patienten[i];
-                            for (int j = 0; j < verwaltung.Count; j++)
-                            {
-                                BasisModulForm f1 = (BasisModulForm)verwaltung[j].form;
-                                f1.Patient = patient;
-
-                                f1.load();
-
-
-                                comboBox1.Items.Clear();
-
-                                comboBox1.Items.Add(p1.VorName);
-                                comboBox1.Items.Add(p2.VorName);
-                                comboBox1.Items.Add(p3.VorName);
-                                comboBox1.Items.Add(p4.VorName);
-                                comboBox1.Items.Add(p5.VorName);
-
-                                comboBox1.SelectedIndex = comboBox1.FindStringExact(patient.VorName);
-                            }
-                            break;
-
-
-                        default:
-                            MessageBox.Show("SwitchCase Default");
-                            break;
-                    }
-
-
-
-
-                    break;
-                }
-            }
+            Patienten.Add(new Patient(1, 'M', "Metehan", "Kilin", new DateTime(1990, 01, 01)));
+            Patienten.Add(new Patient(2, 'M', "Ingo", "Temme", new DateTime(1991, 02, 02)));
+            Patienten.Add(new Patient(3, 'M', "Roberto", "Danti", new DateTime(1992, 03, 03)));
+            Patienten.Add(new Patient(4, 'M', "Stefan", "Lober", new DateTime(1993, 04, 04)));
+            Patienten.Add(new Patient(5, 'W', "Bettina", "Araya", new DateTime(1994, 05, 05)));
         }
 
 
-
-
-        //public static void zurücksetzen(Patient p)
-        //{
-
-
-        //    patienten.Clear();
-        //    loadPatients();
-
-
-        //    for (int i = 0; i < patienten.Count; i++)
-        //    {
-        //        if (patienten[i].Id == p.Id)
-        //        {
-
-        //            //HIER SCHAUEN DASS NUR EIN WERT VERT
-        //            //patienten[i] = p;
-        //            patient = patienten[i];
-        //            for (int j = 0; j < verwaltung.Count; j++)
-        //            {
-        //                BasisModulForm f1 = (BasisModulForm)verwaltung[j].form;
-        //                f1.Patient = patient;
-
-        //                f1.load();
-
-
-        //                comboBox1.Items.Clear();
-
-        //                comboBox1.Items.Add(p1.VorName);
-        //                comboBox1.Items.Add(p2.VorName);
-        //                comboBox1.Items.Add(p3.VorName);
-        //                comboBox1.Items.Add(p4.VorName);
-        //                comboBox1.Items.Add(p5.VorName);
-
-        //                comboBox1.SelectedIndex = comboBox1.FindStringExact(patient.VorName);
-
-        //                break;
-        //            }
-        //            break;
-        //        }
-        //    }
-
-
-        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
+            MemberModulForm1 MemberForm;
+            TabPage tabpage;
 
-
-            for (int i = 0; i < verwaltung.Count; i++)
+            for (int i = 0; i < Verwaltung.Count; i++)
             {
-                if (verwaltung[i].form is MemberModulForm1)
+                if (Verwaltung[i].Form is MemberModulForm1)
                 {
-                    tabControl1.SelectedTab = verwaltung[i].tabpage;
+                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
                     return;
                 }
             }
@@ -301,279 +62,180 @@ namespace WindowsFormsApplication5
             string button1Text = button1.Text;
 
 
-            form = new MemberModulForm1 { Text = button1Text };
-            tabpage1 = new TabPage { Text = button1Text };
+            MemberForm = new MemberModulForm1 { Text = button1Text };
+            tabpage = new TabPage { Text = button1Text };
 
-            form.Patient = patient;
+            MemberForm.Patient = Currentpatient;
 
-            tabControl1.SelectedTab = tabpage1;
-            tabControl1.TabPages.Add(tabpage1);
-            form.Text = button1Text;
-            form.TopLevel = false;
-            form.Parent = tabpage1;
-            form.Show();
-            form.Dock = DockStyle.Fill;
+            tabControl1.SelectedTab = tabpage;
+            tabControl1.TabPages.Add(tabpage);
+            MemberForm.Text = button1Text;
+            MemberForm.TopLevel = false;
+            MemberForm.Parent = tabpage;
+            MemberForm.Show();
+            MemberForm.Dock = DockStyle.Fill;
             Delete.Enabled = true;
-            verwaltung.Add(new VerwaltungForms(form, tabpage1));
+            Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
         }
 
 
 
         private void button2_Click(object sender, EventArgs e)
         {
+            MemberModulForm2 MemberForm;
+            TabPage tabpage;
 
-            for (int i = 0; i < verwaltung.Count; i++)
+            for (int i = 0; i < Verwaltung.Count; i++)
             {
-                if (verwaltung[i].form is MemberModulForm2)
+                if (Verwaltung[i].Form is MemberModulForm2)
                 {
-                    tabControl1.SelectedTab = verwaltung[i].tabpage;
+                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
                     return;
                 }
             }
 
-            Button button2 = (Button)sender;
-            string button2Text = button2.Text;
+            Button button1 = (Button)sender;
+            string button1Text = button1.Text;
 
 
-            form = new MemberModulForm2 { Text = button2Text };
-            tabpage1 = new TabPage { Text = button2Text };
+            MemberForm = new MemberModulForm2 { Text = button1Text };
+            tabpage = new TabPage { Text = button1Text };
 
-            form.Patient = patient;
+            MemberForm.Patient = Currentpatient;
 
-            tabControl1.SelectedTab = tabpage1;
-            tabControl1.TabPages.Add(tabpage1);
-            form.Text = button2Text;
-            form.TopLevel = false;
-            form.Parent = tabpage1;
-            form.Show();
-            form.Dock = DockStyle.Fill;
+            tabControl1.SelectedTab = tabpage;
+            tabControl1.TabPages.Add(tabpage);
+            MemberForm.Text = button1Text;
+            MemberForm.TopLevel = false;
+            MemberForm.Parent = tabpage;
+            MemberForm.Show();
+            MemberForm.Dock = DockStyle.Fill;
             Delete.Enabled = true;
-            verwaltung.Add(new VerwaltungForms(form, tabpage1));
-          
+            Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
 
-
-            //Button button2 = (Button)sender;
-            //string button2Text = button2.Text;
-
-
-            //MemberModulForm2 form2 = new MemberModulForm2 { Text = button2Text };
-            //TabPage tabpage2 = new TabPage { Text = button2Text };
-
-            //form2.Patient = patient;
-
-            //tabControl1.SelectedTab = tabpage2;
-            //tabControl1.TabPages.Add(tabpage2);
-            //form2.Text = button2Text;
-            //form2.TopLevel = false;
-            //form2.Parent = tabpage2;
-            //form2.Show();
-            //Delete.Enabled = true;
-
-            //verwaltung.Add(new VerwaltungForms(form2, tabpage2, patient));
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < verwaltung.Count; i++)
+            MemberModulForm3 MemberForm;
+            TabPage tabpage;
+
+            for (int i = 0; i < Verwaltung.Count; i++)
             {
-                if (verwaltung[i].form is MemberModulForm3)
+                if (Verwaltung[i].Form is MemberModulForm3)
                 {
-                    tabControl1.SelectedTab = verwaltung[i].tabpage;
+                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
                     return;
                 }
             }
 
-            Button button3 = (Button)sender;
-            string button3Text = button3.Text;
+            Button button1 = (Button)sender;
+            string button1Text = button1.Text;
 
 
-            form = new MemberModulForm3 { Text = button3Text };
-            tabpage1 = new TabPage { Text = button3Text };
+            MemberForm = new MemberModulForm3 { Text = button1Text };
+            tabpage = new TabPage { Text = button1Text };
 
-            form.Patient = patient;
+            MemberForm.Patient = Currentpatient;
 
-            tabControl1.SelectedTab = tabpage1;
-            tabControl1.TabPages.Add(tabpage1);
-            form.Text = button3Text;
-            form.TopLevel = false;
-            form.Parent = tabpage1;
-            form.Show();
-            form.Dock = DockStyle.Fill;
+            tabControl1.SelectedTab = tabpage;
+            tabControl1.TabPages.Add(tabpage);
+            MemberForm.Text = button1Text;
+            MemberForm.TopLevel = false;
+            MemberForm.Parent = tabpage;
+            MemberForm.Show();
+            MemberForm.Dock = DockStyle.Fill;
             Delete.Enabled = true;
-            verwaltung.Add(new VerwaltungForms(form, tabpage1));
-
-
-            //for (int i = 0; i < verwaltung.Count; i++)
-            //{
-            //    if (verwaltung[i].form is MemberModulForm3)
-            //    {
-            //        tabControl1.SelectedTab = verwaltung[i].tabpage;
-            //        return;
-            //    }
-            //}
-
-
-            //Button button3 = (Button)sender;
-            //string button3Text = button3.Text;
-
-
-            //MemberModulForm3 form3 = new MemberModulForm3 { Text = button3Text };
-            //TabPage tabpage3 = new TabPage { Text = button3Text };
-
-            //form3.Patient = patient;
-
-            //tabControl1.SelectedTab = tabpage3;
-            //tabControl1.TabPages.Add(tabpage3);
-            //form3.Text = button3Text;
-            //form3.TopLevel = false;
-            //form3.Parent = tabpage3;
-            //form3.Show();
-            //Delete.Enabled = true;
-
-            //verwaltung.Add(new VerwaltungForms(form3, tabpage3, patient));
+            Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < verwaltung.Count; i++)
+            MemberModulForm4 MemberForm;
+            TabPage tabpage;
+
+            for (int i = 0; i < Verwaltung.Count; i++)
             {
-                if (verwaltung[i].form is MemberModulForm4)
+                if (Verwaltung[i].Form is MemberModulForm4)
                 {
-                    tabControl1.SelectedTab = verwaltung[i].tabpage;
+                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
                     return;
                 }
             }
 
-            Button button4 = (Button)sender;
-            string button4Text = button4.Text;
+            Button button1 = (Button)sender;
+            string button1Text = button1.Text;
 
 
-            form = new MemberModulForm4 { Text = button4Text };
-            tabpage1 = new TabPage { Text = button4Text };
+            MemberForm = new MemberModulForm4 { Text = button1Text };
+            tabpage = new TabPage { Text = button1Text };
 
-            form.Patient = patient;
+            MemberForm.Patient = Currentpatient;
 
-            tabControl1.SelectedTab = tabpage1;
-            tabControl1.TabPages.Add(tabpage1);
-            form.Text = button4Text;
-            form.TopLevel = false;
-            form.Parent = tabpage1;
-            form.Show();
-            form.Dock = DockStyle.Fill;
+            tabControl1.SelectedTab = tabpage;
+            tabControl1.TabPages.Add(tabpage);
+            MemberForm.Text = button1Text;
+            MemberForm.TopLevel = false;
+            MemberForm.Parent = tabpage;
+            MemberForm.Show();
+            MemberForm.Dock = DockStyle.Fill;
             Delete.Enabled = true;
-            verwaltung.Add(new VerwaltungForms(form, tabpage1));
-
-
-            //for (int i = 0; i < verwaltung.Count; i++)
-            //{
-            //    if (verwaltung[i].form is MemberModulForm4)
-            //    {
-            //        tabControl1.SelectedTab = verwaltung[i].tabpage;
-            //        return;
-            //    }
-            //}
-
-            //Button button4 = (Button)sender;
-            //string button4Text = button4.Text;
-
-
-            //MemberModulForm4 form4 = new MemberModulForm4 { Text = button4Text };
-            //TabPage tabpage4 = new TabPage { Text = button4Text };
-
-            //form4.Patient = patient;
-
-            //tabControl1.SelectedTab = tabpage4;
-            //tabControl1.TabPages.Add(tabpage4);
-            //form4.Text = button4Text;
-            //form4.TopLevel = false;
-            //form4.Parent = tabpage4;
-            //form4.Show();
-            //Delete.Enabled = true;
-
-            //verwaltung.Add(new VerwaltungForms(form4, tabpage4, patient));
+            Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < verwaltung.Count; i++)
+            MemberModulForm5 MemberForm;
+            TabPage tabpage;
+
+            for (int i = 0; i < Verwaltung.Count; i++)
             {
-                if (verwaltung[i].form is MemberModulForm5)
+                if (Verwaltung[i].Form is MemberModulForm5)
                 {
-                    tabControl1.SelectedTab = verwaltung[i].tabpage;
+                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
                     return;
                 }
             }
 
-            Button button5 = (Button)sender;
-            string button5Text = button5.Text;
+            Button button1 = (Button)sender;
+            string button1Text = button1.Text;
 
 
-            form = new MemberModulForm5 { Text = button5Text };
-            tabpage1 = new TabPage { Text = button5Text };
+            MemberForm = new MemberModulForm5 { Text = button1Text };
+            tabpage = new TabPage { Text = button1Text };
 
-            form.Patient = patient;
+            MemberForm.Patient = Currentpatient;
 
-            tabControl1.SelectedTab = tabpage1;
-            tabControl1.TabPages.Add(tabpage1);
-            form.Text = button5Text;
-            form.TopLevel = false;
-            form.Parent = tabpage1;
-            form.Show();
-            form.Dock = DockStyle.Fill;
+            tabControl1.SelectedTab = tabpage;
+            tabControl1.TabPages.Add(tabpage);
+            MemberForm.Text = button1Text;
+            MemberForm.TopLevel = false;
+            MemberForm.Parent = tabpage;
+            MemberForm.Show();
+            MemberForm.Dock = DockStyle.Fill;
             Delete.Enabled = true;
-            verwaltung.Add(new VerwaltungForms(form, tabpage1));
-
-
-            //for (int i = 0; i < verwaltung.Count; i++)
-            //{
-            //    if (verwaltung[i].form is MemberModulForm5)
-            //    {
-            //        tabControl1.SelectedTab = verwaltung[i].tabpage;
-            //        verwaltung[i].patient = patient;
-
-            //        return;
-            //    }
-            //}
-
-
-            //Button button5 = (Button)sender;
-            //string button5Text = button5.Text;
-
-            //MemberModulForm5 form5 = new MemberModulForm5 { Text = button5Text };
-            //TabPage tabpage5 = new TabPage { Text = button5Text };
-
-            //form5.Patient = patient;
-
-            //tabControl1.SelectedTab = tabpage5;
-            //tabControl1.TabPages.Add(tabpage5);
-            //form5.Text = button5Text;
-            //form5.TopLevel = false;
-            //form5.Parent = tabpage5;
-            //form5.Show();
-            //Delete.Enabled = true;
-
-            //verwaltung.Add(new VerwaltungForms(form5, tabpage5, patient));
+            Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
         }
 
 
         private void Delete_Click(object sender, EventArgs e)
         {
-                for (int i = 0; i < verwaltung.Count; i++)
+                for (int i = 0; i < Verwaltung.Count; i++)
                 {
-                    if (verwaltung[i].tabpage == this.tabControl1.SelectedTab)
+                    if (Verwaltung[i].Tabpage == this.tabControl1.SelectedTab)
                     {
 
-                        verwaltung[i].form.Close();
-                        verwaltung[i].form.Dispose();
-                    
-                        verwaltung[i].tabpage.Dispose();
-                        verwaltung.RemoveAt(i);
+                    Verwaltung[i].Form.Close();
+                    Verwaltung[i].Form.Dispose();
+
+                    Verwaltung[i].Tabpage.Dispose();
+                    Verwaltung.RemoveAt(i);
                     }
 
                 }
                 
 
-                if (verwaltung.Count == 0)
+                if (Verwaltung.Count == 0)
                 {
                     Delete.Enabled = false;
                     //comboBox1.Enabled = true;
@@ -583,49 +245,37 @@ namespace WindowsFormsApplication5
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //string selectedPatient = this.comboBox1.GetItemText(this.comboBox1.SelectedItem);
+           
 
             //Patienten Suchen 
-            for (int i = 0; i < patienten.Count; i++)
+            for (int i = 0; i < Patienten.Count; i++)
             {
-                //Console.WriteLine(patienten[i].vorName);
-                if (patienten[i].VorName == comboBox1.SelectedItem.ToString())
+                if (Patienten[i].ToString()== comboBox1.SelectedItem.ToString())
                 {
-                    patient = patienten[i];
+                    //MessageBox.Show("gefunden" + Patienten[i].ToString() + " \n\n\nAAAAA \n\n\n" + comboBox1.SelectedItem.ToString());
+                    Currentpatient = Patienten[i];
                     //patient = new Patient(patienten[i].Id, patienten[i].Geschlecht, patienten[i].VorName, patienten[i].NachName, patienten[i].Geburtstag);
                     break; 
                 }
             }
 
 
+
+
+
             
-            
 
-
-
-
-            for (int i = 0; i < verwaltung.Count; i++)
+            for (int i = 0; i < Verwaltung.Count; i++)
             {
-                BasisModulForm f1 = (BasisModulForm)verwaltung[i].form;
-                f1.Patient = patient;
+                Verwaltung[i].Form.Patient = Currentpatient;
+                BasisModulForm f1 = Verwaltung[i].Form;
+                f1.Patient = Currentpatient;
                 f1.load();
                 
+            }    
 
 
-
-            }
-
-
-
-
-
-            //if (verwaltung.Count != 0)
-            //{
-            //}
-
-            
-
-            if (patient != null)
+            if (Currentpatient != null)
             {
                 button1.Enabled = true;
                 button2.Enabled = true;
@@ -641,12 +291,7 @@ namespace WindowsFormsApplication5
         }
 
 
-        public void update()
-        {
-          
-
-        }
-
+      
 
     }
 }

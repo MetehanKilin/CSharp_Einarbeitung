@@ -9,24 +9,41 @@ namespace WindowsFormsApplication5
 {
     class VerwaltungForms
     {
-        private Form form;
+        private BasisModulForm form;
         private TabPage tabpage;
-        //public Patient patient;
-
         
 
-        public VerwaltungForms(Form f, TabPage t)
+        public VerwaltungForms(BasisModulForm f, TabPage t)
         {
             
-            this.form = f;
-            this.tabpage = t;
-            //this.patient = p;
+            this.Form = f;
+            this.Tabpage = t;
         }
 
-       
+        public BasisModulForm Form
+        {
+            get
+            {
+                return form;
+            }
 
-       
+            set
+            {
+                form = value;
+            }
+        }
 
+        public TabPage Tabpage
+        {
+            get
+            {
+                return tabpage;
+            }
 
+            set
+            {
+                tabpage = value;
+            }
+        }
     }
 }

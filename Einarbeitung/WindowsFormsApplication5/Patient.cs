@@ -84,6 +84,17 @@ namespace WindowsFormsApplication5
             this.geburtstag = geburtstag;
         }
 
+        
+
+        public override string ToString()
+        {
+            return  "ID: " + id +
+                    "\n Geschlecht" + Geschlecht +
+                    "\n Vorname" + VorName +
+                    "\n Nachname" + NachName +
+                    "\n Geburtstag" + Geburtstag ;
+        }
+
 
 
     }

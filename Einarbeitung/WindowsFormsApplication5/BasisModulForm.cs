@@ -12,6 +12,7 @@ namespace WindowsFormsApplication5
 {
     public partial class BasisModulForm : Form
     {
+
         public BasisModulForm()
         {
             InitializeComponent();
@@ -31,17 +32,34 @@ namespace WindowsFormsApplication5
                 patient = value;
             }
         }
-        protected virtual void load()
+        public virtual void load()
         {
 
         }
 
-
-
-
-        protected virtual void editPatient()
+        protected virtual void reset()
         {
 
+        }
+
+        private void verwerfen_Click(object sender, EventArgs e)
+        {
+            reset();
+        }
+
+        protected virtual void saveData()
+        {
+
+        }
+
+        private void speichern_Click(object sender, EventArgs e)
+        {
+            saveData();
+        }
+
+        private void textBox1_Click(object sender, EventArgs e)
+        {
+            verwerfen.Enabled = true;
         }
     }
 }

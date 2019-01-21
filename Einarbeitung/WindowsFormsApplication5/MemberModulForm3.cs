@@ -18,39 +18,42 @@ namespace WindowsFormsApplication5
         }
 
 
-        protected override void load()
+        public override void load()
         {
-            Console.WriteLine("Vor - und Nachname: " + Patient.VorName + " " + Patient.NachName);
             label1.Text = "Vor- und Nachname: " + Patient.VorName + " " + Patient.NachName;
+            textBox1.Text = Patient.VorName + " " + Patient.NachName;
         }
 
-        public void ModulFormLoad(object sender, EventArgs e)
+        private void ModulFormLoad(object sender, EventArgs e)
         {
-            label1.Text = "Vor- und Nachname: " + Patient.VorName+" "+ Patient.NachName;
-          
-
+            load();
         }
 
-
-
-
-
-
-        public override void edit()
+        protected override void saveData()
         {
-            MemberEditForm3 edit = new MemberEditForm3();
-            edit.Patient = Patient;
-            edit.Form = this;
-            edit.load();
-            edit.Show();
+            string[] split = textBox1.Text.Split(null);
 
+                if (split.Length>2)
+                {
+                MessageBox.Show("Bitte Vorname und Nachme eingeben: (Max Mustermann)");
+                }
+
+            Patient.VorName = split[0];
+            Patient.NachName = split[1];
+
+
+            label1.Text = "Vor- und Nachname: " + Patient.VorName + " " + Patient.NachName;
+            textBox1.Text = Patient.VorName + " " + Patient.NachName;
         }
 
-
-        public override void editPatient(string s)
+        protected override void reset()
         {
-            label1.Text = "Vorname und Nachname: " + s;
+            verwerfen.Enabled = true;
+            textBox1.Text = Patient.VorName + " " + Patient.NachName;
         }
+
+
+
 
 
     }

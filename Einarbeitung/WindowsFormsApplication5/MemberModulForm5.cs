@@ -15,10 +15,13 @@ namespace WindowsFormsApplication5
         public MemberModulForm5()
         {
             InitializeComponent();
-            button1.Visible = false;
+            speichern.Visible = false;
+            verwerfen.Visible = false;
+            textBox1.Visible = false;
+
         }
 
-        protected override void load()
+        public override void load()
         {
             label1.Text = " ID: " + Patient.Id + "\n "
                             + "Geschlecht: " + Patient.Geschlecht + "\n "
@@ -29,14 +32,7 @@ namespace WindowsFormsApplication5
 
         public void ModulFormLoad(object sender, EventArgs e)
         {
-            label1.Text=" ID: " + Patient.Id + "\n "
-                            + "Geschlecht: " + Patient.Geschlecht + "\n "
-                            + "Vorname: " + Patient.VorName + "\n "
-                            + "Nachname: " + Patient.NachName + "\n "
-                            + "Geburtstag: " + Patient.Geburtstag.ToString("MM/dd/yyyy")
-                            ;
-          
-
+            load();
         }
     }
 }
