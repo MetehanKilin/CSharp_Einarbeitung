@@ -89,6 +89,7 @@
             this.Controls.Add(this.label1);
             this.Name = "BasisModulForm";
             this.Text = "ModulForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BasisModulForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

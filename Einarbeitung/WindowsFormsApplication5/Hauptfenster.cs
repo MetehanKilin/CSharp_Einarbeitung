@@ -220,20 +220,39 @@ namespace WindowsFormsApplication5
 
         private void Delete_Click(object sender, EventArgs e)
         {
-                for (int i = 0; i < Verwaltung.Count; i++)
+            Console.WriteLine(Verwaltung.Count);
+            for (int i = 0; i < Verwaltung.Count; i++)
                 {
                     if (Verwaltung[i].Tabpage == this.tabControl1.SelectedTab)
                     {
-
+                    
                     Verwaltung[i].Form.Close();
-                    Verwaltung[i].Form.Dispose();
 
-                    Verwaltung[i].Tabpage.Dispose();
-                    Verwaltung.RemoveAt(i);
+                    if (Verwaltung[i].Form.Closing1 == true)
+                        {
+                            Verwaltung[i].Form.Dispose();
+
+                            Verwaltung[i].Tabpage.Dispose();
+                            Verwaltung.RemoveAt(i);
+                        }
+                        else
+                        {
+                             return;
+                        }
+
+
+                    }
+                    else
+                    {
+                        return;
                     }
 
+
+                   
+                    
+
                 }
-                
+            Console.WriteLine(Verwaltung.Count);
 
                 if (Verwaltung.Count == 0)
                 {
@@ -242,7 +261,7 @@ namespace WindowsFormsApplication5
                 }
             
         }
-
+      
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
            
@@ -258,8 +277,6 @@ namespace WindowsFormsApplication5
                     break; 
                 }
             }
-
-
 
 
 

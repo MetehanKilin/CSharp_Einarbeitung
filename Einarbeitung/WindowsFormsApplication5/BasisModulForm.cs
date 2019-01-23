@@ -16,9 +16,11 @@ namespace WindowsFormsApplication5
         public BasisModulForm()
         {
             InitializeComponent();
+            closing = false;
         }
 
         private Patient patient;
+        private Boolean closing;
 
         internal Patient Patient
         {
@@ -26,12 +28,24 @@ namespace WindowsFormsApplication5
             {
                 return patient;
             }
-
             set
             {
                 patient = value;
             }
         }
+
+        public bool Closing1
+        {
+            get
+            {
+                return closing;
+            }
+            set
+            {
+                closing = value;
+            }
+        }
+
         public virtual void load()
         {
 
@@ -60,6 +74,65 @@ namespace WindowsFormsApplication5
         private void textBox1_Click(object sender, EventArgs e)
         {
             verwerfen.Enabled = true;
+            Closing1 = false;
         }
+
+
+        private Boolean schließen()
+        {
+            if (closing==true)
+            {
+                return true;
+            }
+            else
+            {
+                return false; 
+            }
+        }
+
+
+
+        private void BasisModulForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            if (!schließen())
+            {
+                DialogResult result = MessageBox.Show("nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel,MessageBoxIcon.Question);
+               
+
+                if (result == DialogResult.Yes)
+                {
+                    closing = true;
+                    return;
+                }
+
+                else if (result == DialogResult.No)
+                {
+                    closing = false;
+                    e.Cancel = (result == DialogResult.No);
+                }   
+                //else if(result==DialogResult.Ignore)          welches ereignis bei X-press
+                //{
+                //    closing = false;
+                //    e.Cancel = (result == DialogResult.Ignore);
+                //}
+                else
+                {
+                    e.Cancel = true;
+                }
+
+
+            }
+            
+          
+
+           
+
+
+
+
+        }
+
+     
     }
 }
