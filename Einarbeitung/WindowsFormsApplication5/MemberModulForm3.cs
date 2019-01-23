@@ -21,13 +21,24 @@ namespace WindowsFormsApplication5
 
         public override void load()
         {
-            Closing1 = true;
+
+            //// MessageBox.Show(""+Closing1);
+
+            //if (Closing1==false)
+            //{
+            //    MessageBox.Show("speichernnichtvergessen");
+
+
+            //}
+
+
             label1.Text = "Vor- und Nachname: " + Patient.VorName + " " + Patient.NachName;
             textBox1.Text = Patient.VorName + " " + Patient.NachName;
         }
 
         private void ModulFormLoad(object sender, EventArgs e)
         {
+            Closing1 = true;
             load();
             verwerfen.Enabled = false;
         }
@@ -49,7 +60,6 @@ namespace WindowsFormsApplication5
             textBox1.Text = Patient.VorName + " " + Patient.NachName;
             Closing1 = true;
             verwerfen.Enabled = false;
-            Closing1 = true;
         }
 
         protected override void reset()
@@ -57,7 +67,6 @@ namespace WindowsFormsApplication5
             verwerfen.Enabled = true;
             textBox1.Text = Patient.VorName + " " + Patient.NachName;
             Closing1 = true;
-
         }
 
 

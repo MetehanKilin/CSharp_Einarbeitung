@@ -20,7 +20,7 @@ namespace WindowsFormsApplication5
         }
 
         private Patient patient;
-        private Boolean closing;
+        private Boolean closing=true;
 
         internal Patient Patient
         {
@@ -59,6 +59,7 @@ namespace WindowsFormsApplication5
         private void verwerfen_Click(object sender, EventArgs e)
         {
             reset();
+            verwerfen.Enabled = false;
         }
 
         protected virtual void saveData()
@@ -90,15 +91,26 @@ namespace WindowsFormsApplication5
             }
         }
 
+        private void patientenwechsel()
+        {
 
+           
+
+        }
+
+
+       
+
+
+       
 
         private void BasisModulForm_FormClosing(object sender, FormClosingEventArgs e)
         {
 
             if (!schließen())
             {
-                DialogResult result = MessageBox.Show("nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel,MessageBoxIcon.Question);
-               
+                DialogResult result = MessageBox.Show("nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
 
                 if (result == DialogResult.Yes)
                 {
@@ -110,7 +122,7 @@ namespace WindowsFormsApplication5
                 {
                     closing = false;
                     e.Cancel = (result == DialogResult.No);
-                }   
+                }
                 //else if(result==DialogResult.Ignore)          welches ereignis bei X-press
                 //{
                 //    closing = false;

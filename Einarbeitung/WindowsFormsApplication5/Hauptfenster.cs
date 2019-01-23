@@ -264,7 +264,7 @@ namespace WindowsFormsApplication5
       
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+            
 
             //Patienten Suchen 
             for (int i = 0; i < Patienten.Count; i++)
@@ -278,17 +278,32 @@ namespace WindowsFormsApplication5
                 }
             }
 
-
+            
 
             
 
             for (int i = 0; i < Verwaltung.Count; i++)
             {
                 Verwaltung[i].Form.Patient = Currentpatient;
+
+
+                //MessageBox.Show("" + f1.Closing1);
+                //if (Verwaltung[i].Form.Closing1 == false)
+                //{
+                //    MessageBox.Show("Speichern");
+                //    return;
+                //}
+
+
+
                 BasisModulForm f1 = Verwaltung[i].Form;
                 f1.Patient = Currentpatient;
-                f1.load();
+
+
                 
+
+
+                f1.load();
             }    
 
 
@@ -304,11 +319,46 @@ namespace WindowsFormsApplication5
             {
                 MessageBox.Show("Es wurde kein Patient ausgewählt");
             }
-
         }
 
 
-      
+        
 
+
+
+        private void comboBox1_Click(object sender, EventArgs e)
+        {
+            //Console.WriteLine("Wichtig");
+            if (Currentpatient!=null)
+            {
+
+
+                for (int i = 0; i < Verwaltung.Count; i++)
+                {
+                    if (Verwaltung[i].Form.Closing1==false)
+                    {
+                        tabControl1.SelectedTab = Verwaltung[i].Tabpage;
+                        MessageBox.Show("DU musst speichern");
+                        //neues cancel erreignis feuern
+                        //neues Dialogresult 
+                        break;
+                    }
+                }
+
+
+
+
+            }
+            else
+            {
+                Console.WriteLine("currentpatient ist null");
+
+            }
+
+
+
+
+
+        }
     }
 }

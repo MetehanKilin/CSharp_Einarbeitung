@@ -41,6 +41,7 @@ namespace WindowsFormsApplication5
         {
             if (Patient.Geburtstag!=d.Value)
             {
+                Closing1 = false;
                 verwerfen.Enabled = true;
             }else
             {
@@ -50,19 +51,25 @@ namespace WindowsFormsApplication5
 
         public void ModulFormLoad(object sender, EventArgs e)
         {
+            Closing1 = true;
             load();
+            verwerfen.Enabled = false;
         }
 
         protected override void saveData()
         {
             Patient.Geburtstag = d.Value;
             label1.Text = "Geburtstag: " + Patient.Geburtstag.ToString("dd/MM/yyyy");
+            Closing1 = true;
+            verwerfen.Enabled = false;
         }
 
         protected override void reset()
         {
+            verwerfen.Enabled = true;
             //textBox1.Text = Patient.VorName + " " + Patient.NachName;
             d.Value = Patient.Geburtstag;
+            Closing1=true;
         }
 
 
