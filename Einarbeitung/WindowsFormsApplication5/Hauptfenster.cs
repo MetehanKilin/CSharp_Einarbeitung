@@ -299,10 +299,6 @@ namespace WindowsFormsApplication5
                 BasisModulForm f1 = Verwaltung[i].Form;
                 f1.Patient = Currentpatient;
 
-
-                
-
-
                 f1.load();
             }    
 
@@ -329,19 +325,44 @@ namespace WindowsFormsApplication5
         private void comboBox1_Click(object sender, EventArgs e)
         {
             //Console.WriteLine("Wichtig");
-            if (Currentpatient!=null)
+            if (Currentpatient != null)
             {
 
 
                 for (int i = 0; i < Verwaltung.Count; i++)
                 {
-                    if (Verwaltung[i].Form.Closing1==false)
+                    if (Verwaltung[i].Form.Closing1 == false)
                     {
                         tabControl1.SelectedTab = Verwaltung[i].Tabpage;
-                        MessageBox.Show("DU musst speichern");
-                        //neues cancel erreignis feuern
-                        //neues Dialogresult 
-                        break;
+
+                        DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+
+                        switch (result)
+                        {
+                            case DialogResult.Yes:              //speichern automatisieren
+                                Verwaltung[i].Form.Closing1 = true;
+                                Verwaltung[i].Form.patientenwechsel();
+                                
+                                //Verwaltung[i].Form.Close();
+                                //Verwaltung[i].Form.Dispose();
+                                //Verwaltung[i].Tabpage.Dispose();
+                                //Verwaltung.RemoveAt(i);
+                                i--;
+                                break;
+                            case DialogResult.No:               //HIER BEARBEITEN
+                                
+                                Verwaltung[i].Form.Closing1 = false;
+                                i--;
+                                continue;
+                            case DialogResult.Cancel:               //geht bei abbrechen und X rein
+                                Verwaltung[i].Form.Closing1 = false;
+                                break;
+                            default:
+                                MessageBox.Show("bin im Default");
+                                break;
+                        }
+
                     }
                 }
 
@@ -352,7 +373,6 @@ namespace WindowsFormsApplication5
             else
             {
                 Console.WriteLine("currentpatient ist null");
-
             }
 
 
@@ -360,5 +380,9 @@ namespace WindowsFormsApplication5
 
 
         }
+
+      
+
+
     }
 }

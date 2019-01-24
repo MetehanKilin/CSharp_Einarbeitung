@@ -12,7 +12,7 @@ namespace WindowsFormsApplication5
 {
     public partial class MemberModulForm4 : BasisModulForm
     {
-        DateTimePicker d;
+        private DateTimePicker d;
         public MemberModulForm4()
         {
             InitializeComponent();
@@ -23,6 +23,13 @@ namespace WindowsFormsApplication5
             label1.Text = "Geburtstag: " + Patient.Geburtstag.ToString("MM/dd/yyyy");
             //textBox1.Text = Patient.Geburtstag.ToString("MM/dd/yyyy");
             textBox1.Visible = false;
+
+            if (d != null)
+            {
+                d.Dispose();
+            }
+
+
 
             d = new DateTimePicker();
             d.Value = Patient.Geburtstag;

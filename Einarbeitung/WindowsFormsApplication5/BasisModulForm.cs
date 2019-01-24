@@ -91,9 +91,9 @@ namespace WindowsFormsApplication5
             }
         }
 
-        private void patientenwechsel()
+        public void patientenwechsel()
         {
-
+            saveData();
            
 
         }
@@ -109,7 +109,7 @@ namespace WindowsFormsApplication5
 
             if (!schließen())
             {
-                DialogResult result = MessageBox.Show("nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
 
                 if (result == DialogResult.Yes)

@@ -12,7 +12,7 @@ namespace WindowsFormsApplication5
 {
     public partial class MemberModulForm2 : BasisModulForm
     {
-        RadioButton r;
+        private RadioButton r;
         public MemberModulForm2()
         {
             InitializeComponent();
@@ -25,12 +25,12 @@ namespace WindowsFormsApplication5
             //label1.Text= "Geschlecht: " + Patient.Geschlecht;
             //textBox1.Text = Patient.Geschlecht.ToString();
 
-
-
             textBox1.Visible = false;
+
+
+
             label1.Text = "Geschlecht: " + Patient.Geschlecht;
 
-            //Click Ereignis prüfen
 
             if (r != null)
             {
@@ -52,6 +52,8 @@ namespace WindowsFormsApplication5
                 r.Click += (sender, e) =>
                 {
                     verwerfen.Enabled = true;
+                    Closing1 = false;
+
                 };
 
 
@@ -71,6 +73,7 @@ namespace WindowsFormsApplication5
                 r.Click += (sender, e) =>
                 {
                     verwerfen.Enabled = true;
+                    Closing1 = false;
                 };
 
                 Controls.Add(r);
@@ -87,7 +90,9 @@ namespace WindowsFormsApplication5
 
         public void ModulFormLoad(object sender, EventArgs e)
         {
+            Closing1 = true;
             load();
+            verwerfen.Enabled = false;
         }
 
         protected override void saveData()
@@ -110,8 +115,10 @@ namespace WindowsFormsApplication5
             char[] c = r.Text.ToCharArray();
 
             Patient.Geschlecht = c[0];
-            load();
+            Closing1 = true;
 
+            load();
+            verwerfen.Enabled = false;
 
 
         }
