@@ -18,6 +18,7 @@ namespace WindowsFormsApplication5
             speichern.Visible = false;
             verwerfen.Visible = false;
             textBox1.Visible = false;
+            Closing1 = true;
 
         }
 

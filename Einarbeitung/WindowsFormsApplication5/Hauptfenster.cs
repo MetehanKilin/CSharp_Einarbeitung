@@ -220,7 +220,6 @@ namespace WindowsFormsApplication5
 
         private void Delete_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(Verwaltung.Count);
             for (int i = 0; i < Verwaltung.Count; i++)
                 {
                     if (Verwaltung[i].Tabpage == this.tabControl1.SelectedTab)
@@ -252,7 +251,6 @@ namespace WindowsFormsApplication5
                     
 
                 }
-            Console.WriteLine(Verwaltung.Count);
 
                 if (Verwaltung.Count == 0)
                 {
@@ -324,7 +322,6 @@ namespace WindowsFormsApplication5
 
         private void comboBox1_Click(object sender, EventArgs e)
         {
-            //Console.WriteLine("Wichtig");
             if (Currentpatient != null)
             {
 
@@ -353,8 +350,7 @@ namespace WindowsFormsApplication5
                             case DialogResult.No:               //HIER BEARBEITEN
                                 
                                 Verwaltung[i].Form.Closing1 = false;
-                                i--;
-                                continue;
+                                break;
                             case DialogResult.Cancel:               //geht bei abbrechen und X rein
                                 Verwaltung[i].Form.Closing1 = false;
                                 break;
