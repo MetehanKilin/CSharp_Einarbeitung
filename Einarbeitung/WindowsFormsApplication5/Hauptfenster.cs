@@ -19,7 +19,6 @@ namespace WindowsFormsApplication5
 
 
 
-
         public Hauptfenster()
         {
             InitializeComponent();
@@ -29,6 +28,8 @@ namespace WindowsFormsApplication5
             {
                 comboBox1.Items.Add(item);
             }
+
+
 
         }
 
@@ -377,8 +378,127 @@ namespace WindowsFormsApplication5
 
         }
 
-      
+        private void Hauptfenster_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            if (Currentpatient == null)
+            {
+                Console.WriteLine("ohnePatient");
+            }
+            else if (Verwaltung.Count < 1)
+            {
+                Console.WriteLine("ohneVerwaltung");
+            }
+            else
+            {   //Pruefung ob modul geoeffnet ist
 
 
-    }
+
+                for (int i = 0; i < Verwaltung.Count; i++)
+                {
+                    if (Verwaltung[i].Tabpage == this.tabControl1.SelectedTab)
+                    {
+                        if (!Verwaltung[i].Form.Closing1)
+                        {
+                            DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+
+                            if (result == DialogResult.Yes)
+                            {
+                                Verwaltung[i].Form.Closing1 = true;
+                                return;
+                            }
+
+                            else if (result == DialogResult.No)
+                            {
+                                Verwaltung[i].Form.Closing1 = false;
+                                e.Cancel = (result == DialogResult.No);
+                            }
+                           
+                            else
+                            {
+                                e.Cancel = true;
+                            }
+                            break;
+                        }
+
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Da bin ich ganz Raus");
+                        break;
+                    }
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+                Console.WriteLine("adee2");
+
+
+
+
+
+            }
+
+
+
+
+            //if (!schließen())
+            //{
+            //    DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+
+            //    if (result == DialogResult.Yes)
+            //    {
+            //        closing = true;
+            //        return;
+            //    }
+
+            //    else if (result == DialogResult.No)
+            //    {
+            //        closing = false;
+            //        e.Cancel = (result == DialogResult.No);
+            //    }
+            //    //else if(result==DialogResult.Ignore)          welches ereignis bei X-press
+            //    //{
+            //    //    closing = false;
+            //    //    e.Cancel = (result == DialogResult.Ignore);
+            //    //}
+            //    else
+            //    {
+            //        e.Cancel = true;
+            //    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+        }
 }
