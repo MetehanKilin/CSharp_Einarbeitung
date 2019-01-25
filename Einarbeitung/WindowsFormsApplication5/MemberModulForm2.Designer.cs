@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // label2
@@ -40,21 +42,46 @@
             this.label2.Size = new System.Drawing.Size(0, 13);
             this.label2.TabIndex = 1;
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(200, 2);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(85, 17);
+            this.radioButton1.TabIndex = 3;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "radioButton1";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(200, 37);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(85, 17);
+            this.radioButton2.TabIndex = 4;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "radioButton2";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
             // MemberModulForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MemberModulForm2";
             this.Text = "ModulForm_2";
             this.Load += new System.EventHandler(this.ModulFormLoad);
             this.Controls.SetChildIndex(this.verwerfen, 0);
-            this.Controls.SetChildIndex(this.textBox1, 0);
             this.Controls.SetChildIndex(this.speichern, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);
+            this.Controls.SetChildIndex(this.radioButton1, 0);
+            this.Controls.SetChildIndex(this.radioButton2, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -63,5 +90,7 @@
         #endregion
 
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
     }
 }

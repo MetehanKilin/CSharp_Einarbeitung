@@ -28,19 +28,18 @@ namespace WindowsFormsApplication5
             {
                 comboBox1.Items.Add(item);
             }
-
-
-
+            
         }
 
 
         private void loadPatients()
         {
             Patienten.Add(new Patient(1, 'M', "Metehan", "Kilin", new DateTime(1990, 01, 01)));
-            Patienten.Add(new Patient(2, 'M', "Ingo", "Temme", new DateTime(1991, 02, 02)));
-            Patienten.Add(new Patient(3, 'M', "Roberto", "Danti", new DateTime(1992, 03, 03)));
-            Patienten.Add(new Patient(4, 'M', "Stefan", "Lober", new DateTime(1993, 04, 04)));
-            Patienten.Add(new Patient(5, 'W', "Bettina", "Araya", new DateTime(1994, 05, 05)));
+            Patienten.Add(new Patient(2, 'M', "Ingo", "Temme", new DateTime(1992, 02, 02)));
+            Patienten.Add(new Patient(3, 'M', "Ivaylo", "Topalov", new DateTime(1993, 03, 03)));
+            Patienten.Add(new Patient(3, 'M', "Roberto", "Danti", new DateTime(1994, 04, 04)));
+            Patienten.Add(new Patient(4, 'M', "Stefan", "Lober", new DateTime(1995, 05, 05)));
+            Patienten.Add(new Patient(5, 'W', "Bettina", "Araya", new DateTime(1996, 06, 06)));
         }
 
 
@@ -239,67 +238,102 @@ namespace WindowsFormsApplication5
                         {
                              return;
                         }
-
-
                     }
                     else
                     {
                         return;
-                    }
-
-
-                   
-                    
-
+                    }  
                 }
-
                 if (Verwaltung.Count == 0)
                 {
                     Delete.Enabled = false;
-                    //comboBox1.Enabled = true;
                 }
-            
         }
       
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-
-            //Patienten Suchen 
-            for (int i = 0; i < Patienten.Count; i++)
+            if (Currentpatient!=comboBox1.SelectedItem as Patient )
             {
-                if (Patienten[i].ToString()== comboBox1.SelectedItem.ToString())
+                if (Currentpatient == null)
+            {
+                Console.WriteLine("ohnePatient");
+            }
+            else if (Verwaltung.Count < 1)
+            {
+                Console.WriteLine("ohneVerwaltung");
+            }
+            else
+            {   //Pruefung ob modul geoeffnet ist
+                for (int i = 0; i < Verwaltung.Count; i++)
                 {
-                    //MessageBox.Show("gefunden" + Patienten[i].ToString() + " \n\n\nAAAAA \n\n\n" + comboBox1.SelectedItem.ToString());
-                    Currentpatient = Patienten[i];
-                    //patient = new Patient(patienten[i].Id, patienten[i].Geschlecht, patienten[i].VorName, patienten[i].NachName, patienten[i].Geburtstag);
-                    break; 
+                    if (Verwaltung[i].Tabpage == this.tabControl1.SelectedTab)
+                    {
+                        if (!Verwaltung[i].Form.Closing1)
+                        {
+                            DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+
+                            if (result == DialogResult.Yes)
+                            {
+                                Verwaltung[i].Form.Closing1 = true;
+                                return;
+                            }
+                            else if (result == DialogResult.No)
+                            {
+                                Verwaltung[i].Form.Closing1 = false;
+                                    comboBox1.SelectedItem = Currentpatient;
+
+                            }
+
+
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
 
-            
 
-            
 
+
+
+
+
+
+
+
+
+                Console.WriteLine("ungleich");
+            }else
+            {
+                Console.WriteLine("gleicherPatient");
+            }
+
+
+
+
+
+            Console.WriteLine("2");
+            //Patienten Suchen 
+            Currentpatient = comboBox1.SelectedItem as Patient;
+            
             for (int i = 0; i < Verwaltung.Count; i++)
             {
                 Verwaltung[i].Form.Patient = Currentpatient;
-
-
-                //MessageBox.Show("" + f1.Closing1);
-                //if (Verwaltung[i].Form.Closing1 == false)
-                //{
-                //    MessageBox.Show("Speichern");
-                //    return;
-                //}
-
-
 
                 BasisModulForm f1 = Verwaltung[i].Form;
                 f1.Patient = Currentpatient;
 
                 f1.load();
             }    
+
+
 
 
             if (Currentpatient != null)
@@ -321,62 +355,7 @@ namespace WindowsFormsApplication5
 
 
 
-        private void comboBox1_Click(object sender, EventArgs e)
-        {
-            if (Currentpatient != null)
-            {
-
-
-                for (int i = 0; i < Verwaltung.Count; i++)
-                {
-                    if (Verwaltung[i].Form.Closing1 == false)
-                    {
-                        tabControl1.SelectedTab = Verwaltung[i].Tabpage;
-
-                        DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-
-                        switch (result)
-                        {
-                            case DialogResult.Yes:              //speichern automatisieren
-                                Verwaltung[i].Form.Closing1 = true;
-                                Verwaltung[i].Form.patientenwechsel();
-                                
-                                //Verwaltung[i].Form.Close();
-                                //Verwaltung[i].Form.Dispose();
-                                //Verwaltung[i].Tabpage.Dispose();
-                                //Verwaltung.RemoveAt(i);
-                                i--;
-                                break;
-                            case DialogResult.No:               //HIER BEARBEITEN
-                                
-                                Verwaltung[i].Form.Closing1 = false;
-                                break;
-                            case DialogResult.Cancel:               //geht bei abbrechen und X rein
-                                Verwaltung[i].Form.Closing1 = false;
-                                break;
-                            default:
-                                MessageBox.Show("bin im Default");
-                                break;
-                        }
-
-                    }
-                }
-
-
-
-
-            }
-            else
-            {
-                Console.WriteLine("currentpatient ist null");
-            }
-
-
-
-
-
-        }
+       
 
         private void Hauptfenster_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -391,9 +370,6 @@ namespace WindowsFormsApplication5
             }
             else
             {   //Pruefung ob modul geoeffnet ist
-
-
-
                 for (int i = 0; i < Verwaltung.Count; i++)
                 {
                     if (Verwaltung[i].Tabpage == this.tabControl1.SelectedTab)
@@ -408,97 +384,75 @@ namespace WindowsFormsApplication5
                                 Verwaltung[i].Form.Closing1 = true;
                                 return;
                             }
-
                             else if (result == DialogResult.No)
                             {
                                 Verwaltung[i].Form.Closing1 = false;
                                 e.Cancel = (result == DialogResult.No);
                             }
-                           
                             else
                             {
                                 e.Cancel = true;
                             }
                             break;
                         }
-
-
+                        else
+                        {
+                            break;
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Da bin ich ganz Raus");
                         break;
                     }
-
-
-
-
-
                 }
-
-
-
-
-
-
-
-
-
-
-
-                Console.WriteLine("adee2");
-
-
-
-
+            }
 
             }
 
-
-
-
-            //if (!schließen())
+        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //Console.WriteLine("1");
+            //if (Currentpatient != null)
             //{
-            //    DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
 
-            //    if (result == DialogResult.Yes)
+            //    for (int i = 0; i < Verwaltung.Count; i++)
             //    {
-            //        closing = true;
-            //        return;
+            //        if (Verwaltung[i].Form.Closing1 == false)
+            //        {
+            //            tabControl1.SelectedTab = Verwaltung[i].Tabpage;
+
+            //            DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+            //            switch (result)
+            //            {
+            //                case DialogResult.Yes:              //speichern automatisieren
+            //                    Verwaltung[i].Form.Closing1 = true;
+            //                    Verwaltung[i].Form.patientenwechsel();
+            //                    i--;
+            //                    break;
+            //                case DialogResult.No:               //HIER BEARBEITEN
+
+            //                    Verwaltung[i].Form.Closing1 = false;
+            //                    break;
+            //                case DialogResult.Cancel:               //geht bei abbrechen und X rein
+            //                    Verwaltung[i].Form.Closing1 = false;
+            //                    break;
+            //                default:
+            //                    MessageBox.Show("bin im Default");
+            //                    break;
+            //            }
+
+            //        }
             //    }
-
-            //    else if (result == DialogResult.No)
-            //    {
-            //        closing = false;
-            //        e.Cancel = (result == DialogResult.No);
-            //    }
-            //    //else if(result==DialogResult.Ignore)          welches ereignis bei X-press
-            //    //{
-            //    //    closing = false;
-            //    //    e.Cancel = (result == DialogResult.Ignore);
-            //    //}
-            //    else
-            //    {
-            //        e.Cancel = true;
-            //    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("currentpatient ist null");
+            //}
         }
+
+
+
+    }
 }

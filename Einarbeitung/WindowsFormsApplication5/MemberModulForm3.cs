@@ -15,24 +15,12 @@ namespace WindowsFormsApplication5
         public MemberModulForm3()
         {
             InitializeComponent();
-            
         }
 
 
         public override void load()
         {
-
-            //// MessageBox.Show(""+Closing1);
-
-            //if (Closing1==false)
-            //{
-            //    MessageBox.Show("speichernnichtvergessen");
-
-
-            //}
-
-
-            label1.Text = "Vor- und Nachname: " + Patient.VorName + " " + Patient.NachName;
+            label1.Text = "Vor- und Nachname: \n" + Patient.VorName + " " + Patient.NachName;
             textBox1.Text = Patient.VorName + " " + Patient.NachName;
         }
 
@@ -47,16 +35,16 @@ namespace WindowsFormsApplication5
         {
             string[] split = textBox1.Text.Split(null);
 
-            if (split.Length>2)
+            if (split.Length > 2)
             {
-            MessageBox.Show("Bitte Vorname und Nachme eingeben: (Max Mustermann)");
+                MessageBox.Show("Bitte Vorname und Nachme eingeben: (Max Mustermann)");
             }
 
             Patient.VorName = split[0];
             Patient.NachName = split[1];
 
 
-            label1.Text = "Vor- und Nachname: " + Patient.VorName + " " + Patient.NachName;
+            label1.Text = "Vor- und Nachname: \n" + Patient.VorName + " " + Patient.NachName;
             textBox1.Text = Patient.VorName + " " + Patient.NachName;
             Closing1 = true;
             verwerfen.Enabled = false;
@@ -69,9 +57,10 @@ namespace WindowsFormsApplication5
             Closing1 = true;
         }
 
-
-
-
-
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            Closing1 = false;
+            verwerfen.Enabled = true;
+        }
     }
 }

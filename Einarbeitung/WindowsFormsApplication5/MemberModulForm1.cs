@@ -17,13 +17,11 @@ namespace WindowsFormsApplication5
             InitializeComponent();
             speichern.Visible = false;
             verwerfen.Visible=false;
-            textBox1.Visible = false;
         }
 
         public override void load()
         {
             label1.Text = "Die ID lautet: " + Patient.Id;
-            //textBox1.Text = Patient.Id.ToString();
         }
 
   

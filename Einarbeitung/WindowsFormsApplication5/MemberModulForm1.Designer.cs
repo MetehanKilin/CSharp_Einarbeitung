@@ -35,9 +35,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Location = new System.Drawing.Point(60, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 13);
+            this.label2.Size = new System.Drawing.Size(0, 13);
             this.label2.TabIndex = 1;
             // 
             // MemberModulForm1
@@ -50,6 +50,7 @@
             this.Name = "MemberModulForm1";
             this.Text = "ModulForm_1";
             this.Load += new System.EventHandler(this.ModulFormLoad);
+            this.Controls.SetChildIndex(this.verwerfen, 0);
             this.Controls.SetChildIndex(this.speichern, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);

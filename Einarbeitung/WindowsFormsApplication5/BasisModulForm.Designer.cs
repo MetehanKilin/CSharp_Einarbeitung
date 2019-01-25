@@ -31,7 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.speichern = new System.Windows.Forms.Button();
             this.verwerfen = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -69,21 +68,11 @@
             this.verwerfen.UseVisualStyleBackColor = true;
             this.verwerfen.Click += new System.EventHandler(this.verwerfen_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.textBox1.Location = new System.Drawing.Point(184, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
-            // 
             // BasisModulForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.verwerfen);
             this.Controls.Add(this.speichern);
             this.Controls.Add(this.label1);
@@ -100,6 +89,5 @@
         protected System.Windows.Forms.Label label1;
         protected System.Windows.Forms.Button speichern;
         protected System.Windows.Forms.Button verwerfen;
-        protected System.Windows.Forms.TextBox textBox1;
     }
 }

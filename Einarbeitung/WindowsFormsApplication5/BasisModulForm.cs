@@ -94,14 +94,8 @@ namespace WindowsFormsApplication5
         public void patientenwechsel()
         {
             saveData();
-           
-
         }
-
-
-       
-
-
+        
        
 
         private void BasisModulForm_FormClosing(object sender, FormClosingEventArgs e)
