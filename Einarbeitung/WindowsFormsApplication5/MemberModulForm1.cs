@@ -24,11 +24,9 @@ namespace WindowsFormsApplication5
             label1.Text = "Die ID lautet: " + Patient.Id;
         }
 
-  
-
         private void ModulFormLoad(object sender, EventArgs e)
         {
-            load();          
+            load();
         }
        
     }

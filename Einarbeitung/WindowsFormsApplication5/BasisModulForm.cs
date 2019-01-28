@@ -16,11 +16,11 @@ namespace WindowsFormsApplication5
         public BasisModulForm()
         {
             InitializeComponent();
-            closing = false;
+            closing = true;
         }
 
         private Patient patient;
-        private Boolean closing=true;
+        private Boolean closing;
 
         internal Patient Patient
         {
@@ -117,17 +117,16 @@ namespace WindowsFormsApplication5
                     closing = false;
                     e.Cancel = (result == DialogResult.No);
                 }
-                //else if(result==DialogResult.Ignore)          welches ereignis bei X-press
-                //{
-                //    closing = false;
-                //    e.Cancel = (result == DialogResult.Ignore);
-                //}
                 else
                 {
                     e.Cancel = true;
                 }
 
 
+            }
+            else
+            {
+                Console.WriteLine("schließen "+schließen());
             }
             
           

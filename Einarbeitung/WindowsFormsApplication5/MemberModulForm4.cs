@@ -19,15 +19,12 @@ namespace WindowsFormsApplication5
 
         public override void load()
         {
-            label1.Text = "Geburtstag: " + Patient.Geburtstag.ToString("MM/dd/yyyy");
+            label1.Text = "Geburtstag: \n" + Patient.Geburtstag.ToString("dd/MM/yyyy");
             dateTimePicker1.Value = Patient.Geburtstag;
-            Console.WriteLine("1");
-
         }
 
         private void DateTimePicker1_ValueChanged(Object sender, EventArgs e)
         {
-            Console.WriteLine("ola");
             if (Patient.Geburtstag!=dateTimePicker1.Value)
             {
                 Closing1 = false;

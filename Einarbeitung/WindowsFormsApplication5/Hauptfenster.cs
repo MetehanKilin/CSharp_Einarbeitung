@@ -15,9 +15,7 @@ namespace WindowsFormsApplication5
         private List<VerwaltungForms> Verwaltung = new List<VerwaltungForms>();
         private List<Patient> Patienten = new List<Patient>();
         private Patient Currentpatient;
-
-
-
+        private Boolean Patientenwechsel;
 
         public Hauptfenster()
         {
@@ -37,9 +35,9 @@ namespace WindowsFormsApplication5
             Patienten.Add(new Patient(1, 'M', "Metehan", "Kilin", new DateTime(1990, 01, 01)));
             Patienten.Add(new Patient(2, 'M', "Ingo", "Temme", new DateTime(1992, 02, 02)));
             Patienten.Add(new Patient(3, 'M', "Ivaylo", "Topalov", new DateTime(1993, 03, 03)));
-            Patienten.Add(new Patient(3, 'M', "Roberto", "Danti", new DateTime(1994, 04, 04)));
-            Patienten.Add(new Patient(4, 'M', "Stefan", "Lober", new DateTime(1995, 05, 05)));
-            Patienten.Add(new Patient(5, 'W', "Bettina", "Araya", new DateTime(1996, 06, 06)));
+            Patienten.Add(new Patient(4, 'M', "Roberto", "Danti", new DateTime(1994, 04, 04)));
+            Patienten.Add(new Patient(5, 'M', "Stefan", "Lober", new DateTime(1995, 05, 05)));
+            Patienten.Add(new Patient(6, 'W', "Bettina", "Araya", new DateTime(1996, 06, 06)));
         }
 
 
@@ -60,7 +58,6 @@ namespace WindowsFormsApplication5
 
             Button button1 = (Button)sender;
             string button1Text = button1.Text;
-
 
             MemberForm = new MemberModulForm1 { Text = button1Text };
             tabpage = new TabPage { Text = button1Text };
@@ -222,6 +219,7 @@ namespace WindowsFormsApplication5
         {
             for (int i = 0; i < Verwaltung.Count; i++)
                 {
+
                     if (Verwaltung[i].Tabpage == this.tabControl1.SelectedTab)
                     {
                     
@@ -239,11 +237,12 @@ namespace WindowsFormsApplication5
                              return;
                         }
                     }
-                    else
-                    {
-                        return;
-                    }  
+                    
                 }
+
+
+
+
                 if (Verwaltung.Count == 0)
                 {
                     Delete.Enabled = false;
@@ -252,74 +251,47 @@ namespace WindowsFormsApplication5
       
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Currentpatient!=comboBox1.SelectedItem as Patient )
+            Console.WriteLine(Patientenwechsel);
+            if (Patientenwechsel==true)
             {
-                if (Currentpatient == null)
-            {
-                Console.WriteLine("ohnePatient");
+                return;
             }
-            else if (Verwaltung.Count < 1)
-            {
-                Console.WriteLine("ohneVerwaltung");
-            }
-            else
-            {   //Pruefung ob modul geoeffnet ist
-                for (int i = 0; i < Verwaltung.Count; i++)
-                {
-                    if (Verwaltung[i].Tabpage == this.tabControl1.SelectedTab)
+            
+                    if (Currentpatient == null)
                     {
-                        if (!Verwaltung[i].Form.Closing1)
-                        {
-                            DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-
-                            if (result == DialogResult.Yes)
-                            {
-                                Verwaltung[i].Form.Closing1 = true;
-                                return;
-                            }
-                            else if (result == DialogResult.No)
-                            {
-                                Verwaltung[i].Form.Closing1 = false;
-                                    comboBox1.SelectedItem = Currentpatient;
-
-                            }
-
-
-                        }
-                        else
-                        {
-                            break;
-                        }
+                        Console.WriteLine("ohnePatient");
+                    }
+                    else if (Verwaltung.Count < 1)
+                    {
+                        Console.WriteLine("ohneVerwaltung");
                     }
                     else
-                    {
-                        break;
+                    {   //Pruefung ob modul geoeffnet ist
+                        for (int i = 0; i < Verwaltung.Count; i++)
+                        {
+
+                                if (!Verwaltung[i].Form.Closing1)
+                                {
+                                    DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem Benutzer wechseln?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                                    if (result == DialogResult.Yes)
+                                    {
+                                        Verwaltung[i].Form.Closing1 = true;
+                                    }
+                                    else if (result == DialogResult.No)
+                                    {
+                                        Patientenwechsel = true;
+                                        comboBox1.SelectedItem = Currentpatient;
+                                        
+                                        return;
+                                    }
+                                }     
+                        }
                     }
-                }
-            }
+            
+            
 
 
 
-
-
-
-
-
-
-
-
-                Console.WriteLine("ungleich");
-            }else
-            {
-                Console.WriteLine("gleicherPatient");
-            }
-
-
-
-
-
-            Console.WriteLine("2");
             //Patienten Suchen 
             Currentpatient = comboBox1.SelectedItem as Patient;
             
@@ -332,8 +304,6 @@ namespace WindowsFormsApplication5
 
                 f1.load();
             }    
-
-
 
 
             if (Currentpatient != null)
@@ -359,7 +329,6 @@ namespace WindowsFormsApplication5
 
         private void Hauptfenster_FormClosing(object sender, FormClosingEventArgs e)
         {
-
             if (Currentpatient == null)
             {
                 Console.WriteLine("ohnePatient");
@@ -377,7 +346,6 @@ namespace WindowsFormsApplication5
                         if (!Verwaltung[i].Form.Closing1)
                         {
                             DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
 
                             if (result == DialogResult.Yes)
                             {
@@ -409,48 +377,7 @@ namespace WindowsFormsApplication5
 
             }
 
-        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            //Console.WriteLine("1");
-            //if (Currentpatient != null)
-            //{
-
-
-            //    for (int i = 0; i < Verwaltung.Count; i++)
-            //    {
-            //        if (Verwaltung[i].Form.Closing1 == false)
-            //        {
-            //            tabControl1.SelectedTab = Verwaltung[i].Tabpage;
-
-            //            DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-            //            switch (result)
-            //            {
-            //                case DialogResult.Yes:              //speichern automatisieren
-            //                    Verwaltung[i].Form.Closing1 = true;
-            //                    Verwaltung[i].Form.patientenwechsel();
-            //                    i--;
-            //                    break;
-            //                case DialogResult.No:               //HIER BEARBEITEN
-
-            //                    Verwaltung[i].Form.Closing1 = false;
-            //                    break;
-            //                case DialogResult.Cancel:               //geht bei abbrechen und X rein
-            //                    Verwaltung[i].Form.Closing1 = false;
-            //                    break;
-            //                default:
-            //                    MessageBox.Show("bin im Default");
-            //                    break;
-            //            }
-
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    Console.WriteLine("currentpatient ist null");
-            //}
-        }
+     
 
 
 

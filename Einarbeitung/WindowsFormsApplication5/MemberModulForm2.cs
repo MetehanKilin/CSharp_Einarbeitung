@@ -20,7 +20,7 @@ namespace WindowsFormsApplication5
 
         public override void load()
         {
-            label1.Text = "Geschlecht: " + Patient.Geschlecht;
+            label1.Text = "Geschlecht: \n" + Patient.Geschlecht;
 
             radioButton1.Text = "M";
             radioButton2.Text = "W";
@@ -32,43 +32,22 @@ namespace WindowsFormsApplication5
             else if (Patient.Geschlecht == 'W' || Patient.Geschlecht == 'w')
             {
                 radioButton2.Checked = true;
-               
-            }else
+
+            }
+            else
             {
                 MessageBox.Show("nicht zugeordnet");
             }
 
-            radioButton1.Click += (sender, e) =>
-            {
-                if (Patient.Geschlecht=='W')
-                {
-                    verwerfen.Enabled = true;
-                }
-
-
-
-                Closing1 = false;
-                temp = 'M';
-            };
-
-            radioButton2.Click += (sender, e) =>
-            {
-
-                if (Patient.Geschlecht == 'M')
-                {
-                    verwerfen.Enabled = true;
-                }
-
-                Closing1 = false;
-                temp = 'W';
-            };
+            Closing1 = true;
+            verwerfen.Enabled = false;
         }
+
 
         public void ModulFormLoad(object sender, EventArgs e)
         {
-            Closing1 = true;
             load();
-            verwerfen.Enabled = false;
+            
         }
 
         protected override void saveData()
@@ -81,11 +60,12 @@ namespace WindowsFormsApplication5
             if (Patient.Geschlecht == 'M')
             {
                 radioButton1.Checked = true;
+                label1.Text = "Geschlecht: \n" + Patient.Geschlecht;
             }
             else if (Patient.Geschlecht == 'W')
             {
                 radioButton2.Checked = true;
-
+                label1.Text = "Geschlecht: \n" + Patient.Geschlecht;
             }
             else
             {
@@ -96,12 +76,7 @@ namespace WindowsFormsApplication5
 
         protected override void reset()
         {
-
-
-            verwerfen.Enabled = false;
-            Closing1 = true;
-
-
+            
             if (Patient.Geschlecht == 'M' || Patient.Geschlecht == 'm')
             {
                 radioButton1.Checked = true;
@@ -116,8 +91,30 @@ namespace WindowsFormsApplication5
                 MessageBox.Show("nicht zugeordnet");
             }
 
+            Closing1 = true;
+            verwerfen.Enabled = false;
+
         }
 
-       
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Patient.Geschlecht == 'W')
+            {
+                verwerfen.Enabled = true;
+            }
+            temp = 'M';
+            Closing1 = false;
+
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Patient.Geschlecht == 'M')
+            {
+                verwerfen.Enabled = true;
+            }
+            temp = 'W';
+            Closing1 = false;
+        }
     }
 }
