@@ -15,7 +15,6 @@ namespace WindowsFormsApplication5
         private List<VerwaltungForms> Verwaltung = new List<VerwaltungForms>();
         private List<Patient> Patienten = new List<Patient>();
         private Patient Currentpatient;
-        private Boolean Patientenwechsel;
 
         public Hauptfenster()
         {
@@ -26,7 +25,7 @@ namespace WindowsFormsApplication5
             {
                 comboBox1.Items.Add(item);
             }
-            
+
         }
 
 
@@ -218,83 +217,82 @@ namespace WindowsFormsApplication5
         private void Delete_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < Verwaltung.Count; i++)
+            {
+
+                if (Verwaltung[i].Tabpage == this.tabControl1.SelectedTab)
                 {
 
-                    if (Verwaltung[i].Tabpage == this.tabControl1.SelectedTab)
-                    {
-                    
                     Verwaltung[i].Form.Close();
 
                     if (Verwaltung[i].Form.Closing1 == true)
-                        {
-                            Verwaltung[i].Form.Dispose();
-
-                            Verwaltung[i].Tabpage.Dispose();
-                            Verwaltung.RemoveAt(i);
-                        }
-                        else
-                        {
-                             return;
-                        }
-                    }
-                    
-                }
-
-
-
-
-                if (Verwaltung.Count == 0)
-                {
-                    Delete.Enabled = false;
-                }
-        }
-      
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Console.WriteLine(Patientenwechsel);
-            if (Patientenwechsel==true)
-            {
-                return;
-            }
-            
-                    if (Currentpatient == null)
                     {
-                        Console.WriteLine("ohnePatient");
-                    }
-                    else if (Verwaltung.Count < 1)
-                    {
-                        Console.WriteLine("ohneVerwaltung");
+                        Verwaltung[i].Form.Dispose();
+
+                        Verwaltung[i].Tabpage.Dispose();
+                        Verwaltung.RemoveAt(i);
                     }
                     else
-                    {   //Pruefung ob modul geoeffnet ist
-                        for (int i = 0; i < Verwaltung.Count; i++)
-                        {
+                    {
+                        return;
+                    }
+                }
 
-                                if (!Verwaltung[i].Form.Closing1)
-                                {
-                                    DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem Benutzer wechseln?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                                    if (result == DialogResult.Yes)
-                                    {
-                                        Verwaltung[i].Form.Closing1 = true;
-                                    }
-                                    else if (result == DialogResult.No)
-                                    {
-                                        Patientenwechsel = true;
-                                        comboBox1.SelectedItem = Currentpatient;
-                                        
-                                        return;
-                                    }
-                                }     
+            }
+
+
+
+
+            if (Verwaltung.Count == 0)
+            {
+                Delete.Enabled = false;
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Currentpatient == null)
+            {
+                Console.WriteLine("ohnePatient");
+            }
+            else if (Verwaltung.Count < 1)
+            {
+                Console.WriteLine("ohneVerwaltung");
+            }
+            else if (comboBox1.SelectedItem != Currentpatient)
+            {
+                comboBox1.SelectedItem = Currentpatient;
+
+                return;
+            }
+            else
+            {   //Pruefung ob modul geoeffnet ist
+                for (int i = 0; i < Verwaltung.Count; i++)
+                {
+
+                    if (!Verwaltung[i].Form.Closing1)
+                    {
+                        DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem Benutzer wechseln?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                        if (result == DialogResult.Yes)
+                        {
+                            Verwaltung[i].Form.Closing1 = true;
+                        }
+                        else if (result == DialogResult.No)
+                        {
+                            comboBox1.SelectedItem = Currentpatient;
+
+                            return;
                         }
                     }
-            
-            
+                }
+            }
+
+
 
 
 
             //Patienten Suchen 
             Currentpatient = comboBox1.SelectedItem as Patient;
-            
+
             for (int i = 0; i < Verwaltung.Count; i++)
             {
                 Verwaltung[i].Form.Patient = Currentpatient;
@@ -303,7 +301,7 @@ namespace WindowsFormsApplication5
                 f1.Patient = Currentpatient;
 
                 f1.load();
-            }    
+            }
 
 
             if (Currentpatient != null)
@@ -321,11 +319,11 @@ namespace WindowsFormsApplication5
         }
 
 
-        
 
 
 
-       
+
+
 
         private void Hauptfenster_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -341,45 +339,39 @@ namespace WindowsFormsApplication5
             {   //Pruefung ob modul geoeffnet ist
                 for (int i = 0; i < Verwaltung.Count; i++)
                 {
-                    if (Verwaltung[i].Tabpage == this.tabControl1.SelectedTab)
-                    {
-                        if (!Verwaltung[i].Form.Closing1)
-                        {
-                            DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
-                            if (result == DialogResult.Yes)
-                            {
-                                Verwaltung[i].Form.Closing1 = true;
-                                return;
-                            }
-                            else if (result == DialogResult.No)
-                            {
-                                Verwaltung[i].Form.Closing1 = false;
-                                e.Cancel = (result == DialogResult.No);
-                            }
-                            else
-                            {
-                                e.Cancel = true;
-                            }
-                            break;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    else
+                    if (!Verwaltung[i].Form.Closing1)
                     {
-                        break;
+                        tabControl1.SelectedTab = Verwaltung[i].Tabpage;
+                        DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                        if (result == DialogResult.Yes)
+                        {
+                            Verwaltung[i].Form.Closing1 = true;
+                            return;
+                        }
+                        else if (result == DialogResult.No)
+                        {
+                            e.Cancel = (result == DialogResult.No);
+                            return;
+                        }
+
+
+
+
+
+
                     }
+
+                    Verwaltung[i].Form.Close();
+                    Verwaltung[i].Form.Dispose();
+                    Verwaltung[i].Tabpage.Dispose();
+                    Verwaltung.RemoveAt(i);
+                    i--;
+
+
                 }
             }
-
-            }
-
-     
-
-
-
+        }
     }
 }
