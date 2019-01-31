@@ -17,45 +17,23 @@ namespace WindowsFormsApplication5
             InitializeComponent();
         }
 
-        public override void load()
+        protected override void load()
         {
             label1.Text = "Geburtstag: \n" + Patient.Geburtstag.ToString("dd/MM/yyyy");
             dateTimePicker1.Value = Patient.Geburtstag;
         }
-
-        private void DateTimePicker1_ValueChanged(Object sender, EventArgs e)
-        {
-            if (Patient.Geburtstag!=dateTimePicker1.Value)
-            {
-                Closing1 = false;
-                verwerfen.Enabled = true;
-            }else
-            {
-                verwerfen.Enabled = false;
-            }
-        }
-
-        public void ModulFormLoad(object sender, EventArgs e)
-        {
-            Closing1 = true;
-            load();
-            verwerfen.Enabled = false;
-        }
-
         protected override void saveData()
         {
             Patient.Geburtstag = dateTimePicker1.Value;
-            label1.Text = "Geburtstag: " + Patient.Geburtstag.ToString("dd/MM/yyyy");
-            Closing1 = true;
-            verwerfen.Enabled = false;
         }
 
-        protected override void reset()
+      
+        private void DateTimePicker1_ValueChanged(Object sender, EventArgs e)
         {
-            verwerfen.Enabled = true;
-            dateTimePicker1.Value = Patient.Geburtstag;
-            Closing1=true;
+            buttonsPassed(true);
         }
+
+      
 
 
     }

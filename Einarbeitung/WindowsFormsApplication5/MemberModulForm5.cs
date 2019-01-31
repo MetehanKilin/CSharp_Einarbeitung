@@ -17,11 +17,9 @@ namespace WindowsFormsApplication5
             InitializeComponent();
             speichern.Visible = false;
             verwerfen.Visible = false;
-            Closing1 = true;
-
         }
 
-        public override void load()
+        protected override void load()
         {
             label1.Text = " ID: " + Patient.Id + "\n "
                             + "Geschlecht: " + Patient.Geschlecht + "\n "
@@ -30,9 +28,6 @@ namespace WindowsFormsApplication5
                             + "Geburtstag: " + Patient.Geburtstag.ToString("MM/dd/yyyy");
         }
 
-        public void ModulFormLoad(object sender, EventArgs e)
-        {
-            load();
-        }
+      
     }
 }

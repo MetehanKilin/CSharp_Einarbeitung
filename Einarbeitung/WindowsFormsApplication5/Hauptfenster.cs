@@ -15,6 +15,8 @@ namespace WindowsFormsApplication5
         private List<VerwaltungForms> Verwaltung = new List<VerwaltungForms>();
         private List<Patient> Patienten = new List<Patient>();
         private Patient Currentpatient;
+        private bool CurrentPatientSwitch;
+
 
         public Hauptfenster()
         {
@@ -40,7 +42,6 @@ namespace WindowsFormsApplication5
         }
 
 
-
         private void button1_Click(object sender, EventArgs e)
         {
             MemberModulForm1 MemberForm;
@@ -62,9 +63,9 @@ namespace WindowsFormsApplication5
             tabpage = new TabPage { Text = button1Text };
 
             MemberForm.Patient = Currentpatient;
-
-            tabControl1.SelectedTab = tabpage;
+            
             tabControl1.TabPages.Add(tabpage);
+            tabControl1.SelectedTab = tabpage;
             MemberForm.Text = button1Text;
             MemberForm.TopLevel = false;
             MemberForm.Parent = tabpage;
@@ -73,8 +74,6 @@ namespace WindowsFormsApplication5
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
         }
-
-
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -93,14 +92,13 @@ namespace WindowsFormsApplication5
             Button button1 = (Button)sender;
             string button1Text = button1.Text;
 
-
             MemberForm = new MemberModulForm2 { Text = button1Text };
             tabpage = new TabPage { Text = button1Text };
 
             MemberForm.Patient = Currentpatient;
 
-            tabControl1.SelectedTab = tabpage;
             tabControl1.TabPages.Add(tabpage);
+            tabControl1.SelectedTab = tabpage;
             MemberForm.Text = button1Text;
             MemberForm.TopLevel = false;
             MemberForm.Parent = tabpage;
@@ -128,14 +126,13 @@ namespace WindowsFormsApplication5
             Button button1 = (Button)sender;
             string button1Text = button1.Text;
 
-
             MemberForm = new MemberModulForm3 { Text = button1Text };
             tabpage = new TabPage { Text = button1Text };
 
             MemberForm.Patient = Currentpatient;
 
-            tabControl1.SelectedTab = tabpage;
             tabControl1.TabPages.Add(tabpage);
+            tabControl1.SelectedTab = tabpage;
             MemberForm.Text = button1Text;
             MemberForm.TopLevel = false;
             MemberForm.Parent = tabpage;
@@ -162,14 +159,13 @@ namespace WindowsFormsApplication5
             Button button1 = (Button)sender;
             string button1Text = button1.Text;
 
-
             MemberForm = new MemberModulForm4 { Text = button1Text };
             tabpage = new TabPage { Text = button1Text };
 
             MemberForm.Patient = Currentpatient;
 
-            tabControl1.SelectedTab = tabpage;
             tabControl1.TabPages.Add(tabpage);
+            tabControl1.SelectedTab = tabpage;
             MemberForm.Text = button1Text;
             MemberForm.TopLevel = false;
             MemberForm.Parent = tabpage;
@@ -196,14 +192,13 @@ namespace WindowsFormsApplication5
             Button button1 = (Button)sender;
             string button1Text = button1.Text;
 
-
             MemberForm = new MemberModulForm5 { Text = button1Text };
             tabpage = new TabPage { Text = button1Text };
 
             MemberForm.Patient = Currentpatient;
 
-            tabControl1.SelectedTab = tabpage;
             tabControl1.TabPages.Add(tabpage);
+            tabControl1.SelectedTab = tabpage;
             MemberForm.Text = button1Text;
             MemberForm.TopLevel = false;
             MemberForm.Parent = tabpage;
@@ -213,82 +208,37 @@ namespace WindowsFormsApplication5
             Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
         }
 
-
-        private void Delete_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < Verwaltung.Count; i++)
-            {
-
-                if (Verwaltung[i].Tabpage == this.tabControl1.SelectedTab)
-                {
-
-                    Verwaltung[i].Form.Close();
-
-                    if (Verwaltung[i].Form.Closing1 == true)
-                    {
-                        Verwaltung[i].Form.Dispose();
-
-                        Verwaltung[i].Tabpage.Dispose();
-                        Verwaltung.RemoveAt(i);
-                    }
-                    else
-                    {
-                        return;
-                    }
-                }
-
-            }
-
-
-
-
-            if (Verwaltung.Count == 0)
-            {
-                Delete.Enabled = false;
-            }
-        }
+      
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Currentpatient == null)
+            if (CurrentPatientSwitch) 
             {
-                Console.WriteLine("ohnePatient");
-            }
-            else if (Verwaltung.Count < 1)
-            {
-                Console.WriteLine("ohneVerwaltung");
-            }
-            else if (comboBox1.SelectedItem != Currentpatient)
-            {
-                comboBox1.SelectedItem = Currentpatient;
-
                 return;
             }
-            else
             {   //Pruefung ob modul geoeffnet ist
                 for (int i = 0; i < Verwaltung.Count; i++)
                 {
+                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
 
-                    if (!Verwaltung[i].Form.Closing1)
+                    if (!Verwaltung[i].Form.Closing)
                     {
                         DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem Benutzer wechseln?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
                         if (result == DialogResult.Yes)
                         {
-                            Verwaltung[i].Form.Closing1 = true;
+                            Verwaltung[i].Form.Closing = false;
                         }
-                        else if (result == DialogResult.No)
+                        else 
                         {
+                            CurrentPatientSwitch = true;
                             comboBox1.SelectedItem = Currentpatient;
-
+                            CurrentPatientSwitch = false;
                             return;
                         }
                     }
                 }
             }
-
-
-
-
 
             //Patienten Suchen 
             Currentpatient = comboBox1.SelectedItem as Patient;
@@ -296,13 +246,8 @@ namespace WindowsFormsApplication5
             for (int i = 0; i < Verwaltung.Count; i++)
             {
                 Verwaltung[i].Form.Patient = Currentpatient;
-
-                BasisModulForm f1 = Verwaltung[i].Form;
-                f1.Patient = Currentpatient;
-
-                f1.load();
+                Verwaltung[i].Form.DatenLaden();
             }
-
 
             if (Currentpatient != null)
             {
@@ -312,65 +257,59 @@ namespace WindowsFormsApplication5
                 button4.Enabled = true;
                 button5.Enabled = true;
             }
-            else
+           
+        }
+
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < Verwaltung.Count; i++)
             {
-                MessageBox.Show("Es wurde kein Patient ausgewählt");
+                if (Verwaltung[i].Tabpage == this.tabControl1.SelectedTab)
+                {
+                    if (!Fensterschließen(i))
+                    {
+                        return;
+                    }
+                }
+            }
+            if (Verwaltung.Count == 0)
+            {
+                Delete.Enabled = false;
             }
         }
 
+        private bool Fensterschließen(int index)
+        {
+            Verwaltung[index].Form.Close();
+            if (Verwaltung[index].Form.Closing == true)
+            {
+                Verwaltung[index].Form.Dispose();
+                Verwaltung[index].Tabpage.Dispose();
+                Verwaltung.RemoveAt(index);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
-
-
-
-
-
+        }
 
         private void Hauptfenster_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (Currentpatient == null)
+               //Pruefung ob modul geoeffnet ist
+            for (int i = 0; i < Verwaltung.Count; i++)
             {
-                Console.WriteLine("ohnePatient");
-            }
-            else if (Verwaltung.Count < 1)
-            {
-                Console.WriteLine("ohneVerwaltung");
-            }
-            else
-            {   //Pruefung ob modul geoeffnet ist
-                for (int i = 0; i < Verwaltung.Count; i++)
+                tabControl1.SelectedTab = Verwaltung[i].Tabpage;
+
+                if (!Fensterschließen(i))
                 {
-
-                    if (!Verwaltung[i].Form.Closing1)
-                    {
-                        tabControl1.SelectedTab = Verwaltung[i].Tabpage;
-                        DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-                        if (result == DialogResult.Yes)
-                        {
-                            Verwaltung[i].Form.Closing1 = true;
-                            return;
-                        }
-                        else if (result == DialogResult.No)
-                        {
-                            e.Cancel = (result == DialogResult.No);
-                            return;
-                        }
-
-
-
-
-
-
-                    }
-
-                    Verwaltung[i].Form.Close();
-                    Verwaltung[i].Form.Dispose();
-                    Verwaltung[i].Tabpage.Dispose();
-                    Verwaltung.RemoveAt(i);
-                    i--;
-
-
+                    e.Cancel = true;
+                    return;
                 }
+                i--;
+
+
             }
         }
     }

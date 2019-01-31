@@ -19,15 +19,12 @@ namespace WindowsFormsApplication5
             verwerfen.Visible=false;
         }
 
-        public override void load()
+        protected override void load()
         {
             label1.Text = "Die ID lautet: " + Patient.Id;
         }
 
-        private void ModulFormLoad(object sender, EventArgs e)
-        {
-            load();
-        }
+     
        
     }
 }

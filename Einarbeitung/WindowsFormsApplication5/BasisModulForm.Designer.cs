@@ -79,6 +79,7 @@
             this.Name = "BasisModulForm";
             this.Text = "ModulForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BasisModulForm_FormClosing);
+            this.Load += new System.EventHandler(this.BasisModulForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

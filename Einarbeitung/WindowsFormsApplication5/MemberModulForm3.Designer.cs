@@ -60,7 +60,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MemberModulForm3";
             this.Text = "ModulForm_3";
-            this.Load += new System.EventHandler(this.ModulFormLoad);
             this.Controls.SetChildIndex(this.verwerfen, 0);
             this.Controls.SetChildIndex(this.speichern, 0);
             this.Controls.SetChildIndex(this.label1, 0);

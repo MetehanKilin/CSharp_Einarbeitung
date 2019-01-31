@@ -18,19 +18,12 @@ namespace WindowsFormsApplication5
             InitializeComponent();
         }
 
-
-        public override void load()
+        protected override void load()
         {
             label1.Text = "Vor- und Nachname: \n" + Patient.VorName + " " + Patient.NachName;
             textBox1.Text = Patient.VorName + " " + Patient.NachName;
-            verwerfen.Enabled = false;
-            Closing1 = true;
         }
 
-        private void ModulFormLoad(object sender, EventArgs e)
-        {
-            load();
-        }
 
         protected override void saveData()
         {
@@ -38,42 +31,22 @@ namespace WindowsFormsApplication5
 
             string pattern = "^[a-zA-ZäöüÄÖÜß]+(([',. -][a-zA-ZäöüÄÖÜß ])?[a-zA-ZäöüÄÖÜß]*)$";
             Match match = Regex.Match(textBox1.Text, pattern);
-            if (match.Success==false)
+
+            if (match.Success == false)
             {
                 MessageBox.Show("Bitte Vorname und Nachme eingeben: (Max Mustermann)");
                 return;
             }
             else
             {
-                if (split.Length > 2)
-                {
-                    MessageBox.Show("Bitte Vorname und Nachme eingeben: (Max Mustermann)");
-                }
-
                 Patient.VorName = split[0];
                 Patient.NachName = split[1];
-
-
-                label1.Text = "Vor- und Nachname: \n" + Patient.VorName + " " + Patient.NachName;
-                textBox1.Text = Patient.VorName + " " + Patient.NachName;
-                Closing1 = true;
-                verwerfen.Enabled = false;
             }
-            
-           
-        }
-
-        protected override void reset()
-        {
-            verwerfen.Enabled = true;
-            textBox1.Text = Patient.VorName + " " + Patient.NachName;
-            Closing1 = true;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            Closing1 = false;
-            verwerfen.Enabled = true;
+            buttonsPassed(true);
         }
     }
 }

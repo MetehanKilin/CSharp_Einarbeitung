@@ -22,19 +22,7 @@ namespace WindowsFormsApplication5
         private Patient patient;
         private Boolean closing;
 
-        internal Patient Patient
-        {
-            get
-            {
-                return patient;
-            }
-            set
-            {
-                patient = value;
-            }
-        }
-
-        public bool Closing1
+        public bool Closing
         {
             get
             {
@@ -46,98 +34,80 @@ namespace WindowsFormsApplication5
             }
         }
 
-        public virtual void load()
+        public Patient Patient
         {
-
+            get
+            {
+                return patient;
+            }
+            set
+            {
+                patient = value;
+            }
         }
 
-        protected virtual void reset()
+        public void DatenLaden()
         {
-
-        }
-
-        private void verwerfen_Click(object sender, EventArgs e)
-        {
-            reset();
+            load();
+            Closing = true;
             verwerfen.Enabled = false;
+        }
+
+        protected void buttonsPassed(bool b){
+            verwerfen.Enabled = b;
+            Closing = !b;
+        }
+
+        protected virtual void load()
+        {
         }
 
         protected virtual void saveData()
         {
-
         }
 
         private void speichern_Click(object sender, EventArgs e)
         {
             saveData();
+            DatenLaden();
         }
 
-        private void textBox1_Click(object sender, EventArgs e)
+        private void verwerfen_Click(object sender, EventArgs e)
         {
-            verwerfen.Enabled = true;
-            Closing1 = false;
+            DatenLaden();
         }
 
-
-        private Boolean schließen()
+        private void BasisModulForm_Load(object sender, EventArgs e)
         {
-            if (closing==true)
-            {
-                return true;
-            }
-            else
-            {
-                return false; 
-            }
+            DatenLaden();
         }
-
-        public void patientenwechsel()
-        {
-            saveData();
-        }
-        
-       
-
         private void BasisModulForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            CloseWindow(e);
+        }
 
-            if (!schließen())
+        public void CloseWindow(FormClosingEventArgs e)
+        {
+            if (!Closing)
             {
                 DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
 
                 if (result == DialogResult.Yes)
                 {
                     closing = true;
                     return;
                 }
-
-                else if (result == DialogResult.No)
-                {
-                    closing = false;
-                    e.Cancel = (result == DialogResult.No);
-                }
                 else
                 {
                     e.Cancel = true;
                 }
-
-
             }
-            else
-            {
-                Console.WriteLine("schließen "+schließen());
-            }
-            
-          
-
-           
-
-
-
-
         }
 
-     
+      
+
+
+
+
     }
 }
