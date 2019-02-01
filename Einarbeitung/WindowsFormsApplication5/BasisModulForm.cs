@@ -53,7 +53,8 @@ namespace WindowsFormsApplication5
             verwerfen.Enabled = false;
         }
 
-        protected void buttonsPassed(bool b){
+        protected void buttonsPassed(bool b)
+        {
             verwerfen.Enabled = b;
             Closing = !b;
         }
@@ -64,6 +65,12 @@ namespace WindowsFormsApplication5
 
         protected virtual void saveData()
         {
+        }
+
+        public void savedData()
+        {
+            saveData();
+            buttonsPassed(false);
         }
 
         private void speichern_Click(object sender, EventArgs e)
@@ -90,24 +97,44 @@ namespace WindowsFormsApplication5
         {
             if (!Closing)
             {
-                DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem schließen?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-
-                if (result == DialogResult.Yes)
+                switch (CloseWindowCheck())
                 {
-                    closing = true;
-                    return;
-                }
-                else
-                {
-                    e.Cancel = true;
+                    case 1:
+                        savedData();
+                        closing = true;
+                        return;
+                    case 2:
+                        closing = true;
+                        return;
+                    default:
+                        e.Cancel = true;
+                        return;
                 }
             }
         }
 
-      
-
+        public int CloseWindowCheck()
+        {
+            DialogResult result = MessageBox.Show("nicht gespeicherte Daten,\n jetzt Speichern?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                closing = true;
+                return 1;
+            }
+            else if(result==DialogResult.No)
+            {
+                closing = true;
+                return 2;
+            }
+            else
+	        {
+                closing = false;
+                return 3;
+            }
+        }
 
 
 
     }
 }
+

@@ -208,34 +208,38 @@ namespace WindowsFormsApplication5
             Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
         }
 
-      
+
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (CurrentPatientSwitch) 
+            if (CurrentPatientSwitch)
             {
                 return;
             }
             {   //Pruefung ob modul geoeffnet ist
                 for (int i = 0; i < Verwaltung.Count; i++)
                 {
-                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
 
                     if (!Verwaltung[i].Form.Closing)
                     {
-                        DialogResult result = MessageBox.Show("Nicht gespeicherte Daten, trotzdem Benutzer wechseln?", "speichern / verwerfen", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                        tabControl1.SelectedTab = Verwaltung[i].Tabpage;
 
-                        if (result == DialogResult.Yes)
+                        switch (Verwaltung[i].Form.CloseWindowCheck())
                         {
-                            Verwaltung[i].Form.Closing = false;
+                            case 1:
+                                Verwaltung[i].Form.savedData();
+                                break;
+                            case 2:
+                                break;
+                            default:
+                                CurrentPatientSwitch = true;
+                                comboBox1.SelectedItem = Currentpatient;
+                                CurrentPatientSwitch = false;
+                                return;
                         }
-                        else 
-                        {
-                            CurrentPatientSwitch = true;
-                            comboBox1.SelectedItem = Currentpatient;
-                            CurrentPatientSwitch = false;
-                            return;
-                        }
+
+
+                       
                     }
                 }
             }
@@ -257,7 +261,7 @@ namespace WindowsFormsApplication5
                 button4.Enabled = true;
                 button5.Enabled = true;
             }
-           
+
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -297,7 +301,7 @@ namespace WindowsFormsApplication5
 
         private void Hauptfenster_FormClosing(object sender, FormClosingEventArgs e)
         {
-               //Pruefung ob modul geoeffnet ist
+            //Pruefung ob modul geoeffnet ist
             for (int i = 0; i < Verwaltung.Count; i++)
             {
                 tabControl1.SelectedTab = Verwaltung[i].Tabpage;
