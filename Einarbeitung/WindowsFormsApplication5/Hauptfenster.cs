@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClassLibrary;
+using System.Reflection;
+using System.IO;
 
 namespace WindowsFormsApplication5
 {
@@ -44,169 +47,172 @@ namespace WindowsFormsApplication5
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MemberModulForm1 MemberForm;
             TabPage tabpage;
 
             for (int i = 0; i < Verwaltung.Count; i++)
             {
-                if (Verwaltung[i].Form is MemberModulForm1)
+                if (Verwaltung[i].Form is BasisModulForm)
                 {
                     tabControl1.SelectedTab = Verwaltung[i].Tabpage;
                     return;
                 }
             }
 
-            Button button1 = (Button)sender;
-            string button1Text = button1.Text;
+            string path = @"C:\Users\metehan.kilin\Source\Repos\CSharp_Einareitung\Einarbeitung\Modul1\bin\Debug\Modul1.dll";
 
-            MemberForm = new MemberModulForm1 { Text = button1Text };
-            tabpage = new TabPage { Text = button1Text };
+            Assembly assembly = Assembly.LoadFile(path);
+            Type type = assembly.GetType("Modul1.MemberModulForm1");
+            object obj = Activator.CreateInstance(type);
 
-            MemberForm.Patient = Currentpatient;
+            BasisModulForm modul = obj as BasisModulForm { Text=assembly.GetName().ToString()};
+            
+            tabpage = new TabPage { Text=assembly.GetName().ToString() };
+
+            modul.Patient = Currentpatient;
             
             tabControl1.TabPages.Add(tabpage);
             tabControl1.SelectedTab = tabpage;
-            MemberForm.Text = button1Text;
-            MemberForm.TopLevel = false;
-            MemberForm.Parent = tabpage;
-            MemberForm.Show();
-            MemberForm.Dock = DockStyle.Fill;
+            modul.Text = assembly.GetName().ToString();
+            modul.TopLevel = false;
+            modul.Parent = tabpage;
+            modul.Show();
+            modul.Dock = DockStyle.Fill;
             Delete.Enabled = true;
-            Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
+            Verwaltung.Add(new VerwaltungForms(modul, tabpage));
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            MemberModulForm2 MemberForm;
-            TabPage tabpage;
+        //private void button2_Click(object sender, EventArgs e)
+        //{
+        //    BasisModulForm MemberForm;
+        //    TabPage tabpage;
 
-            for (int i = 0; i < Verwaltung.Count; i++)
-            {
-                if (Verwaltung[i].Form is MemberModulForm2)
-                {
-                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
-                    return;
-                }
-            }
+        //    for (int i = 0; i < Verwaltung.Count; i++)
+        //    {
+        //        if (Verwaltung[i].Form is MemberModulForm2)
+        //        {
+        //            tabControl1.SelectedTab = Verwaltung[i].Tabpage;
+        //            return;
+        //        }
+        //    }
 
-            Button button1 = (Button)sender;
-            string button1Text = button1.Text;
+        //    Button button1 = (Button)sender;
+        //    string button1Text = button1.Text;
 
-            MemberForm = new MemberModulForm2 { Text = button1Text };
-            tabpage = new TabPage { Text = button1Text };
+        //    MemberForm = new MemberModulForm2 { Text = button1Text };
+        //    tabpage = new TabPage { Text = button1Text };
 
-            MemberForm.Patient = Currentpatient;
+        //    MemberForm.Patient = Currentpatient;
 
-            tabControl1.TabPages.Add(tabpage);
-            tabControl1.SelectedTab = tabpage;
-            MemberForm.Text = button1Text;
-            MemberForm.TopLevel = false;
-            MemberForm.Parent = tabpage;
-            MemberForm.Show();
-            MemberForm.Dock = DockStyle.Fill;
-            Delete.Enabled = true;
-            Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
+        //    tabControl1.TabPages.Add(tabpage);
+        //    tabControl1.SelectedTab = tabpage;
+        //    MemberForm.Text = button1Text;
+        //    MemberForm.TopLevel = false;
+        //    MemberForm.Parent = tabpage;
+        //    MemberForm.Show();
+        //    MemberForm.Dock = DockStyle.Fill;
+        //    Delete.Enabled = true;
+        //    Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
 
-        }
+        //}
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            MemberModulForm3 MemberForm;
-            TabPage tabpage;
+        //private void button3_Click(object sender, EventArgs e)
+        //{
+        //    MemberModulForm3 MemberForm;
+        //    TabPage tabpage;
 
-            for (int i = 0; i < Verwaltung.Count; i++)
-            {
-                if (Verwaltung[i].Form is MemberModulForm3)
-                {
-                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
-                    return;
-                }
-            }
+        //    for (int i = 0; i < Verwaltung.Count; i++)
+        //    {
+        //        if (Verwaltung[i].Form is MemberModulForm3)
+        //        {
+        //            tabControl1.SelectedTab = Verwaltung[i].Tabpage;
+        //            return;
+        //        }
+        //    }
 
-            Button button1 = (Button)sender;
-            string button1Text = button1.Text;
+        //    Button button1 = (Button)sender;
+        //    string button1Text = button1.Text;
 
-            MemberForm = new MemberModulForm3 { Text = button1Text };
-            tabpage = new TabPage { Text = button1Text };
+        //    MemberForm = new MemberModulForm3 { Text = button1Text };
+        //    tabpage = new TabPage { Text = button1Text };
 
-            MemberForm.Patient = Currentpatient;
+        //    MemberForm.Patient = Currentpatient;
 
-            tabControl1.TabPages.Add(tabpage);
-            tabControl1.SelectedTab = tabpage;
-            MemberForm.Text = button1Text;
-            MemberForm.TopLevel = false;
-            MemberForm.Parent = tabpage;
-            MemberForm.Show();
-            MemberForm.Dock = DockStyle.Fill;
-            Delete.Enabled = true;
-            Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
-        }
+        //    tabControl1.TabPages.Add(tabpage);
+        //    tabControl1.SelectedTab = tabpage;
+        //    MemberForm.Text = button1Text;
+        //    MemberForm.TopLevel = false;
+        //    MemberForm.Parent = tabpage;
+        //    MemberForm.Show();
+        //    MemberForm.Dock = DockStyle.Fill;
+        //    Delete.Enabled = true;
+        //    Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
+        //}
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            MemberModulForm4 MemberForm;
-            TabPage tabpage;
+        //private void button4_Click(object sender, EventArgs e)
+        //{
+        //    MemberModulForm4 MemberForm;
+        //    TabPage tabpage;
 
-            for (int i = 0; i < Verwaltung.Count; i++)
-            {
-                if (Verwaltung[i].Form is MemberModulForm4)
-                {
-                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
-                    return;
-                }
-            }
+        //    for (int i = 0; i < Verwaltung.Count; i++)
+        //    {
+        //        if (Verwaltung[i].Form is MemberModulForm4)
+        //        {
+        //            tabControl1.SelectedTab = Verwaltung[i].Tabpage;
+        //            return;
+        //        }
+        //    }
 
-            Button button1 = (Button)sender;
-            string button1Text = button1.Text;
+        //    Button button1 = (Button)sender;
+        //    string button1Text = button1.Text;
 
-            MemberForm = new MemberModulForm4 { Text = button1Text };
-            tabpage = new TabPage { Text = button1Text };
+        //    MemberForm = new MemberModulForm4 { Text = button1Text };
+        //    tabpage = new TabPage { Text = button1Text };
 
-            MemberForm.Patient = Currentpatient;
+        //    MemberForm.Patient = Currentpatient;
 
-            tabControl1.TabPages.Add(tabpage);
-            tabControl1.SelectedTab = tabpage;
-            MemberForm.Text = button1Text;
-            MemberForm.TopLevel = false;
-            MemberForm.Parent = tabpage;
-            MemberForm.Show();
-            MemberForm.Dock = DockStyle.Fill;
-            Delete.Enabled = true;
-            Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
-        }
+        //    tabControl1.TabPages.Add(tabpage);
+        //    tabControl1.SelectedTab = tabpage;
+        //    MemberForm.Text = button1Text;
+        //    MemberForm.TopLevel = false;
+        //    MemberForm.Parent = tabpage;
+        //    MemberForm.Show();
+        //    MemberForm.Dock = DockStyle.Fill;
+        //    Delete.Enabled = true;
+        //    Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
+        //}
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            MemberModulForm5 MemberForm;
-            TabPage tabpage;
+        //private void button5_Click(object sender, EventArgs e)
+        //{
+        //    MemberModulForm5 MemberForm;
+        //    TabPage tabpage;
 
-            for (int i = 0; i < Verwaltung.Count; i++)
-            {
-                if (Verwaltung[i].Form is MemberModulForm5)
-                {
-                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
-                    return;
-                }
-            }
+        //    for (int i = 0; i < Verwaltung.Count; i++)
+        //    {
+        //        if (Verwaltung[i].Form is MemberModulForm5)
+        //        {
+        //            tabControl1.SelectedTab = Verwaltung[i].Tabpage;
+        //            return;
+        //        }
+        //    }
 
-            Button button1 = (Button)sender;
-            string button1Text = button1.Text;
+        //    Button button1 = (Button)sender;
+        //    string button1Text = button1.Text;
 
-            MemberForm = new MemberModulForm5 { Text = button1Text };
-            tabpage = new TabPage { Text = button1Text };
+        //    MemberForm = new MemberModulForm5 { Text = button1Text };
+        //    tabpage = new TabPage { Text = button1Text };
 
-            MemberForm.Patient = Currentpatient;
+        //    MemberForm.Patient = Currentpatient;
 
-            tabControl1.TabPages.Add(tabpage);
-            tabControl1.SelectedTab = tabpage;
-            MemberForm.Text = button1Text;
-            MemberForm.TopLevel = false;
-            MemberForm.Parent = tabpage;
-            MemberForm.Show();
-            MemberForm.Dock = DockStyle.Fill;
-            Delete.Enabled = true;
-            Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
-        }
+        //    tabControl1.TabPages.Add(tabpage);
+        //    tabControl1.SelectedTab = tabpage;
+        //    MemberForm.Text = button1Text;
+        //    MemberForm.TopLevel = false;
+        //    MemberForm.Parent = tabpage;
+        //    MemberForm.Show();
+        //    MemberForm.Dock = DockStyle.Fill;
+        //    Delete.Enabled = true;
+        //    Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
+        //}
 
 
 

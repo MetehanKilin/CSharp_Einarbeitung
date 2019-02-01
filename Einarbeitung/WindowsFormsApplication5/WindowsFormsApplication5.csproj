@@ -58,18 +58,6 @@
     <Compile Include="MemberModulForm5.Designer.cs">
       <DependentUpon>MemberModulForm5.cs</DependentUpon>
     </Compile>
-    <Compile Include="BasisModulForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BasisModulForm.Designer.cs">
-      <DependentUpon>BasisModulForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MemberModulForm1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MemberModulForm1.Designer.cs">
-      <DependentUpon>MemberModulForm1.cs</DependentUpon>
-    </Compile>
     <Compile Include="MemberModulForm2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,7 +70,6 @@
     <Compile Include="MemberModulForm3.Designer.cs">
       <DependentUpon>MemberModulForm3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Patient.cs" />
     <Compile Include="VerwaltungForms.cs" />
     <Compile Include="Hauptfenster.cs">
       <SubType>Form</SubType>
@@ -94,12 +81,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Hauptfenster.resx">
       <DependentUpon>Hauptfenster.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="BasisModulForm.resx">
-      <DependentUpon>BasisModulForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MemberModulForm1.resx">
-      <DependentUpon>MemberModulForm1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemberModulForm2.resx">
       <DependentUpon>MemberModulForm2.cs</DependentUpon>
@@ -135,6 +116,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">
+      <Project>{72f2aef8-da4f-4be1-ba76-63ff82cb7d28}</Project>
+      <Name>ClassLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClassLibrary;
 
-namespace WindowsFormsApplication5
+namespace Modul1
 {
     public partial class MemberModulForm1 : BasisModulForm
     {

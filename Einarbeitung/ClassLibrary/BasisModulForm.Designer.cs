@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication5
+﻿namespace ClassLibrary
 {
     partial class BasisModulForm
     {
