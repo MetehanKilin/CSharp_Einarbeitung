@@ -24,6 +24,7 @@ namespace WindowsFormsApplication5
         private List<Patient> Patienten = new List<Patient>();
         private Patient Currentpatient;
         private bool CurrentPatientSwitch;
+        string path = Environment.CurrentDirectory;
 
 
         public Hauptfenster()
@@ -52,19 +53,6 @@ namespace WindowsFormsApplication5
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string path = @"C:\Users\metehan.kilin\Source\Repos\CSharp_Einarbeitung\Einarbeitung\Modul1\bin\Debug\Modul1.dll";
-
-            Assembly assembly = Assembly.LoadFile(path);
-            Type type = assembly.GetType("Modul1.MemberModulForm1");
-            object obj = Activator.CreateInstance(type);
-
-
-
-
-            BasisModulForm modul = new MemberModulForm1();
-            
-            TabPage tabpage;
-
             for (int i = 0; i < Verwaltung.Count; i++)
             {
                 if (Verwaltung[i].Form is MemberModulForm1)
@@ -73,12 +61,11 @@ namespace WindowsFormsApplication5
                     return;
                 }
             }
-            
-            
-            tabpage = new TabPage { Text=button1.Text };
 
+            BasisModulForm modul = new MemberModulForm1();
+
+            TabPage tabpage = new TabPage { Text = button1.Text };
             modul.Patient = Currentpatient;
-            
             tabControl1.TabPages.Add(tabpage);
             tabControl1.SelectedTab = tabpage;
             modul.TopLevel = false;
@@ -91,9 +78,6 @@ namespace WindowsFormsApplication5
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-            TabPage tabpage;
-
             for (int i = 0; i < Verwaltung.Count; i++)
             {
                 if (Verwaltung[i].Form is MemberModulForm2)
@@ -102,22 +86,10 @@ namespace WindowsFormsApplication5
                     return;
                 }
             }
-
-
-            string path = @"C:\Users\metehan.kilin\Source\Repos\CSharp_Einarbeitung\Einarbeitung\Modul2\bin\Debug\Modul2.dll";
-
-            Assembly assembly = Assembly.LoadFile(path);
-            Type type = assembly.GetType("Modul2.MemberModulForm2");
-            object obj = Activator.CreateInstance(type);
-
             BasisModulForm modul = new MemberModulForm2();
-
-
-
-            tabpage = new TabPage { Text = button2.Text };
-
+            
+            TabPage tabpage = new TabPage { Text = button2.Text };
             modul.Patient = Currentpatient;
-
             tabControl1.TabPages.Add(tabpage);
             tabControl1.SelectedTab = tabpage;
             modul.TopLevel = false;
@@ -126,13 +98,10 @@ namespace WindowsFormsApplication5
             modul.Dock = DockStyle.Fill;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            TabPage tabpage;
-
             for (int i = 0; i < Verwaltung.Count; i++)
             {
                 if (Verwaltung[i].Form is MemberModulForm3)
@@ -142,20 +111,10 @@ namespace WindowsFormsApplication5
                 }
             }
 
-            String path = @"C:\Users\metehan.kilin\Source\Repos\CSharp_Einarbeitung\Einarbeitung\Modul3\bin\Debug\Modul3.dll";
-
-            Assembly assembly = Assembly.LoadFile(path);
-            Type type = assembly.GetType("Modul3.MemberModulForm3");
-            object obj = Activator.CreateInstance(type);
-
             BasisModulForm modul = new MemberModulForm3();
 
-           
-
-            tabpage = new TabPage { Text = button3.Text };
-
+            TabPage tabpage = new TabPage { Text = button3.Text };
             modul.Patient = Currentpatient;
-
             tabControl1.TabPages.Add(tabpage);
             tabControl1.SelectedTab = tabpage;
             modul.TopLevel = false;
@@ -168,8 +127,6 @@ namespace WindowsFormsApplication5
 
         private void button4_Click(object sender, EventArgs e)
         {
-            TabPage tabpage;
-
             for (int i = 0; i < Verwaltung.Count; i++)
             {
                 if (Verwaltung[i].Form is MemberModulForm4)
@@ -179,19 +136,10 @@ namespace WindowsFormsApplication5
                 }
             }
 
-            String path = @"C:\Users\metehan.kilin\Source\Repos\CSharp_Einarbeitung\Einarbeitung\Modul4\bin\Debug\Modul4.dll";
-
-            Assembly assembly = Assembly.LoadFile(path);
-            Type type = assembly.GetType("Modul4.MemberModulForm4");
-            object obj = Activator.CreateInstance(type);
-
             BasisModulForm modul = new MemberModulForm4();
-            modul.Text = button4.Text;
 
-            tabpage = new TabPage { Text = button4.Text };
-
+            TabPage tabpage = new TabPage { Text = button4.Text };
             modul.Patient = Currentpatient;
-
             tabControl1.TabPages.Add(tabpage);
             tabControl1.SelectedTab = tabpage;
             modul.Text = button4.Text;
@@ -205,8 +153,6 @@ namespace WindowsFormsApplication5
 
         private void button5_Click(object sender, EventArgs e)
         {
-            TabPage tabpage;
-
             for (int i = 0; i < Verwaltung.Count; i++)
             {
                 if (Verwaltung[i].Form is MemberModulForm5)
@@ -216,20 +162,10 @@ namespace WindowsFormsApplication5
                 }
             }
 
-            String path = @"C:\Users\metehan.kilin\Source\Repos\CSharp_Einarbeitung\Einarbeitung\Modul5\bin\Debug\Modul5.dll";
-
-            Assembly assembly = Assembly.LoadFile(path);
-            Type type = assembly.GetType("Modul5.MemberModulForm5");
-            object obj = Activator.CreateInstance(type);
-
             BasisModulForm modul = new MemberModulForm5();
-            modul.Text = button5.Text;
 
-
-            tabpage = new TabPage { Text = button5.Text };
-
+            TabPage tabpage = new TabPage { Text = button5.Text };
             modul.Patient = Currentpatient;
-
             tabControl1.TabPages.Add(tabpage);
             tabControl1.SelectedTab = tabpage;
             modul.Text = button5.Text;
@@ -272,7 +208,7 @@ namespace WindowsFormsApplication5
                         }
 
 
-                       
+
                     }
                 }
             }
