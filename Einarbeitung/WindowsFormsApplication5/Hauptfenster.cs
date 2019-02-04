@@ -10,6 +10,11 @@ using System.Windows.Forms;
 using ClassLibrary;
 using System.Reflection;
 using System.IO;
+using Modul1;
+using Modul2;
+using Modul3;
+using Modul4;
+using Modul5;
 
 namespace WindowsFormsApplication5
 {
@@ -47,32 +52,35 @@ namespace WindowsFormsApplication5
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TabPage tabpage;
-
-            for (int i = 0; i < Verwaltung.Count; i++)
-            {
-                if (Verwaltung[i].Form is BasisModulForm)
-                {
-                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
-                    return;
-                }
-            }
-
-            string path = @"C:\Users\metehan.kilin\Source\Repos\CSharp_Einareitung\Einarbeitung\Modul1\bin\Debug\Modul1.dll";
+            string path = @"C:\Users\metehan.kilin\Source\Repos\CSharp_Einarbeitung\Einarbeitung\Modul1\bin\Debug\Modul1.dll";
 
             Assembly assembly = Assembly.LoadFile(path);
             Type type = assembly.GetType("Modul1.MemberModulForm1");
             object obj = Activator.CreateInstance(type);
 
-            BasisModulForm modul = obj as BasisModulForm { Text=assembly.GetName().ToString()};
+
+
+
+            BasisModulForm modul = new MemberModulForm1();
             
-            tabpage = new TabPage { Text=assembly.GetName().ToString() };
+            TabPage tabpage;
+
+            for (int i = 0; i < Verwaltung.Count; i++)
+            {
+                if (Verwaltung[i].Form is MemberModulForm1)
+                {
+                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
+                    return;
+                }
+            }
+            
+            
+            tabpage = new TabPage { Text=button1.Text };
 
             modul.Patient = Currentpatient;
             
             tabControl1.TabPages.Add(tabpage);
             tabControl1.SelectedTab = tabpage;
-            modul.Text = assembly.GetName().ToString();
             modul.TopLevel = false;
             modul.Parent = tabpage;
             modul.Show();
@@ -81,138 +89,157 @@ namespace WindowsFormsApplication5
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
         }
 
-        //private void button2_Click(object sender, EventArgs e)
-        //{
-        //    BasisModulForm MemberForm;
-        //    TabPage tabpage;
+        private void button2_Click(object sender, EventArgs e)
+        {
 
-        //    for (int i = 0; i < Verwaltung.Count; i++)
-        //    {
-        //        if (Verwaltung[i].Form is MemberModulForm2)
-        //        {
-        //            tabControl1.SelectedTab = Verwaltung[i].Tabpage;
-        //            return;
-        //        }
-        //    }
+            TabPage tabpage;
 
-        //    Button button1 = (Button)sender;
-        //    string button1Text = button1.Text;
+            for (int i = 0; i < Verwaltung.Count; i++)
+            {
+                if (Verwaltung[i].Form is MemberModulForm2)
+                {
+                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
+                    return;
+                }
+            }
 
-        //    MemberForm = new MemberModulForm2 { Text = button1Text };
-        //    tabpage = new TabPage { Text = button1Text };
 
-        //    MemberForm.Patient = Currentpatient;
+            string path = @"C:\Users\metehan.kilin\Source\Repos\CSharp_Einarbeitung\Einarbeitung\Modul2\bin\Debug\Modul2.dll";
 
-        //    tabControl1.TabPages.Add(tabpage);
-        //    tabControl1.SelectedTab = tabpage;
-        //    MemberForm.Text = button1Text;
-        //    MemberForm.TopLevel = false;
-        //    MemberForm.Parent = tabpage;
-        //    MemberForm.Show();
-        //    MemberForm.Dock = DockStyle.Fill;
-        //    Delete.Enabled = true;
-        //    Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
+            Assembly assembly = Assembly.LoadFile(path);
+            Type type = assembly.GetType("Modul2.MemberModulForm2");
+            object obj = Activator.CreateInstance(type);
 
-        //}
+            BasisModulForm modul = new MemberModulForm2();
 
-        //private void button3_Click(object sender, EventArgs e)
-        //{
-        //    MemberModulForm3 MemberForm;
-        //    TabPage tabpage;
 
-        //    for (int i = 0; i < Verwaltung.Count; i++)
-        //    {
-        //        if (Verwaltung[i].Form is MemberModulForm3)
-        //        {
-        //            tabControl1.SelectedTab = Verwaltung[i].Tabpage;
-        //            return;
-        //        }
-        //    }
 
-        //    Button button1 = (Button)sender;
-        //    string button1Text = button1.Text;
+            tabpage = new TabPage { Text = button2.Text };
 
-        //    MemberForm = new MemberModulForm3 { Text = button1Text };
-        //    tabpage = new TabPage { Text = button1Text };
+            modul.Patient = Currentpatient;
 
-        //    MemberForm.Patient = Currentpatient;
+            tabControl1.TabPages.Add(tabpage);
+            tabControl1.SelectedTab = tabpage;
+            modul.TopLevel = false;
+            modul.Parent = tabpage;
+            modul.Show();
+            modul.Dock = DockStyle.Fill;
+            Delete.Enabled = true;
+            Verwaltung.Add(new VerwaltungForms(modul, tabpage));
 
-        //    tabControl1.TabPages.Add(tabpage);
-        //    tabControl1.SelectedTab = tabpage;
-        //    MemberForm.Text = button1Text;
-        //    MemberForm.TopLevel = false;
-        //    MemberForm.Parent = tabpage;
-        //    MemberForm.Show();
-        //    MemberForm.Dock = DockStyle.Fill;
-        //    Delete.Enabled = true;
-        //    Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
-        //}
+        }
 
-        //private void button4_Click(object sender, EventArgs e)
-        //{
-        //    MemberModulForm4 MemberForm;
-        //    TabPage tabpage;
+        private void button3_Click(object sender, EventArgs e)
+        {
+            TabPage tabpage;
 
-        //    for (int i = 0; i < Verwaltung.Count; i++)
-        //    {
-        //        if (Verwaltung[i].Form is MemberModulForm4)
-        //        {
-        //            tabControl1.SelectedTab = Verwaltung[i].Tabpage;
-        //            return;
-        //        }
-        //    }
+            for (int i = 0; i < Verwaltung.Count; i++)
+            {
+                if (Verwaltung[i].Form is MemberModulForm3)
+                {
+                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
+                    return;
+                }
+            }
 
-        //    Button button1 = (Button)sender;
-        //    string button1Text = button1.Text;
+            String path = @"C:\Users\metehan.kilin\Source\Repos\CSharp_Einarbeitung\Einarbeitung\Modul3\bin\Debug\Modul3.dll";
 
-        //    MemberForm = new MemberModulForm4 { Text = button1Text };
-        //    tabpage = new TabPage { Text = button1Text };
+            Assembly assembly = Assembly.LoadFile(path);
+            Type type = assembly.GetType("Modul3.MemberModulForm3");
+            object obj = Activator.CreateInstance(type);
 
-        //    MemberForm.Patient = Currentpatient;
+            BasisModulForm modul = new MemberModulForm3();
 
-        //    tabControl1.TabPages.Add(tabpage);
-        //    tabControl1.SelectedTab = tabpage;
-        //    MemberForm.Text = button1Text;
-        //    MemberForm.TopLevel = false;
-        //    MemberForm.Parent = tabpage;
-        //    MemberForm.Show();
-        //    MemberForm.Dock = DockStyle.Fill;
-        //    Delete.Enabled = true;
-        //    Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
-        //}
+           
 
-        //private void button5_Click(object sender, EventArgs e)
-        //{
-        //    MemberModulForm5 MemberForm;
-        //    TabPage tabpage;
+            tabpage = new TabPage { Text = button3.Text };
 
-        //    for (int i = 0; i < Verwaltung.Count; i++)
-        //    {
-        //        if (Verwaltung[i].Form is MemberModulForm5)
-        //        {
-        //            tabControl1.SelectedTab = Verwaltung[i].Tabpage;
-        //            return;
-        //        }
-        //    }
+            modul.Patient = Currentpatient;
 
-        //    Button button1 = (Button)sender;
-        //    string button1Text = button1.Text;
+            tabControl1.TabPages.Add(tabpage);
+            tabControl1.SelectedTab = tabpage;
+            modul.TopLevel = false;
+            modul.Parent = tabpage;
+            modul.Show();
+            modul.Dock = DockStyle.Fill;
+            Delete.Enabled = true;
+            Verwaltung.Add(new VerwaltungForms(modul, tabpage));
+        }
 
-        //    MemberForm = new MemberModulForm5 { Text = button1Text };
-        //    tabpage = new TabPage { Text = button1Text };
+        private void button4_Click(object sender, EventArgs e)
+        {
+            TabPage tabpage;
 
-        //    MemberForm.Patient = Currentpatient;
+            for (int i = 0; i < Verwaltung.Count; i++)
+            {
+                if (Verwaltung[i].Form is MemberModulForm4)
+                {
+                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
+                    return;
+                }
+            }
 
-        //    tabControl1.TabPages.Add(tabpage);
-        //    tabControl1.SelectedTab = tabpage;
-        //    MemberForm.Text = button1Text;
-        //    MemberForm.TopLevel = false;
-        //    MemberForm.Parent = tabpage;
-        //    MemberForm.Show();
-        //    MemberForm.Dock = DockStyle.Fill;
-        //    Delete.Enabled = true;
-        //    Verwaltung.Add(new VerwaltungForms(MemberForm, tabpage));
-        //}
+            String path = @"C:\Users\metehan.kilin\Source\Repos\CSharp_Einarbeitung\Einarbeitung\Modul4\bin\Debug\Modul4.dll";
+
+            Assembly assembly = Assembly.LoadFile(path);
+            Type type = assembly.GetType("Modul4.MemberModulForm4");
+            object obj = Activator.CreateInstance(type);
+
+            BasisModulForm modul = new MemberModulForm4();
+            modul.Text = button4.Text;
+
+            tabpage = new TabPage { Text = button4.Text };
+
+            modul.Patient = Currentpatient;
+
+            tabControl1.TabPages.Add(tabpage);
+            tabControl1.SelectedTab = tabpage;
+            modul.Text = button4.Text;
+            modul.TopLevel = false;
+            modul.Parent = tabpage;
+            modul.Show();
+            modul.Dock = DockStyle.Fill;
+            Delete.Enabled = true;
+            Verwaltung.Add(new VerwaltungForms(modul, tabpage));
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            TabPage tabpage;
+
+            for (int i = 0; i < Verwaltung.Count; i++)
+            {
+                if (Verwaltung[i].Form is MemberModulForm5)
+                {
+                    tabControl1.SelectedTab = Verwaltung[i].Tabpage;
+                    return;
+                }
+            }
+
+            String path = @"C:\Users\metehan.kilin\Source\Repos\CSharp_Einarbeitung\Einarbeitung\Modul5\bin\Debug\Modul5.dll";
+
+            Assembly assembly = Assembly.LoadFile(path);
+            Type type = assembly.GetType("Modul5.MemberModulForm5");
+            object obj = Activator.CreateInstance(type);
+
+            BasisModulForm modul = new MemberModulForm5();
+            modul.Text = button5.Text;
+
+
+            tabpage = new TabPage { Text = button5.Text };
+
+            modul.Patient = Currentpatient;
+
+            tabControl1.TabPages.Add(tabpage);
+            tabControl1.SelectedTab = tabpage;
+            modul.Text = button5.Text;
+            modul.TopLevel = false;
+            modul.Parent = tabpage;
+            modul.Show();
+            modul.Dock = DockStyle.Fill;
+            Delete.Enabled = true;
+            Verwaltung.Add(new VerwaltungForms(modul, tabpage));
+        }
 
 
 
@@ -226,7 +253,7 @@ namespace WindowsFormsApplication5
                 for (int i = 0; i < Verwaltung.Count; i++)
                 {
 
-                    if (!Verwaltung[i].Form.Closing)
+                    if (!Verwaltung[i].Form.Closing1)
                     {
                         tabControl1.SelectedTab = Verwaltung[i].Tabpage;
 
@@ -291,7 +318,7 @@ namespace WindowsFormsApplication5
         private bool Fensterschließen(int index)
         {
             Verwaltung[index].Form.Close();
-            if (Verwaltung[index].Form.Closing == true)
+            if (Verwaltung[index].Form.Closing1 == true)
             {
                 Verwaltung[index].Form.Dispose();
                 Verwaltung[index].Tabpage.Dispose();

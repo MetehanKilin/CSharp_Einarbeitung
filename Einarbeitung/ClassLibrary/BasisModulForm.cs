@@ -23,7 +23,7 @@ namespace ClassLibrary
         private Patient patient;
         private Boolean closing;
 
-        public bool Closing
+        public Boolean Closing1
         {
             get
             {
@@ -50,14 +50,14 @@ namespace ClassLibrary
         public void DatenLaden()
         {
             load();
-            Closing = true;
+            Closing1 = true;
             verwerfen.Enabled = false;
         }
 
         protected void buttonsPassed(bool b)
         {
             verwerfen.Enabled = b;
-            Closing = !b;
+            Closing1 = !b;
         }
 
         protected virtual void load()
@@ -96,7 +96,7 @@ namespace ClassLibrary
 
         public void CloseWindow(FormClosingEventArgs e)
         {
-            if (!Closing)
+            if (!Closing1)
             {
                 switch (CloseWindowCheck())
                 {

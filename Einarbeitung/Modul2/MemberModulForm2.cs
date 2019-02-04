@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibrary;
 
-namespace WindowsFormsApplication5
+namespace Modul2
 {
     public partial class MemberModulForm2 : BasisModulForm
     {

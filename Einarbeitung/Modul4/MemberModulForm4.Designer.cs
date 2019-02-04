@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication5
+﻿namespace Modul4
 {
     partial class MemberModulForm4
     {
