@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Kis>
+  <Patienten>
+    <Patient>    
+      <ID>1</ID>
+      <Geschlecht>M</Geschlecht>
+      <Vorname>Metehan</Vorname>
+      <Nachname>Kilin</Nachname>
+      <Geburtstag>01.01.1990</Geburtstag>
+    </Patient>
+    <Patient>
+      <ID>2</ID>
+      <Geschlecht>M</Geschlecht>
+      <Vorname>Ingo</Vorname>
+      <Nachname>Temme</Nachname>
+      <Geburtstag>02.02.1992</Geburtstag>
+    </Patient>
+    <Patient>
+      <ID>3</ID>
+      <Geschlecht>M</Geschlecht>
+      <Vorname>Ivaylo</Vorname>
+      <Nachname>Topalov</Nachname>
+      <Geburtstag>03.03.1993</Geburtstag>
+    </Patient>
+    <Patient>
+      <ID>4</ID>
+      <Geschlecht>M</Geschlecht>
+      <Vorname>Roberto</Vorname>
+      <Nachname>Danti</Nachname>
+      <Geburtstag>04.04.1994</Geburtstag>
+    </Patient>
+    <Patient>
+      <ID>5</ID>
+      <Geschlecht>M</Geschlecht>
+      <Vorname>Stefan</Vorname>
+      <Nachname>Lober</Nachname>
+      <Geburtstag>05.05.1995</Geburtstag>
+    </Patient>
+    <Patient>
+      <ID>6</ID>
+      <Geschlecht>W</Geschlecht>
+      <Vorname>Bettina</Vorname>
+      <Nachname>Araya</Nachname>
+      <Geburtstag>06.06.1996</Geburtstag>
+    </Patient>
+  </Patienten>
+</Kis>

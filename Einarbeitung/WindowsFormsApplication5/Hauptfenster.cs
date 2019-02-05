@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using ClassLibrary;
 using System.Reflection;
 using System.IO;
-
+using System.Xml;
 
 namespace WindowsFormsApplication5
 {
@@ -37,12 +37,34 @@ namespace WindowsFormsApplication5
 
         private void loadPatients()
         {
-            Patienten.Add(new Patient(1, 'M', "Metehan", "Kilin", new DateTime(1990, 01, 01)));
-            Patienten.Add(new Patient(2, 'M', "Ingo", "Temme", new DateTime(1992, 02, 02)));
-            Patienten.Add(new Patient(3, 'M', "Ivaylo", "Topalov", new DateTime(1993, 03, 03)));
-            Patienten.Add(new Patient(4, 'M', "Roberto", "Danti", new DateTime(1994, 04, 04)));
-            Patienten.Add(new Patient(5, 'M', "Stefan", "Lober", new DateTime(1995, 05, 05)));
-            Patienten.Add(new Patient(6, 'W', "Bettina", "Araya", new DateTime(1996, 06, 06)));
+            //Patienten.Add(new Patient(1, 'M', "Metehan", "Kilin", new DateTime(1990, 01, 01)));
+            //Patienten.Add(new Patient(2, 'M', "Ingo", "Temme", new DateTime(1992, 02, 02)));
+            //Patienten.Add(new Patient(3, 'M', "Ivaylo", "Topalov", new DateTime(1993, 03, 03)));
+            //Patienten.Add(new Patient(4, 'M', "Roberto", "Danti", new DateTime(1994, 04, 04)));
+            //Patienten.Add(new Patient(5, 'M', "Stefan", "Lober", new DateTime(1995, 05, 05)));
+            //Patienten.Add(new Patient(6, 'W', "Bettina", "Araya", new DateTime(1996, 06, 06)));
+
+
+
+            XmlDocument xml = new XmlDocument();
+            xml.Load(@"C:\Users\metehan.kilin\Source\Repos\CSharp_Einarbeitung\Einarbeitung\WindowsFormsApplication5\Patienten.xml");
+            XmlNodeList xnList = xml.SelectNodes("/Kis/Patienten/Patient");
+
+            foreach (XmlNode node in xnList)
+            {
+                int id = Int32.Parse(node["ID"].InnerText);
+                string geschlechttemp = node["Geschlecht"].InnerText;
+                char geschlecht = geschlechttemp[0];
+                string vorname = node["Vorname"].InnerText;
+                string nachname = node["Nachname"].InnerText;
+                string geburtstagTemp = node["Geburtstag"].InnerText;
+                DateTime geburtstag = DateTime.Parse(geburtstagTemp);
+                Console.WriteLine("Patient: {0} {1} {2} {3} {4}", id, geschlecht, vorname, nachname, geburtstag.ToString("dd/MM/yyyy"));
+                Patienten.Add(new Patient(id, geschlecht, vorname, nachname, geburtstag));
+            }
+
+
+
         }
 
 
