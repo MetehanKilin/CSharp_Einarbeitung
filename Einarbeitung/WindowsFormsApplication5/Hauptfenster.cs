@@ -10,11 +10,7 @@ using System.Windows.Forms;
 using ClassLibrary;
 using System.Reflection;
 using System.IO;
-using Modul1;
-using Modul2;
-using Modul3;
-using Modul4;
-using Modul5;
+
 
 namespace WindowsFormsApplication5
 {
@@ -25,7 +21,6 @@ namespace WindowsFormsApplication5
         private Patient Currentpatient;
         private bool CurrentPatientSwitch;
         string path = Environment.CurrentDirectory;
-
 
         public Hauptfenster()
         {
@@ -53,16 +48,25 @@ namespace WindowsFormsApplication5
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Assembly assembly = Assembly.LoadFile(path+@"\Modul1.dll");
+            Object obj = assembly.CreateInstance("Modul1.MemberModulForm1");
+            TypeInfo tp = obj.GetType().GetTypeInfo();
+            Console.WriteLine(tp.Name);
+            String a = tp.Name;
+
+            BasisModulForm modul = obj as BasisModulForm;
+
+
             for (int i = 0; i < Verwaltung.Count; i++)
             {
-                if (Verwaltung[i].Form is MemberModulForm1)
+                if (Verwaltung[i].Form.GetType() == modul.GetType())   // noch überprüfen
                 {
                     tabControl1.SelectedTab = Verwaltung[i].Tabpage;
                     return;
                 }
             }
 
-            BasisModulForm modul = new MemberModulForm1();
+
 
             TabPage tabpage = new TabPage { Text = button1.Text };
             modul.Patient = Currentpatient;
@@ -78,16 +82,20 @@ namespace WindowsFormsApplication5
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Assembly assembly = Assembly.LoadFile(path + @"\Modul2.dll");
+            Object obj = assembly.CreateInstance("Modul2.MemberModulForm2");
+            BasisModulForm modul = obj as BasisModulForm;
+
             for (int i = 0; i < Verwaltung.Count; i++)
             {
-                if (Verwaltung[i].Form is MemberModulForm2)
+                if (Verwaltung[i].Form.GetType() == modul.GetType())
                 {
                     tabControl1.SelectedTab = Verwaltung[i].Tabpage;
                     return;
                 }
             }
-            BasisModulForm modul = new MemberModulForm2();
-            
+
+
             TabPage tabpage = new TabPage { Text = button2.Text };
             modul.Patient = Currentpatient;
             tabControl1.TabPages.Add(tabpage);
@@ -102,16 +110,20 @@ namespace WindowsFormsApplication5
 
         private void button3_Click(object sender, EventArgs e)
         {
+            Assembly assembly = Assembly.LoadFile(path + @"\Modul3.dll");
+            Object obj = assembly.CreateInstance("Modul3.MemberModulForm3");
+            BasisModulForm modul = obj as BasisModulForm;
+
+            Object a = obj.GetType();
+
             for (int i = 0; i < Verwaltung.Count; i++)
             {
-                if (Verwaltung[i].Form is MemberModulForm3)
+                if (Verwaltung[i].Form.GetType() == modul.GetType())
                 {
                     tabControl1.SelectedTab = Verwaltung[i].Tabpage;
                     return;
                 }
             }
-
-            BasisModulForm modul = new MemberModulForm3();
 
             TabPage tabpage = new TabPage { Text = button3.Text };
             modul.Patient = Currentpatient;
@@ -127,16 +139,19 @@ namespace WindowsFormsApplication5
 
         private void button4_Click(object sender, EventArgs e)
         {
+            Assembly assembly = Assembly.LoadFile(path + @"\Modul4.dll");
+            Object obj = assembly.CreateInstance("Modul4.MemberModulForm4");
+            BasisModulForm modul = obj as BasisModulForm;
+
             for (int i = 0; i < Verwaltung.Count; i++)
             {
-                if (Verwaltung[i].Form is MemberModulForm4)
+                if (Verwaltung[i].Form.GetType() == modul.GetType())
                 {
                     tabControl1.SelectedTab = Verwaltung[i].Tabpage;
                     return;
                 }
             }
 
-            BasisModulForm modul = new MemberModulForm4();
 
             TabPage tabpage = new TabPage { Text = button4.Text };
             modul.Patient = Currentpatient;
@@ -153,16 +168,18 @@ namespace WindowsFormsApplication5
 
         private void button5_Click(object sender, EventArgs e)
         {
+            Assembly assembly = Assembly.LoadFile(path + @"\Modul1.dll");
+            Object obj = assembly.CreateInstance("Modul5.MemberModulForm5");
+            BasisModulForm modul = obj as BasisModulForm;
+
             for (int i = 0; i < Verwaltung.Count; i++)
             {
-                if (Verwaltung[i].Form is MemberModulForm5)
+                if (Verwaltung[i].Form.GetType() == modul.GetType())
                 {
                     tabControl1.SelectedTab = Verwaltung[i].Tabpage;
                     return;
                 }
             }
-
-            BasisModulForm modul = new MemberModulForm5();
 
             TabPage tabpage = new TabPage { Text = button5.Text };
             modul.Patient = Currentpatient;
@@ -188,7 +205,6 @@ namespace WindowsFormsApplication5
             {   //Pruefung ob modul geoeffnet ist
                 for (int i = 0; i < Verwaltung.Count; i++)
                 {
-
                     if (!Verwaltung[i].Form.Closing1)
                     {
                         tabControl1.SelectedTab = Verwaltung[i].Tabpage;
@@ -206,9 +222,6 @@ namespace WindowsFormsApplication5
                                 CurrentPatientSwitch = false;
                                 return;
                         }
-
-
-
                     }
                 }
             }
@@ -230,7 +243,6 @@ namespace WindowsFormsApplication5
                 button4.Enabled = true;
                 button5.Enabled = true;
             }
-
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -265,7 +277,6 @@ namespace WindowsFormsApplication5
             {
                 return false;
             }
-
         }
 
         private void Hauptfenster_FormClosing(object sender, FormClosingEventArgs e)
@@ -281,8 +292,6 @@ namespace WindowsFormsApplication5
                     return;
                 }
                 i--;
-
-
             }
         }
     }

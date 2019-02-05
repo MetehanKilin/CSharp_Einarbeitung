@@ -86,26 +86,6 @@
       <Project>{72f2aef8-da4f-4be1-ba76-63ff82cb7d28}</Project>
       <Name>ClassLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Modul1\Modul1.csproj">
-      <Project>{5b89db79-6894-4384-bc47-9627057ea05d}</Project>
-      <Name>Modul1</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Modul2\Modul2.csproj">
-      <Project>{673818e2-5ba9-43cd-9921-91f990f65a93}</Project>
-      <Name>Modul2</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Modul3\Modul3.csproj">
-      <Project>{00b2440a-c5dd-4616-8793-09509eac1fee}</Project>
-      <Name>Modul3</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Modul4\Modul4.csproj">
-      <Project>{f61149d8-b335-4ee9-89ad-a113f57e2d8c}</Project>
-      <Name>Modul4</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Modul5\Modul5.csproj">
-      <Project>{117e623d-be8e-4582-b3aa-e6bc0303f502}</Project>
-      <Name>Modul5</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
