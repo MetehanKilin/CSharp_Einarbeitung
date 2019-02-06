@@ -1,11 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Kis>
-  <Path></Path>
   <Module>
-    <Modul1>Modul1.dll</Modul1>
-    <Modul2>Modul2.dll</Modul2>
-    <Modul3>Modul3.dll</Modul3>
-    <Modul4>Modul4.dll</Modul4>
-    <Modul5>Modul5.dll</Modul5>
+    <Modul>
+      <name>Modul1.dll</name>
+      <Form>MemberModulForm1</Form>
+    </Modul>
+    <Modul>
+      <name>Modul2.dll</name>
+      <Form>MemberModulForm2</Form>
+    </Modul>
+    <Modul>
+      <name>Modul3.dll</name>
+      <Form>MemberModulForm3</Form>
+    </Modul>
+    <Modul>
+      <name>Modul4.dll</name>
+      <Form>MemberModulForm4</Form>
+    </Modul>
+    <Modul>
+      <name>Modul5.dll</name>
+      <Form>MemberModulForm5</Form>
+    </Modul>
   </Module>
 </Kis>

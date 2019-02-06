@@ -20,17 +20,24 @@ namespace WindowsFormsApplication5
         private List<Patient> Patienten = new List<Patient>();
         private Patient Currentpatient;
         private bool CurrentPatientSwitch;
-        string path = Environment.CurrentDirectory;
+        private string path = Environment.CurrentDirectory;
+        private XmlDocument xml = new XmlDocument();
+        private List<String> Module = new List<string>();
+        private List<String> Forms = new List<string>();
+        private string path_Namespace;
 
         public Hauptfenster()
         {
             InitializeComponent();
             loadPatients();
+            loadModules();
 
             foreach (var item in Patienten)
             {
                 comboBox1.Items.Add(item);
             }
+
+
 
         }
 
@@ -44,10 +51,7 @@ namespace WindowsFormsApplication5
             //Patienten.Add(new Patient(5, 'M', "Stefan", "Lober", new DateTime(1995, 05, 05)));
             //Patienten.Add(new Patient(6, 'W', "Bettina", "Araya", new DateTime(1996, 06, 06)));
 
-
-
-            XmlDocument xml = new XmlDocument();
-            xml.Load(@"C:\Users\metehan.kilin\Source\Repos\CSharp_Einarbeitung\Einarbeitung\WindowsFormsApplication5\Patienten.xml");
+            xml.Load(path+@"\Patienten.xml");
             XmlNodeList xnList = xml.SelectNodes("/Kis/Patienten/Patient");
 
             foreach (XmlNode node in xnList)
@@ -59,25 +63,32 @@ namespace WindowsFormsApplication5
                 string nachname = node["Nachname"].InnerText;
                 string geburtstagTemp = node["Geburtstag"].InnerText;
                 DateTime geburtstag = DateTime.Parse(geburtstagTemp);
-                Console.WriteLine("Patient: {0} {1} {2} {3} {4}", id, geschlecht, vorname, nachname, geburtstag.ToString("dd/MM/yyyy"));
                 Patienten.Add(new Patient(id, geschlecht, vorname, nachname, geburtstag));
             }
-
-
-
+            xml.RemoveAll();
+            xnList = null;
         }
+        private void loadModules()
+        {
+            xml.Load(path + @"\Module.xml");
+            XmlNodeList xnList = xml.SelectNodes("/Kis/Module/Modul");
 
+            foreach (XmlNode node in xnList)
+            {
+                string modul = node["name"].InnerText;
+                string form = node["Form"].InnerText;
+                Module.Add(modul);
+                Forms.Add(form);
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Assembly assembly = Assembly.LoadFile(path+@"\Modul1.dll");
-            Object obj = assembly.CreateInstance("Modul1.MemberModulForm1");
-            TypeInfo tp = obj.GetType().GetTypeInfo();
-            Console.WriteLine(tp.Name);
-            String a = tp.Name;
+            path_Namespace = Module[0].Substring(0, (Module[0].Length - 4));
 
+            Assembly assembly = Assembly.LoadFile(path + @"\" + Module[0]);
+            Object obj = assembly.CreateInstance(path_Namespace+"."+ Forms[0]);
             BasisModulForm modul = obj as BasisModulForm;
-
 
             for (int i = 0; i < Verwaltung.Count; i++)
             {
@@ -87,8 +98,6 @@ namespace WindowsFormsApplication5
                     return;
                 }
             }
-
-
 
             TabPage tabpage = new TabPage { Text = button1.Text };
             modul.Patient = Currentpatient;
@@ -104,8 +113,10 @@ namespace WindowsFormsApplication5
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Assembly assembly = Assembly.LoadFile(path + @"\Modul2.dll");
-            Object obj = assembly.CreateInstance("Modul2.MemberModulForm2");
+            path_Namespace = Module[1].Substring(0, (Module[1].Length - 4));
+
+            Assembly assembly = Assembly.LoadFile(path + @"\" + Module[1]);
+            Object obj = assembly.CreateInstance(path_Namespace + "." + Forms[1]);
             BasisModulForm modul = obj as BasisModulForm;
 
             for (int i = 0; i < Verwaltung.Count; i++)
@@ -132,11 +143,11 @@ namespace WindowsFormsApplication5
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Assembly assembly = Assembly.LoadFile(path + @"\Modul3.dll");
-            Object obj = assembly.CreateInstance("Modul3.MemberModulForm3");
-            BasisModulForm modul = obj as BasisModulForm;
+            path_Namespace = Module[2].Substring(0, (Module[2].Length - 4));
 
-            Object a = obj.GetType();
+            Assembly assembly = Assembly.LoadFile(path + @"\" + Module[2]);
+            Object obj = assembly.CreateInstance(path_Namespace + "." + Forms[2]);
+            BasisModulForm modul = obj as BasisModulForm;
 
             for (int i = 0; i < Verwaltung.Count; i++)
             {
@@ -161,8 +172,10 @@ namespace WindowsFormsApplication5
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Assembly assembly = Assembly.LoadFile(path + @"\Modul4.dll");
-            Object obj = assembly.CreateInstance("Modul4.MemberModulForm4");
+            path_Namespace = Module[3].Substring(0, (Module[3].Length - 4));
+
+            Assembly assembly = Assembly.LoadFile(path + @"\" + Module[3]);
+            Object obj = assembly.CreateInstance(path_Namespace + "." + Forms[3]);
             BasisModulForm modul = obj as BasisModulForm;
 
             for (int i = 0; i < Verwaltung.Count; i++)
@@ -173,7 +186,6 @@ namespace WindowsFormsApplication5
                     return;
                 }
             }
-
 
             TabPage tabpage = new TabPage { Text = button4.Text };
             modul.Patient = Currentpatient;
@@ -190,8 +202,10 @@ namespace WindowsFormsApplication5
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Assembly assembly = Assembly.LoadFile(path + @"\Modul1.dll");
-            Object obj = assembly.CreateInstance("Modul5.MemberModulForm5");
+            path_Namespace = Module[4].Substring(0, (Module[4].Length - 4));
+
+            Assembly assembly = Assembly.LoadFile(path + @"\" + Module[4]);
+            Object obj = assembly.CreateInstance(path_Namespace + "." + Forms[4]);
             BasisModulForm modul = obj as BasisModulForm;
 
             for (int i = 0; i < Verwaltung.Count; i++)
