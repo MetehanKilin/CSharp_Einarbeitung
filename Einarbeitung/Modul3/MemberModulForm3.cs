@@ -32,10 +32,10 @@ namespace Modul3
 
             string[] split = textBox1.Text.Split(null);
 
-            string pattern = "^[a-zA-ZäöüÄÖÜß]+(([',. -][a-zA-ZäöüÄÖÜß ])?[a-zA-ZäöüÄÖÜß]*)$";
+            string pattern = "^[a-zA-ZäöüÄÖÜß]+[\s]?[a-zA-ZäöüÄÖÜß]+$";
             Match match = Regex.Match(textBox1.Text, pattern);
 
-            if (match.Success == false)
+            if (!match.Success == false)
             {
                 MessageBox.Show("Bitte Vorname und Nachme eingeben: (Max Mustermann)");
                 return;
