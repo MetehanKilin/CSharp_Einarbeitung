@@ -16,6 +16,8 @@ namespace ClassLibrary
         private Patient patient;
         private Boolean closing;
         private string path = Environment.CurrentDirectory;
+        private bool DatabaseActive;
+
 
         public BasisModulForm()
         {
@@ -57,6 +59,19 @@ namespace ClassLibrary
             set
             {
                 path = value;
+            }
+        }
+
+        public bool DatabaseActive1
+        {
+            get
+            {
+                return DatabaseActive;
+            }
+
+            set
+            {
+                DatabaseActive = value;
             }
         }
 

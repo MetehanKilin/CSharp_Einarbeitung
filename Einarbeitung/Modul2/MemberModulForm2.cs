@@ -48,8 +48,6 @@ namespace Modul2
             //XmlDocument doc = new XmlDocument();
             //doc.Load(Path + @"\Patienten.xml");
 
-            
-
             if (radioButton1.Checked)
             {
                 Patient.Geschlecht = 'M';

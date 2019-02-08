@@ -9,11 +9,14 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibrary;
+using MySql.Data.MySqlClient;
 
 namespace Modul3
 {
     public partial class MemberModulForm3 : BasisModulForm
     {
+        private string myConnectionString;
+
         public MemberModulForm3()
         {
             InitializeComponent();
@@ -28,23 +31,69 @@ namespace Modul3
 
         protected override void saveData()
         {
-            Console.WriteLine("speichern");
-
             string[] split = textBox1.Text.Split(null);
+            Patient.VorName = split[0];
+            Patient.NachName = split[1];
 
-            string pattern = "^[a-zA-ZäöüÄÖÜß]+[\s]?[a-zA-ZäöüÄÖÜß]+$";
-            Match match = Regex.Match(textBox1.Text, pattern);
-
-            if (!match.Success == false)
+            if (DatabaseActive1)
             {
-                MessageBox.Show("Bitte Vorname und Nachme eingeben: (Max Mustermann)");
-                return;
+                try
+                {
+                    myConnectionString = "SERVER=127.0.0.1;" +
+                                            "DATABASE=patienten;" +
+                                            "UID=admin;" +
+                                            "PASSWORD=admin;";
+
+                    string update = "UPDATE patienten.patienten SET Nachname = '" + Patient.NachName.ToString() + "' WHERE(ID = '" + Patient.Id + "')";
+
+                    MySqlConnection connection = new MySqlConnection(myConnectionString);
+
+                    MySqlCommand c = new MySqlCommand(update,connection);
+                    connection.Open();
+                    c.ExecuteNonQuery();
+                    connection.Close();
+
+                    Console.WriteLine(update);
+                }
+                catch (Exception e)
+                {
+
+                    MessageBox.Show("Datenbank Modul3 Update Fehler\n" + e.Message);
+                }
+
+
+
+
+
+
+
+                Console.WriteLine("Datenbank");
             }
             else
             {
-                Patient.VorName = split[0];
-                Patient.NachName = split[1];
+                Console.WriteLine("XML_SPEICHERN");
             }
+
+
+
+
+            //Console.WriteLine("speichern");
+
+            //string[] split = textBox1.Text.Split(null);
+
+            //string pattern = "^([a-zA-ZäöüÄÖÜß])+ {1,}$ ([a-zA-ZäöüÄÖÜß])+$";
+            //Match match = Regex.Match(textBox1.Text, pattern);
+
+            //if (!match.Success == false)
+            //{
+            //    MessageBox.Show("Bitte Vorname und Nachme eingeben: (Max Mustermann)");
+            //    return;
+            //}
+            //else
+            //{
+            //    Patient.VorName = split[0];
+            //    Patient.NachName = split[1];
+            //}
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

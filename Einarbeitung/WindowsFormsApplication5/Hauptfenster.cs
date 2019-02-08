@@ -29,6 +29,20 @@ namespace WindowsFormsApplication5
         private List<String> Forms = new List<string>();
         private string path_Namespace;
         private string myConnectionString;
+        private bool datanbankgeladen;
+
+        public bool Datanbankgeladen
+        {
+            get
+            {
+                return datanbankgeladen;
+            }
+
+            set
+            {
+                datanbankgeladen = value;
+            }
+        }
 
         public Hauptfenster()
         {
@@ -47,6 +61,7 @@ namespace WindowsFormsApplication5
             DialogResult result = MessageBox.Show("Woher sollen die Daten geladen werden?\n\n Datenbank = ja\n XML = nein", "Load", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
+                datanbankgeladen = true;
                 return 1;
             }
             else 
@@ -212,6 +227,7 @@ namespace WindowsFormsApplication5
             modul.Dock = DockStyle.Fill;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
+            Verwaltung[0].Form.DatabaseActive1 = datanbankgeladen;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -242,6 +258,7 @@ namespace WindowsFormsApplication5
             modul.Dock = DockStyle.Fill;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
+            Verwaltung[0].Form.DatabaseActive1 = datanbankgeladen;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -271,6 +288,7 @@ namespace WindowsFormsApplication5
             modul.Dock = DockStyle.Fill;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
+            Verwaltung[0].Form.DatabaseActive1 = datanbankgeladen;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -301,6 +319,7 @@ namespace WindowsFormsApplication5
             modul.Dock = DockStyle.Fill;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
+            Verwaltung[0].Form.DatabaseActive1 = datanbankgeladen;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -331,6 +350,7 @@ namespace WindowsFormsApplication5
             modul.Dock = DockStyle.Fill;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
+            Verwaltung[0].Form.DatabaseActive1 = datanbankgeladen;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -342,6 +362,7 @@ namespace WindowsFormsApplication5
             {   //Pruefung ob modul geoeffnet ist
                 for (int i = 0; i < Verwaltung.Count; i++)
                 {
+                    
                     if (!Verwaltung[i].Form.Closing1)
                     {
                         tabControl1.SelectedTab = Verwaltung[i].Tabpage;
