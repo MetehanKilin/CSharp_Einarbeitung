@@ -28,6 +28,8 @@ namespace Modul3
 
         protected override void saveData()
         {
+            Console.WriteLine("speichern");
+
             string[] split = textBox1.Text.Split(null);
 
             string pattern = "^[a-zA-ZäöüÄÖÜß]+(([',. -][a-zA-ZäöüÄÖÜß ])?[a-zA-ZäöüÄÖÜß]*)$";

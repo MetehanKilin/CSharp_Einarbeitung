@@ -11,6 +11,9 @@ using ClassLibrary;
 using System.Reflection;
 using System.IO;
 using System.Xml;
+using System.Collections;
+using MySql.Data.MySqlClient;
+
 
 namespace WindowsFormsApplication5
 {
@@ -25,67 +28,167 @@ namespace WindowsFormsApplication5
         private List<String> Module = new List<string>();
         private List<String> Forms = new List<string>();
         private string path_Namespace;
+        private string myConnectionString;
 
         public Hauptfenster()
         {
             InitializeComponent();
-            loadPatients();
-            loadModules();
+            int startWith = start();
+            loadPatients(startWith);
+            loadModules(startWith);
 
             foreach (var item in Patienten)
             {
                 comboBox1.Items.Add(item);
             }
-
-
-
         }
-
-
-        private void loadPatients()
+        private int start()
         {
-            //Patienten.Add(new Patient(1, 'M', "Metehan", "Kilin", new DateTime(1990, 01, 01)));
-            //Patienten.Add(new Patient(2, 'M', "Ingo", "Temme", new DateTime(1992, 02, 02)));
-            //Patienten.Add(new Patient(3, 'M', "Ivaylo", "Topalov", new DateTime(1993, 03, 03)));
-            //Patienten.Add(new Patient(4, 'M', "Roberto", "Danti", new DateTime(1994, 04, 04)));
-            //Patienten.Add(new Patient(5, 'M', "Stefan", "Lober", new DateTime(1995, 05, 05)));
-            //Patienten.Add(new Patient(6, 'W', "Bettina", "Araya", new DateTime(1996, 06, 06)));
-
-            xml.Load(path+@"\Patienten.xml");
-            XmlNodeList xnList = xml.SelectNodes("/Kis/Patienten/Patient");
-
-            foreach (XmlNode node in xnList)
+            DialogResult result = MessageBox.Show("Woher sollen die Daten geladen werden?\n\n Datenbank = ja\n XML = nein", "Load", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                int id = Int32.Parse(node["ID"].InnerText);
-                string geschlechttemp = node["Geschlecht"].InnerText;
-                char geschlecht = geschlechttemp[0];
-                string vorname = node["Vorname"].InnerText;
-                string nachname = node["Nachname"].InnerText;
-                string geburtstagTemp = node["Geburtstag"].InnerText;
-                DateTime geburtstag = DateTime.Parse(geburtstagTemp);
-                Patienten.Add(new Patient(id, geschlecht, vorname, nachname, geburtstag));
+                return 1;
             }
-            xml.RemoveAll();
-            xnList = null;
-        }
-        private void loadModules()
-        {
-            xml.Load(path + @"\Module.xml");
-            XmlNodeList xnList = xml.SelectNodes("/Kis/Module/Modul");
-
-            foreach (XmlNode node in xnList)
+            else 
             {
-                string modul = node["name"].InnerText;
-                string form = node["Form"].InnerText;
-                Module.Add(modul);
-                Forms.Add(form);
+                return 2;
+            }
+        }
+
+        private void loadPatients(int startWith)
+        {
+            if (startWith.Equals(1))
+            {
+
+                try
+                {
+                    myConnectionString = "SERVER=127.0.0.1;" +
+                                            "DATABASE=patienten;" +
+                                            "UID=admin;" +
+                                            "PASSWORD=admin;";
+
+
+                    MySqlConnection connection = new MySqlConnection(myConnectionString);
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "SELECT * FROM patienten";
+                    MySqlDataReader Reader;
+                    connection.Open();
+                    Reader = command.ExecuteReader();
+
+                    int id = 0;
+                    char a = ' ';
+                    string Vname = " ";
+                    string Nname = " ";
+                    DateTime geb = new DateTime();
+
+                    while (Reader.Read())
+                    {
+                        id = Int32.Parse(Reader.GetValue(0).ToString());
+                        string tempGeschlecht = Reader.GetValue(1).ToString();
+                        a = tempGeschlecht[0];
+                        Vname = Reader.GetValue(2).ToString();
+                        Nname = Reader.GetValue(3).ToString();
+                        geb = DateTime.Parse(Reader.GetValue(4).ToString());
+
+                        Patienten.Add(new Patient(id, a, Vname, Nname, geb));
+                    }
+                    connection.Close();
+
+                }
+                catch (Exception e)
+                {
+
+                    MessageBox.Show("Datenbank Patienten Fehler\n"+e.Message);
+                }
+                
+            }
+            else
+            {
+                xml.Load(path + @"\Patienten.xml");
+                XmlNodeList xnList = xml.SelectNodes("/Kis/Patienten/Patient");
+
+                foreach (XmlNode node in xnList)
+                {
+                    int id = Int32.Parse(node["ID"].InnerText);
+                    string geschlechttemp = node["Geschlecht"].InnerText;
+                    char geschlecht = geschlechttemp[0];
+                    string vorname = node["Vorname"].InnerText;
+                    string nachname = node["Nachname"].InnerText;
+                    string geburtstagTemp = node["Geburtstag"].InnerText;
+                    DateTime geburtstag = DateTime.Parse(geburtstagTemp);
+                    Patienten.Add(new Patient(id, geschlecht, vorname, nachname, geburtstag));
+                }
+                xml.RemoveAll();
+                xnList = null;
+            }
+        }
+
+        private void loadModules(int startWith)
+        {
+            if (startWith.Equals(1))
+            {
+
+
+
+                try
+                {
+                    myConnectionString = "SERVER=127.0.0.1;" +
+                                            "DATABASE=patienten;" +
+                                            "UID=admin;" +
+                                            "PASSWORD=admin;";
+
+
+                    MySqlConnection connection = new MySqlConnection(myConnectionString);
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "SELECT * FROM module";
+                    MySqlDataReader Reader;
+                    connection.Open();
+                    Reader = command.ExecuteReader();
+
+                    
+                    string modul = " ";
+                    string modulForm = " ";
+
+                    while (Reader.Read())
+                    {
+                        modul = Reader.GetValue(0).ToString()+".dll";
+                        modulForm = Reader.GetValue(1).ToString();
+                        Module.Add(modul);
+                        Forms.Add(modulForm);
+
+                        Console.WriteLine(modul);
+                        Console.WriteLine(modulForm);
+                    }
+                    connection.Close();
+
+                }
+                catch (Exception e)
+                {
+
+                    MessageBox.Show("Datenbank Modul Fehler\n" + e.Message);
+                }
+
+            }
+            else
+            {
+                xml.Load(path + @"\Module.xml");
+                XmlNodeList xnList = xml.SelectNodes("/Kis/Module/Modul");
+
+                foreach (XmlNode node in xnList)
+                {
+                    string modul = node["name"].InnerText;
+                    string form = node["Form"].InnerText;
+                    Module.Add(modul);
+                    Forms.Add(form);
+                }
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            path_Namespace = Module[0].Substring(0, (Module[0].Length - 4));
 
+            path_Namespace = Module[0].Substring(0, (Module[0].Length - 4));
+            Console.WriteLine(path_Namespace);
             Assembly assembly = Assembly.LoadFile(path + @"\" + Module[0]);
             Object obj = assembly.CreateInstance(path_Namespace+"."+ Forms[0]);
             BasisModulForm modul = obj as BasisModulForm;
@@ -229,8 +332,6 @@ namespace WindowsFormsApplication5
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
         }
-
-
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {

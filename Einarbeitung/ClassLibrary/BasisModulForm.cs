@@ -13,15 +13,15 @@ namespace ClassLibrary
 {
     public partial class BasisModulForm : Form
     {
+        private Patient patient;
+        private Boolean closing;
+        private string path = Environment.CurrentDirectory;
 
         public BasisModulForm()
         {
             InitializeComponent();
             closing = true;
         }
-
-        private Patient patient;
-        private Boolean closing;
 
         public Boolean Closing1
         {
@@ -44,6 +44,19 @@ namespace ClassLibrary
             set
             {
                 patient = value;
+            }
+        }
+
+        public string Path
+        {
+            get
+            {
+                return path;
+            }
+
+            set
+            {
+                path = value;
             }
         }
 
@@ -78,7 +91,7 @@ namespace ClassLibrary
         {
             saveData();
             DatenLaden();
-        }
+         }
 
         private void verwerfen_Click(object sender, EventArgs e)
         {

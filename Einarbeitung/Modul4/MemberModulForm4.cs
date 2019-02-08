@@ -27,15 +27,10 @@ namespace Modul4
         {
             Patient.Geburtstag = dateTimePicker1.Value;
         }
-
       
         private void DateTimePicker1_ValueChanged(Object sender, EventArgs e)
         {
             buttonsPassed(true);
         }
-
-      
-
-
     }
 }
