@@ -48,6 +48,7 @@
             // speichern
             // 
             this.speichern.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.speichern.Enabled = false;
             this.speichern.Location = new System.Drawing.Point(31, 212);
             this.speichern.Name = "speichern";
             this.speichern.Size = new System.Drawing.Size(75, 23);

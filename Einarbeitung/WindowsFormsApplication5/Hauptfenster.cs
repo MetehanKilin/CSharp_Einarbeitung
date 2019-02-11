@@ -24,12 +24,13 @@ namespace WindowsFormsApplication5
         private Patient Currentpatient;
         private bool CurrentPatientSwitch;
         private string path = Environment.CurrentDirectory;
-        private XmlDocument xml = new XmlDocument();
         private List<String> Module = new List<string>();
         private List<String> Forms = new List<string>();
         private string path_Namespace;
-        private string myConnectionString;
         private bool datanbankgeladen;
+        private IDAO daoDatabase = new DaoDatabase();
+        private IDAO daoXml = new DaoXml();
+
 
         public bool Datanbankgeladen
         {
@@ -37,7 +38,6 @@ namespace WindowsFormsApplication5
             {
                 return datanbankgeladen;
             }
-
             set
             {
                 datanbankgeladen = value;
@@ -74,67 +74,11 @@ namespace WindowsFormsApplication5
         {
             if (startWith.Equals(1))
             {
-
-                try
-                {
-                    myConnectionString = "SERVER=127.0.0.1;" +
-                                            "DATABASE=patienten;" +
-                                            "UID=admin;" +
-                                            "PASSWORD=admin;";
-
-
-                    MySqlConnection connection = new MySqlConnection(myConnectionString);
-                    MySqlCommand command = connection.CreateCommand();
-                    command.CommandText = "SELECT * FROM patienten";
-                    MySqlDataReader Reader;
-                    connection.Open();
-                    Reader = command.ExecuteReader();
-
-                    int id = 0;
-                    char a = ' ';
-                    string Vname = " ";
-                    string Nname = " ";
-                    DateTime geb = new DateTime();
-
-                    while (Reader.Read())
-                    {
-                        id = Int32.Parse(Reader.GetValue(0).ToString());
-                        string tempGeschlecht = Reader.GetValue(1).ToString();
-                        a = tempGeschlecht[0];
-                        Vname = Reader.GetValue(2).ToString();
-                        Nname = Reader.GetValue(3).ToString();
-                        geb = DateTime.Parse(Reader.GetValue(4).ToString());
-
-                        Patienten.Add(new Patient(id, a, Vname, Nname, geb));
-                    }
-                    connection.Close();
-
-                }
-                catch (Exception e)
-                {
-
-                    MessageBox.Show("Datenbank Patienten Fehler\n"+e.Message);
-                }
-                
+                Patienten.AddRange(daoDatabase.PatientenLaden());
             }
             else
             {
-                xml.Load(path + @"\Patienten.xml");
-                XmlNodeList xnList = xml.SelectNodes("/Kis/Patienten/Patient");
-
-                foreach (XmlNode node in xnList)
-                {
-                    int id = Int32.Parse(node["ID"].InnerText);
-                    string geschlechttemp = node["Geschlecht"].InnerText;
-                    char geschlecht = geschlechttemp[0];
-                    string vorname = node["Vorname"].InnerText;
-                    string nachname = node["Nachname"].InnerText;
-                    string geburtstagTemp = node["Geburtstag"].InnerText;
-                    DateTime geburtstag = DateTime.Parse(geburtstagTemp);
-                    Patienten.Add(new Patient(id, geschlecht, vorname, nachname, geburtstag));
-                }
-                xml.RemoveAll();
-                xnList = null;
+                Patienten.AddRange(daoXml.PatientenLaden());
             }
         }
 
@@ -142,66 +86,18 @@ namespace WindowsFormsApplication5
         {
             if (startWith.Equals(1))
             {
-
-
-
-                try
-                {
-                    myConnectionString = "SERVER=127.0.0.1;" +
-                                            "DATABASE=patienten;" +
-                                            "UID=admin;" +
-                                            "PASSWORD=admin;";
-
-
-                    MySqlConnection connection = new MySqlConnection(myConnectionString);
-                    MySqlCommand command = connection.CreateCommand();
-                    command.CommandText = "SELECT * FROM module";
-                    MySqlDataReader Reader;
-                    connection.Open();
-                    Reader = command.ExecuteReader();
-
-                    
-                    string modul = " ";
-                    string modulForm = " ";
-
-                    while (Reader.Read())
-                    {
-                        modul = Reader.GetValue(0).ToString()+".dll";
-                        modulForm = Reader.GetValue(1).ToString();
-                        Module.Add(modul);
-                        Forms.Add(modulForm);
-
-                        Console.WriteLine(modul);
-                        Console.WriteLine(modulForm);
-                    }
-                    connection.Close();
-
-                }
-                catch (Exception e)
-                {
-
-                    MessageBox.Show("Datenbank Modul Fehler\n" + e.Message);
-                }
-
+                Module.AddRange(daoDatabase.ModuleLaden());
+                Forms.AddRange(daoDatabase.FormsLaden());
             }
             else
             {
-                xml.Load(path + @"\Module.xml");
-                XmlNodeList xnList = xml.SelectNodes("/Kis/Module/Modul");
-
-                foreach (XmlNode node in xnList)
-                {
-                    string modul = node["name"].InnerText;
-                    string form = node["Form"].InnerText;
-                    Module.Add(modul);
-                    Forms.Add(form);
-                }
+                Module.AddRange(daoXml.ModuleLaden());
+                Forms.AddRange(daoXml.FormsLaden());
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             path_Namespace = Module[0].Substring(0, (Module[0].Length - 4));
             Console.WriteLine(path_Namespace);
             Assembly assembly = Assembly.LoadFile(path + @"\" + Module[0]);
@@ -225,9 +121,9 @@ namespace WindowsFormsApplication5
             modul.Parent = tabpage;
             modul.Show();
             modul.Dock = DockStyle.Fill;
+            modul.DatabaseActive1 = datanbankgeladen;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
-            Verwaltung[0].Form.DatabaseActive1 = datanbankgeladen;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -256,9 +152,9 @@ namespace WindowsFormsApplication5
             modul.Parent = tabpage;
             modul.Show();
             modul.Dock = DockStyle.Fill;
+            modul.DatabaseActive1 = datanbankgeladen;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
-            Verwaltung[0].Form.DatabaseActive1 = datanbankgeladen;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -286,9 +182,9 @@ namespace WindowsFormsApplication5
             modul.Parent = tabpage;
             modul.Show();
             modul.Dock = DockStyle.Fill;
+            modul.DatabaseActive1 = datanbankgeladen;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
-            Verwaltung[0].Form.DatabaseActive1 = datanbankgeladen;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -317,9 +213,9 @@ namespace WindowsFormsApplication5
             modul.Parent = tabpage;
             modul.Show();
             modul.Dock = DockStyle.Fill;
+            modul.DatabaseActive1 = datanbankgeladen;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
-            Verwaltung[0].Form.DatabaseActive1 = datanbankgeladen;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -348,9 +244,9 @@ namespace WindowsFormsApplication5
             modul.Parent = tabpage;
             modul.Show();
             modul.Dock = DockStyle.Fill;
+            modul.DatabaseActive1 = datanbankgeladen;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
-            Verwaltung[0].Form.DatabaseActive1 = datanbankgeladen;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

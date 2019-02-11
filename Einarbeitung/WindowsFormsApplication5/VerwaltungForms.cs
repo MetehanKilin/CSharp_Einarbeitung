@@ -16,7 +16,6 @@ namespace WindowsFormsApplication5
 
         public VerwaltungForms(BasisModulForm f, TabPage t)
         {
-            
             this.Form = f;
             this.Tabpage = t;
         }

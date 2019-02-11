@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Xml;
 
 namespace ClassLibrary
 {
@@ -17,12 +17,22 @@ namespace ClassLibrary
         private Boolean closing;
         private string path = Environment.CurrentDirectory;
         private bool DatabaseActive;
-
+        private string MyConnectionString = "SERVER=127.0.0.1;" +
+                                            "DATABASE=patienten;" +
+                                            "UID=admin;" +
+                                            "PASSWORD=admin;";
+        private XmlDocument xml = new XmlDocument();
+        private bool useSql;
 
         public BasisModulForm()
         {
             InitializeComponent();
             closing = true;
+        }
+
+        public BasisModulForm(bool useSql)
+        {
+            this.useSql = useSql;
         }
 
         public Boolean Closing1
@@ -75,16 +85,40 @@ namespace ClassLibrary
             }
         }
 
+        public string MyConnectionString1
+        {
+            get
+            {
+                return MyConnectionString;
+            }
+
+           
+        }
+
+        public XmlDocument Xml
+        {
+            get
+            {
+                return xml;
+            }
+
+            set
+            {
+                xml = value;
+            }
+        }
+
         public void DatenLaden()
         {
             load();
-            Closing1 = true;
-            verwerfen.Enabled = false;
+            buttonsPassed(false);
+
         }
 
         protected void buttonsPassed(bool b)
         {
             verwerfen.Enabled = b;
+            speichern.Enabled = b;
             Closing1 = !b;
         }
 

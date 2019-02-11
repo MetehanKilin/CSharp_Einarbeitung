@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DaoDatabase.cs" />
+    <Compile Include="DaoXml.cs" />
+    <Compile Include="IDAO.cs" />
     <Compile Include="VerwaltungForms.cs" />
     <Compile Include="Hauptfenster.cs">
       <SubType>Form</SubType>

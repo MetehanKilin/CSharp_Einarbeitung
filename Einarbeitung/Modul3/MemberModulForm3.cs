@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibrary;
 using MySql.Data.MySqlClient;
+using System.Xml;
 
 namespace Modul3
 {
     public partial class MemberModulForm3 : BasisModulForm
     {
-        private string myConnectionString;
 
         public MemberModulForm3()
         {
@@ -39,61 +39,43 @@ namespace Modul3
             {
                 try
                 {
-                    myConnectionString = "SERVER=127.0.0.1;" +
-                                            "DATABASE=patienten;" +
-                                            "UID=admin;" +
-                                            "PASSWORD=admin;";
+                    string update = "UPDATE patienten.patienten SET Nachname = '" + Patient.NachName.ToString() +
+                                        "', Vorname = '"+ Patient.VorName.ToString()+"'WHERE(ID = '" + Patient.Id + "')";
 
-                    string update = "UPDATE patienten.patienten SET Nachname = '" + Patient.NachName.ToString() + "' WHERE(ID = '" + Patient.Id + "')";
+                    MySqlConnection connection = new MySqlConnection(MyConnectionString1);
 
-                    MySqlConnection connection = new MySqlConnection(myConnectionString);
-
-                    MySqlCommand c = new MySqlCommand(update,connection);
+                    MySqlCommand command = new MySqlCommand(update,connection);
                     connection.Open();
-                    c.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
+                    command.Connection.Close();
+                    command.Connection.Dispose();
+                    command.Dispose();
+                    connection.ClearAllPoolsAsync();
                     connection.Close();
-
-                    Console.WriteLine(update);
+                    connection.Dispose();
                 }
                 catch (Exception e)
                 {
-
-                    MessageBox.Show("Datenbank Modul3 Update Fehler\n" + e.Message);
+                    MessageBox.Show("Datenbank Modul 3 Update Fehler\n" + e.Message);
                 }
-
-
-
-
-
-
-
-                Console.WriteLine("Datenbank");
             }
             else
             {
-                Console.WriteLine("XML_SPEICHERN");
+                Xml.Load(Path + @"\Patienten.xml");
+                XmlNodeList xnList = Xml.SelectNodes("/Kis/Patienten/Patient");
+
+                foreach (XmlNode node in xnList)
+                {
+                    if (Int32.Parse(node["ID"].InnerText).Equals(Patient.Id))
+                    {
+                        node["Vorname"].InnerText = Patient.VorName.ToString();
+                        node["Nachname"].InnerText = Patient.NachName.ToString();
+                    }
+                }
+                Xml.Save(Environment.CurrentDirectory + @"\Patienten.xml");
+                Xml.RemoveAll();
+                xnList = null;
             }
-
-
-
-
-            //Console.WriteLine("speichern");
-
-            //string[] split = textBox1.Text.Split(null);
-
-            //string pattern = "^([a-zA-ZäöüÄÖÜß])+ {1,}$ ([a-zA-ZäöüÄÖÜß])+$";
-            //Match match = Regex.Match(textBox1.Text, pattern);
-
-            //if (!match.Success == false)
-            //{
-            //    MessageBox.Show("Bitte Vorname und Nachme eingeben: (Max Mustermann)");
-            //    return;
-            //}
-            //else
-            //{
-            //    Patient.VorName = split[0];
-            //    Patient.NachName = split[1];
-            //}
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

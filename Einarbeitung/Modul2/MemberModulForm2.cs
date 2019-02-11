@@ -11,17 +11,22 @@ using ClassLibrary;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
+using MySql.Data.MySqlClient;
 
 namespace Modul2
 {
     public partial class MemberModulForm2 : BasisModulForm
     {
-        private System.Xml.XmlDocument xml = new XmlDocument();
 
         public MemberModulForm2()
         {
             InitializeComponent();
         }
+        //public MemberModulForm2(bool useSql) : base(useSql)
+        //{
+        //    _daoModul2 = ApplicationInit.GetDaoModul2()
+        //    InitializeComponent();
+        //}
 
         protected override void load()
         {
@@ -40,36 +45,60 @@ namespace Modul2
 
         protected override void saveData()
         {
-            //Console.WriteLine("sprn");  
-
-
-            //xml.Load(Path + @"\Patienten.xml");
-            //XmlNodeList xnList = xml.SelectNodes("/Kis/Patienten/Patient");
-            //XmlDocument doc = new XmlDocument();
-            //doc.Load(Path + @"\Patienten.xml");
-
             if (radioButton1.Checked)
             {
-                Patient.Geschlecht = 'M';
-
-                
-
-                //foreach (XmlNode node in xnList)
-                //{
-                   
-                //    Console.WriteLine(node["ID"].InnerText);
-                //    node["ID"].InnerText = "9999";      //läuft
-                //}
-
-
-
-                //doc.Save("C:\\temp\\neue.xml");
-                
-
+                Patient.Geschlecht= 'M';
             }
             else
             {
                 Patient.Geschlecht = 'W';
+            }
+
+            if (DatabaseActive1)
+            {
+                try
+                {
+
+                    string update = "UPDATE patienten.patienten SET Geschlecht = '" + Patient.Geschlecht + "'WHERE(ID = '" + Patient.Id + "')";
+
+                    MySqlConnection connection = new MySqlConnection(MyConnectionString1);
+
+                    MySqlCommand command = new MySqlCommand(update, connection);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    connection.Dispose();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Datenbank Modul 2 Update Fehler\n" + e.Message);
+                }
+                finally
+                {
+                    //command.Dispose();
+                    //connection.ClearAllPoolsAsync();
+                    //connection.Close();
+                    //connection.Dispose();
+                } 
+            }
+            else
+            {
+                Xml.Load(Path + @"\Patienten.xml");
+
+                Console.WriteLine(Path + @"\Patienten.xml");
+
+                XmlNodeList xnList = Xml.SelectNodes("/Kis/Patienten/Patient");
+
+                foreach (XmlNode node in xnList)
+                {
+                    if (Int32.Parse(node["ID"].InnerText).Equals(Patient.Id))
+                    {
+                        node["Geschlecht"].InnerText = Patient.Geschlecht.ToString();
+                    }
+                }
+                Xml.Save(Environment.CurrentDirectory + @"\Patienten.xml");
+                Xml.RemoveAll();
+                xnList = null;
             }
         }
 
@@ -78,11 +107,7 @@ namespace Modul2
             buttonsPassed(true);
         }
 
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            buttonsPassed(true);
-
-        }
+      
 
     }
 }
