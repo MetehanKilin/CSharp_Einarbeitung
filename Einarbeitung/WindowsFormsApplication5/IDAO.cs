@@ -10,9 +10,7 @@ namespace WindowsFormsApplication5
     interface IDAO
     {
         List<Patient> PatientenLaden();
-
         void update(Patient patient);
-
         List<String> ModuleLaden();
         List<String> FormsLaden();
     }

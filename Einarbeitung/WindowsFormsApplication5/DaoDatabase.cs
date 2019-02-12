@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ClassLibrary;
 using MySql.Data.MySqlClient;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication5
 {
@@ -64,7 +65,26 @@ namespace WindowsFormsApplication5
 
         public void update(Patient patient)
         {
-            
+            try
+            {
+                string update = "UPDATE patienten.patienten SET Geburtstag = '" + patient.Geburtstag.ToString("yyyy/MM/dd") + "'WHERE(ID = '" + patient.Id + "')";
+
+                MySqlConnection connection = new MySqlConnection(myConnectionString);
+
+                MySqlCommand command = new MySqlCommand(update, connection);
+                connection.Open();
+                command.ExecuteNonQuery();
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Datenbank Modul 4 Update Fehler\n" + patient.Geburtstag.ToString("yyyy / MM / dd") + "\n" + e.Message);
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
+            }
         }
 
         public List<string> ModuleLaden()
@@ -88,13 +108,17 @@ namespace WindowsFormsApplication5
                     Module.Add(modul);
                     Forms.Add(modulForm);
                 }
-                connection.Close();
                 return Module;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Datenbank Fehler: ModulLaden\n" + e.Message);
                 return null;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
             }
         }
 
@@ -116,13 +140,17 @@ namespace WindowsFormsApplication5
                     modulForm = Reader.GetValue(1).ToString();
                     Forms.Add(modulForm);
                 }
-                connection.Close();
                 return Forms;
             }
             catch (Exception e)
             {
                 Console.WriteLine("Datenbank Fehler: FormLaden\n" + e.Message);
                 return null;
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
             }
         }
     }
