@@ -31,25 +31,7 @@ namespace Modul4
 
             if (DatabaseActive1)
             {
-                try
-                {
-
-                    string update = "UPDATE patienten.patienten SET Geburtstag = '" + Patient.Geburtstag.ToString("yyyy/MM/dd") + "'WHERE(ID = '" + Patient.Id + "')";
-
-                    MySqlConnection connection = new MySqlConnection(MyConnectionString1);
-
-                    MySqlCommand command = new MySqlCommand(update, connection);
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    command.Dispose();
-                    connection.ClearAllPoolsAsync();
-                    connection.Close();
-                    connection.Dispose();
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Datenbank Modul 4 Update Fehler\n"+ Patient.Geburtstag.ToString("yyyy / MM / dd")+ "\n" + e.Message);
-                }
+                Console.WriteLine("DB Passiert");
             }
             else
             {

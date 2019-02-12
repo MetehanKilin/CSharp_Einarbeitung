@@ -7,15 +7,16 @@ using ClassLibrary;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication5
+namespace ClassLibrary
 {
-    class DaoDatabase : IDAO
+    class DaoDatabaseB : IDAOB
     {
         private string myConnectionString = "SERVER=127.0.0.1;" +
                                         "DATABASE=patienten;" +
                                         "UID=admin;" +
                                         "PASSWORD=admin;";
         private MySqlConnection connection;
+        private MySqlCommand command;
         private List<Patient> Patienten=new List<Patient>();
         private List<String> Module = new List<string>();
         private List<String> Forms = new List<string>();
@@ -74,11 +75,12 @@ namespace WindowsFormsApplication5
                     patient.Geburtstag.ToString("yyyy/MM/dd") + 
                     "'WHERE(ID = '" + patient.Id + "')";
 
-                MySqlConnection connection = new MySqlConnection(myConnectionString);
+                connection = new MySqlConnection(myConnectionString);
 
-                MySqlCommand command = new MySqlCommand(update, connection);
+                command = new MySqlCommand(update, connection);
                 connection.Open();
                 command.ExecuteNonQuery();
+               
 
             }
             catch (Exception e)
@@ -90,6 +92,7 @@ namespace WindowsFormsApplication5
                 connection.Close();
                 connection.Dispose();
             }
+           
         }
 
         public List<string> ModuleLaden()

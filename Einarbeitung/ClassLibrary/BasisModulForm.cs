@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -21,8 +14,11 @@ namespace ClassLibrary
                                             "DATABASE=patienten;" +
                                             "UID=admin;" +
                                             "PASSWORD=admin;";
+
         private XmlDocument xml = new XmlDocument();
         private bool useSql;
+        private IDAOB Database = new DaoDatabaseB();
+
 
         public BasisModulForm()
         {
@@ -65,7 +61,6 @@ namespace ClassLibrary
             {
                 return path;
             }
-
             set
             {
                 path = value;
@@ -78,7 +73,6 @@ namespace ClassLibrary
             {
                 return DatabaseActive;
             }
-
             set
             {
                 DatabaseActive = value;
@@ -91,8 +85,6 @@ namespace ClassLibrary
             {
                 return MyConnectionString;
             }
-
-           
         }
 
         public XmlDocument Xml
@@ -101,12 +93,12 @@ namespace ClassLibrary
             {
                 return xml;
             }
-
             set
             {
                 xml = value;
             }
         }
+
 
         public void DatenLaden()
         {
@@ -133,12 +125,15 @@ namespace ClassLibrary
         public void savedData()
         {
             saveData();
+            Database.update(patient);
             buttonsPassed(false);
         }
 
         private void speichern_Click(object sender, EventArgs e)
         {
             saveData();
+            Database.update(patient);
+            Console.WriteLine(patient.VorName + " " + patient.Geschlecht);
             DatenLaden();
          }
 

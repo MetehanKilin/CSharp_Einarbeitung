@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 using ClassLibrary;
 using System.Xml;
 
-namespace WindowsFormsApplication5
+namespace ClassLibrary
 {
-    class DaoXml : IDAO
+    class DaoXmlB : IDAOB
     {
         private List<Patient> Patienten = new List<Patient>();
         private List<String> Module = new List<string>();
         private List<String> Forms = new List<string>();
         private XmlDocument xml = new XmlDocument();
         private string path = Environment.CurrentDirectory;
-        private IDAO daodatabase = new DaoDatabase();
+        private IDAOB daodatabase = new DaoDatabaseB();
 
         public List<Patient> PatientenLaden()
         {

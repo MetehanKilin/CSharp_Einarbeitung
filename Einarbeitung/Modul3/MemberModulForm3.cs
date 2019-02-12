@@ -17,6 +17,7 @@ namespace Modul3
     public partial class MemberModulForm3 : BasisModulForm
     {
 
+
         public MemberModulForm3()
         {
             InitializeComponent();
@@ -37,27 +38,8 @@ namespace Modul3
 
             if (DatabaseActive1)
             {
-                try
-                {
-                    string update = "UPDATE patienten.patienten SET Nachname = '" + Patient.NachName.ToString() +
-                                        "', Vorname = '"+ Patient.VorName.ToString()+"'WHERE(ID = '" + Patient.Id + "')";
-
-                    MySqlConnection connection = new MySqlConnection(MyConnectionString1);
-
-                    MySqlCommand command = new MySqlCommand(update,connection);
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    command.Connection.Close();
-                    command.Connection.Dispose();
-                    command.Dispose();
-                    connection.ClearAllPoolsAsync();
-                    connection.Close();
-                    connection.Dispose();
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Datenbank Modul 3 Update Fehler\n" + e.Message);
-                }
+                Console.WriteLine("DB Passiert");
+               
             }
             else
             {

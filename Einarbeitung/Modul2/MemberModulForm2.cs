@@ -17,11 +17,14 @@ namespace Modul2
 {
     public partial class MemberModulForm2 : BasisModulForm
     {
+        
 
         public MemberModulForm2()
         {
             InitializeComponent();
+
         }
+
         //public MemberModulForm2(bool useSql) : base(useSql)
         //{
         //    _daoModul2 = ApplicationInit.GetDaoModul2()
@@ -56,30 +59,7 @@ namespace Modul2
 
             if (DatabaseActive1)
             {
-                try
-                {
-
-                    string update = "UPDATE patienten.patienten SET Geschlecht = '" + Patient.Geschlecht + "'WHERE(ID = '" + Patient.Id + "')";
-
-                    MySqlConnection connection = new MySqlConnection(MyConnectionString1);
-
-                    MySqlCommand command = new MySqlCommand(update, connection);
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                    connection.Dispose();
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Datenbank Modul 2 Update Fehler\n" + e.Message);
-                }
-                finally
-                {
-                    //command.Dispose();
-                    //connection.ClearAllPoolsAsync();
-                    //connection.Close();
-                    //connection.Dispose();
-                } 
+                Console.WriteLine("DB Passiert");
             }
             else
             {
