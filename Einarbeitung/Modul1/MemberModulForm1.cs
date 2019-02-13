@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ClassLibrary;
+﻿using ClassLibrary;
 
 namespace Modul1
 {
@@ -24,8 +15,5 @@ namespace Modul1
         {
             label1.Text = "Die ID lautet: " + Patient.Id;
         }
-
-     
-       
     }
 }

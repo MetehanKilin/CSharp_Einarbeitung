@@ -1,35 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using ClassLibrary;
-using System.Xml;
-using System.Xml.Serialization;
-using System.IO;
-using MySql.Data.MySqlClient;
+
 
 namespace Modul2
 {
     public partial class MemberModulForm2 : BasisModulForm
     {
-        
-
         public MemberModulForm2()
         {
             InitializeComponent();
-
         }
-
-        //public MemberModulForm2(bool useSql) : base(useSql)
-        //{
-        //    _daoModul2 = ApplicationInit.GetDaoModul2()
-        //    InitializeComponent();
-        //}
 
         protected override void load()
         {
@@ -45,40 +25,15 @@ namespace Modul2
             }
         }
 
-
         protected override void saveData()
         {
             if (radioButton1.Checked)
             {
-                Patient.Geschlecht= 'M';
+                Patient.Geschlecht = 'M';
             }
             else
             {
                 Patient.Geschlecht = 'W';
-            }
-
-            if (DatabaseActive1)
-            {
-                Console.WriteLine("DB Passiert");
-            }
-            else
-            {
-                Xml.Load(Path + @"\Patienten.xml");
-
-                Console.WriteLine(Path + @"\Patienten.xml");
-
-                XmlNodeList xnList = Xml.SelectNodes("/Kis/Patienten/Patient");
-
-                foreach (XmlNode node in xnList)
-                {
-                    if (Int32.Parse(node["ID"].InnerText).Equals(Patient.Id))
-                    {
-                        node["Geschlecht"].InnerText = Patient.Geschlecht.ToString();
-                    }
-                }
-                Xml.Save(Environment.CurrentDirectory + @"\Patienten.xml");
-                Xml.RemoveAll();
-                xnList = null;
             }
         }
 
@@ -86,8 +41,5 @@ namespace Modul2
         {
             buttonsPassed(true);
         }
-
-      
-
     }
 }

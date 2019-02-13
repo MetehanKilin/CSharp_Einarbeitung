@@ -1,23 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Xml;
 
 namespace ClassLibrary
 {
     public partial class BasisModulForm : Form
     {
         private Patient patient;
-        private Boolean closing;
-        private string path = Environment.CurrentDirectory;
-        private bool DatabaseActive;
-        private string MyConnectionString = "SERVER=127.0.0.1;" +
-                                            "DATABASE=patienten;" +
-                                            "UID=admin;" +
-                                            "PASSWORD=admin;";
-
-        private XmlDocument xml = new XmlDocument();
+        private bool closing;
         private bool useSql;
         private IDAOB Database = new DaoDatabaseB();
+        private IDAOB xml = new DaoXmlB();
 
 
         public BasisModulForm()
@@ -26,9 +19,38 @@ namespace ClassLibrary
             closing = true;
         }
 
-        public BasisModulForm(bool useSql)
+        public List<Patient> getPatienten()
         {
-            this.useSql = useSql;
+            if (UseSql)
+            {
+                return Database.PatientenLaden();
+            }
+            else
+            {
+                return xml.PatientenLaden();
+            }
+        }
+        public List<string> getModule()
+        {
+            if (UseSql)
+            {
+                return Database.ModuleLaden();
+            }
+            else
+            {
+                return xml.ModuleLaden();
+            }
+        }
+        public List<string> getForms()
+        {
+            if (UseSql)
+            {
+                return Database.FormsLaden();
+            }
+            else
+            {
+                return xml.FormsLaden();
+            }
         }
 
         public Boolean Closing1
@@ -55,56 +77,22 @@ namespace ClassLibrary
             }
         }
 
-        public string Path
+        public bool UseSql
         {
             get
             {
-                return path;
+                return useSql;
             }
             set
             {
-                path = value;
+                useSql = value;
             }
         }
-
-        public bool DatabaseActive1
-        {
-            get
-            {
-                return DatabaseActive;
-            }
-            set
-            {
-                DatabaseActive = value;
-            }
-        }
-
-        public string MyConnectionString1
-        {
-            get
-            {
-                return MyConnectionString;
-            }
-        }
-
-        public XmlDocument Xml
-        {
-            get
-            {
-                return xml;
-            }
-            set
-            {
-                xml = value;
-            }
-        }
-
 
         public void DatenLaden()
         {
             load();
             buttonsPassed(false);
-
         }
 
         protected void buttonsPassed(bool b)
@@ -125,17 +113,28 @@ namespace ClassLibrary
         public void savedData()
         {
             saveData();
-            Database.update(patient);
+            storageSave(patient);
             buttonsPassed(false);
         }
 
         private void speichern_Click(object sender, EventArgs e)
         {
             saveData();
-            Database.update(patient);
-            Console.WriteLine(patient.VorName + " " + patient.Geschlecht);
+            storageSave(patient);
             DatenLaden();
          }
+
+        private void storageSave(Patient patient)
+        {
+            if (UseSql)
+            {
+                Database.update(patient);
+            }
+            else
+            {
+                xml.update(patient);
+            }
+        }
 
         private void verwerfen_Click(object sender, EventArgs e)
         {
@@ -190,8 +189,6 @@ namespace ClassLibrary
                 return 3;
             }
         }
-
-
 
     }
 }

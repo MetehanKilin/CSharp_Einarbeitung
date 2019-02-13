@@ -1,19 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibrary;
 using System.Reflection;
-using System.IO;
-using System.Xml;
-using System.Collections;
-using MySql.Data.MySqlClient;
-
 
 namespace WindowsFormsApplication5
 {
@@ -24,29 +13,15 @@ namespace WindowsFormsApplication5
         private Patient Currentpatient;
         private bool CurrentPatientSwitch;
         private string path = Environment.CurrentDirectory;
-        private List<String> Module = new List<string>();
-        private List<String> Forms = new List<string>();
+        private List<string> Module = new List<string>();
+        private List<string> Forms = new List<string>();
         private string path_Namespace;
-        private bool datanbankgeladen;
-        private IDAO daoDatabase = new DaoDatabase();
-        private IDAO daoXml = new DaoXml();
-
-
-        public bool Datanbankgeladen
-        {
-            get
-            {
-                return datanbankgeladen;
-            }
-            set
-            {
-                datanbankgeladen = value;
-            }
-        }
+        private BasisModulForm modul;
 
         public Hauptfenster()
         {
             InitializeComponent();
+            modul = new BasisModulForm();
             int startWith = start();
             loadPatients(startWith);
             loadModules(startWith);
@@ -56,12 +31,13 @@ namespace WindowsFormsApplication5
                 comboBox1.Items.Add(item);
             }
         }
+
         private int start()
         {
             DialogResult result = MessageBox.Show("Woher sollen die Daten geladen werden?\n\n Datenbank = ja\n XML = nein", "Load", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                datanbankgeladen = true;
+                modul.UseSql = true;
                 return 1;
             }
             else 
@@ -72,28 +48,13 @@ namespace WindowsFormsApplication5
 
         private void loadPatients(int startWith)
         {
-            if (startWith.Equals(1))
-            {
-                Patienten.AddRange(daoDatabase.PatientenLaden());
-            }
-            else
-            {
-                Patienten.AddRange(daoXml.PatientenLaden());
-            }
+                Patienten.AddRange(modul.getPatienten());
         }
 
         private void loadModules(int startWith)
         {
-            if (startWith.Equals(1))
-            {
-                Module.AddRange(daoDatabase.ModuleLaden());
-                Forms.AddRange(daoDatabase.FormsLaden());
-            }
-            else
-            {
-                Module.AddRange(daoXml.ModuleLaden());
-                Forms.AddRange(daoXml.FormsLaden());
-            }
+                Module.AddRange(modul.getModule());
+                Forms.AddRange(modul.getForms());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -121,7 +82,6 @@ namespace WindowsFormsApplication5
             modul.Parent = tabpage;
             modul.Show();
             modul.Dock = DockStyle.Fill;
-            modul.DatabaseActive1 = datanbankgeladen;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
         }
@@ -132,7 +92,7 @@ namespace WindowsFormsApplication5
 
             Assembly assembly = Assembly.LoadFile(path + @"\" + Module[1]);
             Object obj = assembly.CreateInstance(path_Namespace + "." + Forms[1]);
-            BasisModulForm modul = obj as BasisModulForm;
+            modul = obj as BasisModulForm;
 
             for (int i = 0; i < Verwaltung.Count; i++)
             {
@@ -152,7 +112,6 @@ namespace WindowsFormsApplication5
             modul.Parent = tabpage;
             modul.Show();
             modul.Dock = DockStyle.Fill;
-            modul.DatabaseActive1 = datanbankgeladen;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
         }
@@ -182,7 +141,6 @@ namespace WindowsFormsApplication5
             modul.Parent = tabpage;
             modul.Show();
             modul.Dock = DockStyle.Fill;
-            modul.DatabaseActive1 = datanbankgeladen;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
         }
@@ -213,7 +171,6 @@ namespace WindowsFormsApplication5
             modul.Parent = tabpage;
             modul.Show();
             modul.Dock = DockStyle.Fill;
-            modul.DatabaseActive1 = datanbankgeladen;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
         }
@@ -244,7 +201,6 @@ namespace WindowsFormsApplication5
             modul.Parent = tabpage;
             modul.Show();
             modul.Dock = DockStyle.Fill;
-            modul.DatabaseActive1 = datanbankgeladen;
             Delete.Enabled = true;
             Verwaltung.Add(new VerwaltungForms(modul, tabpage));
         }

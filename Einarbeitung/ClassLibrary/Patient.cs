@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
@@ -20,7 +16,6 @@ namespace ClassLibrary
             {
                 return id;
             }
-
         }
 
         public char Geschlecht
@@ -29,7 +24,6 @@ namespace ClassLibrary
             {
                 return geschlecht;
             }
-
             set
             {
                 geschlecht = value;
@@ -42,7 +36,6 @@ namespace ClassLibrary
             {
                 return vorName;
             }
-
             set
             {
                 vorName = value;
@@ -55,7 +48,6 @@ namespace ClassLibrary
             {
                 return nachName;
             }
-
             set
             {
                 nachName = value;
@@ -68,7 +60,6 @@ namespace ClassLibrary
             {
                 return geburtstag;
             }
-
             set
             {
                 geburtstag = value;
@@ -83,9 +74,7 @@ namespace ClassLibrary
             this.nachName = nachName;
             this.geburtstag = geburtstag;
         }
-
         
-
         public override string ToString()
         {
             return  "ID: " + id +
@@ -94,10 +83,5 @@ namespace ClassLibrary
                     "\n Nachname" + NachName +
                     "\n Geburtstag" + Geburtstag ;
         }
-
-
-
     }
-
-
 }

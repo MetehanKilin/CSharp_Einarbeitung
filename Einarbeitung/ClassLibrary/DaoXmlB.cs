@@ -40,7 +40,22 @@ namespace ClassLibrary
 
         public void update(Patient patient)
         {
-            throw new NotImplementedException();
+            xml.Load(path + @"\Patienten.xml");
+            XmlNodeList xnList = xml.SelectNodes("/Kis/Patienten/Patient");
+
+            foreach (XmlNode node in xnList)
+            {
+                if (Int32.Parse(node["ID"].InnerText).Equals(patient.Id))
+                {
+                    node["Geschlecht"].InnerText = patient.Geschlecht.ToString();
+                    node["Vorname"].InnerText = patient.VorName.ToString();
+                    node["Nachname"].InnerText = patient.NachName.ToString();
+                    node["Geburtstag"].InnerText = patient.Geburtstag.ToString("dd/MM/yyyy");
+                }
+            }
+            xml.Save(Environment.CurrentDirectory + @"\Patienten.xml");
+            xml.RemoveAll();
+            xnList = null;
         }
 
         public List<string> ModuleLaden()

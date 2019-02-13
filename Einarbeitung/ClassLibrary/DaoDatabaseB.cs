@@ -80,8 +80,6 @@ namespace ClassLibrary
                 command = new MySqlCommand(update, connection);
                 connection.Open();
                 command.ExecuteNonQuery();
-               
-
             }
             catch (Exception e)
             {
@@ -92,7 +90,6 @@ namespace ClassLibrary
                 connection.Close();
                 connection.Dispose();
             }
-           
         }
 
         public List<string> ModuleLaden()
